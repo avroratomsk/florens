@@ -1,0 +1,70 @@
+{% load static %}
+<header class="header">
+  <div class="header__top top-header">
+    <div class="header__container">
+      <div class="top-header__inner">
+        <nav class="top-header__menu">
+          <ul class="top-header__list">
+            <li><a href="#">Акции</a></li>
+            <li><a href="#">О нас</a></li>
+            <li><a href="#">Доставка</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Отзывы</a></li>
+          </ul>
+        </nav>
+
+        <div class="top-header__contact">
+          <div class="top-header__icon">
+            <img src="{% static 'theme/mb/images/phone.svg' %}" alt="">
+          </div>
+          <a href="tel:89999999999">8(999) 999-99-99</a>
+        </div>
+        <div class="top-header__contact">
+          <div class="top-header__icon">
+            <img src="{% static 'theme/mb/images/wh.svg' %}" alt="">
+          </div>
+          <a href="tel:89999999999">8(999) 999-99-99</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header__middle middle-header">
+    <div class="header__container">
+      <div class="middle-header__inner">
+        <a href="/" class="middle-header__logo">
+          <img src="{{ site_settings.logo.url }}" alt="">
+        </a>
+        <form action="#" method="GET" class="middle-header__search">
+          <input type="search" placeholder="Найти.." name="search" id="search">
+          <button type="submit">Поиск</button>
+        </form>
+        <div class="middle-header__actions">
+          <a href="#" class="middle-header__favorit">
+            <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+          </a>
+          <a href="#" class="middle-header__cart">
+            <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header__bottom bottom-header">
+    <div class="header__container">
+      <div class="bottom-header__inner">
+        <nav class="bottom-header__nav">
+          <ul class="bottom-header__list">
+            <li><a href="#">8 Марта</a></li>
+            <li><a href="#">14 февраля</a></li>
+            <li><a href="#">Цветы и монобукеты</a></li>
+            <li><a href="#">Композиции</a></li>
+            <li><a href="#">Цветы по поводу</a></li>
+            <li><a href="#">Дополнительно к цветам</a></li>
+            <li><a href="#">Популярное</a></li>
+            <li><a href="#">Новинки</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
