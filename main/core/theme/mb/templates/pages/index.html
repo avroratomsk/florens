@@ -3,7 +3,646 @@
 <body>
   <div class="wrapper">
     {% include "components/header.html" %}
-    <main class="page"></main>
+    <main class="page">
+      <div class="index-slider">
+        <div class="index-slider__slider swiper">
+          <div class="swiper-wrapper">
+            <div class="index-slider__slide swiper-slide">
+              <div class="index-slider__container">
+                <div class="index-slider__slide-inner">
+                  <div class="index-slider__content">
+                    <h1 class="index-slider__title">Скидки 20% на первый заказ</h1>
+                    <p class="index-slider__subtitle">
+                      Действует круглосуточная доставка в любой район города и пригород
+                    </p>
+                    <a href="#" class="index-slider__link _btn">Подробнее об акции</a>
+                  </div>
+                  <div class="index-slider__image">
+                    <img src="{% static 'theme/mb/images/slider.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="index-slider__slide swiper-slide">
+              <div class="index-slider__container">
+                <div class="index-slider__slide-inner">
+                  <div class="index-slider__content">
+                    <h1 class="index-slider__title">Скидки 20% на первый заказ</h1>
+                    <p class="index-slider__subtitle">
+                      Действует круглосуточная доставка в любой район города и пригород
+                    </p>
+                    <a href="#" class="index-slider__link _btn">Подробнее об акции</a>
+                  </div>
+                  <div class="index-slider__image">
+                    <img src="{% static 'theme/mb/images/slider.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="index-slider__slide swiper-slide">
+              <div class="index-slider__container">
+                <div class="index-slider__slide-inner">
+                  <div class="index-slider__content">
+                    <h1 class="index-slider__title">Скидки 20% на первый заказ</h1>
+                    <p class="index-slider__subtitle">
+                      Действует круглосуточная доставка в любой район города и пригород
+                    </p>
+                    <a href="#" class="index-slider__link _btn">Подробнее об акции</a>
+                  </div>
+                  <div class="index-slider__image">
+                    <img src="{% static 'theme/mb/images/slider.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <button type="button" aria-label="Предыдущий слайд" class="index-slider__prev swiper-button-prev"></button>
+          <button type="button" aria-label="Следующий слайд" class="index-slider__next swiper-button-next"></button>
+        </div>
+      </div>
+      <section class="advantages">
+        <div class="advantages__container">
+          <!-- <h2 class="advantages__title _title-h2">Доставка цветов в Иркутске</h2> -->
+          <div class="advantages__grid">
+            <div class="advantages__item">
+              <div class="advantages__icon">
+                <img src="{% static 'theme/mb/images/delivery.svg' %}" alt="">
+              </div>
+              <span>Бесплатная доставка</span>
+            </div>
+            <div class="advantages__item">
+              <div class="advantages__icon">
+                <img src="{% static 'theme/mb/images/bouquet.svg' %}" alt="">
+              </div>
+              <span>Всегда только свежие букеты</span>
+            </div>
+            <div class="advantages__item">
+              <div class="advantages__icon">
+                <img src="{% static 'theme/mb/images/offer.svg' %}" alt="">
+              </div>
+              <span>Скидка 10% при регистрации</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="index-catalog">
+        <!-- <img src="{% static 'theme/mb/images/bg-absolute.png' %}" alt="" class="bg-absolute"> -->
+        <div class="index-catalog__container">
+          <div class="index-catalog__inner">
+            <div class="index-catalog__head">
+              <h2 class="index-catalog__title _title-h2">Онлайн-витрина</h2>
+              <p class="index-catalog__subtitle">
+                Готовые букеты, закажите прямо сейчас - доставим за 30 минут!
+              </p>
+            </div>
+            <div class="index-catalog__cards cards-catalog">
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="index-catalog__link">
+              <span>Перейти в каталог</span>
+              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="">
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="index-catalog">
+        <div class="index-catalog__container">
+          <div class="index-catalog__inner">
+            <div class="index-catalog__head">
+              <h2 class="index-catalog__title _title-h2">Новинки</h2>
+            </div>
+            <div class="index-catalog__cards cards-catalog">
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="index-catalog__link">
+              <span>Перейти в каталог</span>
+              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="">
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="index-catalog">
+        <div class="index-catalog__container">
+          <div class="index-catalog__inner">
+            <div class="index-catalog__head">
+              <h2 class="index-catalog__title _title-h2">Акции</h2>
+            </div>
+            <div class="index-catalog__cards cards-catalog">
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="index-catalog__card card">
+                <div class="card__image">
+                  <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="">
+                  <img src="{% static 'theme/mb/images/product-3.jpeg' %}" alt="">
+                  <button type="button" class="card__favorit">
+                    <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__hit">
+                    <img src="{% static 'theme/mb/images/hit.svg' %}" alt="">
+                  </button>
+                  <button type="button" class="card__click">Купить в один клик</button>
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title-h3">Букет из 17 роз</h3>
+                  <div class="card__content-bottom">
+                    <span class="card__price">2500 <span class="currency">₽</span></span>
+                    <button type="button" class="card__cart">
+                      <img src="{% static 'theme/mb/images/cart.svg' %}" alt="">
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="index-catalog__link">
+              <span>Перейти в каталог</span>
+              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="">
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="index-about">
+        <div class="index-about__container">
+          <div class="index-about__head">
+            <div class="index-about__logo">
+              <img src="{% static 'theme/mb/images/logo-about.png' %}" alt="">
+            </div>
+            <p class="index-about__subtitle">
+              “Люди дарят цветы, потому что в них заключен истинный смысл любви.”
+            </p>
+          </div>
+          <ul class="index-about__list">
+            <li>
+              <img src="{% static 'theme/mb/images/flower.svg' %}" alt="">
+              <span>Всегда в наличии оригинальные букеты и композиции, которые украсят ваш праздник</span>
+            </li>
+            <li>
+              <img src="{% static 'theme/mb/images/flower.svg' %}" alt="">
+              <span>Фольгированные шары с гелием</span>
+            </li>
+            <li>
+              <img src="{% static 'theme/mb/images/flower.svg' %}" alt="">
+              <span>Мягкие игрушки, сувениры, вазы</span>
+            </li>
+            <li>
+              <img src="{% static 'theme/mb/images/flower.svg' %}" alt="">
+              <span>Горшочные растения и все сопутствующие товары</span>
+            </li>
+            <li>
+              <img src="{% static 'theme/mb/images/flower.svg' %}" alt="">
+              <span>Открытки</span>
+            </li>
+            <li>
+              <img src="{% static 'theme/mb/images/flower.svg' %}" alt="">
+              <span>Оформим ваш подарок</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="faq">
+        <div class="faq__container">
+          <h2 class="faq__title _title-h2">Вопросы и ответы</h2>
+          <div class="faq__grid">
+            <div class="faq__item">
+              Будет ли доставленный букет соответствовать фото на сайте?
+            </div>
+            <div class="faq__item">
+              Как оплатить заказ? Какие способы оплаты?
+            </div>
+            <div class="faq__item">
+              Как оформить заказ на доставку цветов?
+            </div>
+            <div class="faq__item">
+              Читать все вопросы и ответы
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="index-reviews">
+        <div class="index-reviews__container">
+          <h2 class="index-reviews__title _title-h2">Отзывы о нашей работе</h2>
+        </div>
+      </section>
+    </main>
   </div>
 </body>
 {% endblock %} {% comment %} {% include "../components/footer.html" %} {% endcomment %}

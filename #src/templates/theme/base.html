@@ -6,6 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="format-detection" content="telephone=no" />
     <!-- <style>body{opacity: 0;}</style> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{% static 'theme/mb/css/main.css' %}" />
     <link rel="shortcut icon" href="favicon.ico" />
     <!-- <meta name="robots" content="noindex, nofollow"> -->
@@ -23,6 +24,17 @@
   </head>
   <body>
     {% block content %}{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module">
+      import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";
+
+      const swiper = new Swiper(".index-slider__slider", {
+        navigation: {
+          nextEl: ".index-slider__next",
+          prevEl: ".index-slider__prev",
+        },
+      });
+    </script>
     <script src="{% static 'theme/mb/js/index.js' %}"></script>
   </body>
 </html>

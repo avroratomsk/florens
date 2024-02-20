@@ -1,0 +1,203 @@
+.index-catalog {
+  position: relative;
+  // .index-catalog__container
+
+  &__container {}
+
+  // .index-catalog__inner
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  // .index-catalog__head
+
+  &__head {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  // .index-catalog__title
+
+  &__title {}
+
+  // .index-catalog__subtitle
+  &__subtitle {
+    font-size: 18px;
+  }
+
+  // .index-catalog__link
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F26A7E;
+    padding: 20px 40px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-top: 50px;
+    color: $white;
+
+    span {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+
+  // .index-catalog__cards
+
+  &__cards {}
+
+  // .index-catalog__card
+
+  &__card {}
+}
+
+.cards-catalog {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  overflow: hidden;
+  box-shadow: 0px 0px 4px rgba($color: $mainColor, $alpha: .1);
+  border: 1px solid rgba($color: $mainColor, $alpha: .1);
+  border-radius: 10px;
+
+  &:hover {
+    .card__click {
+      display: block;
+    }
+
+    .card__image {
+      img {
+        &:nth-child(1) {
+          opacity: 0;
+        }
+
+        &:nth-child(2) {
+          opacity: 1 !important;
+        }
+      }
+    }
+  }
+
+  // .card__image
+
+  &__image {
+    position: relative;
+    min-width: 290px;
+    min-height: 350px;
+    width: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      transition: $animation_speed;
+
+      &:nth-child(1) {
+        opacity: 1;
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+    }
+
+
+  }
+
+  // .card__favorit
+
+  &__favorit {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    z-index: 2;
+  }
+
+  // .card__hit
+
+  &__hit {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    z-index: 2;
+  }
+
+  // .card__content
+
+  &__content {
+    padding: 20px 20px 40px;
+    background-color: rgba($color: $white, $alpha: 1.0);
+  }
+
+  // .card__click
+
+  &__click {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 0px;
+    text-align: center;
+    background-color: rgba($color: $white, $alpha: .6);
+    font-weight: 500;
+    text-decoration: underline;
+    backdrop-filter: blur(4px);
+    display: none;
+  }
+
+  // .card__title-h3
+
+  &__title-h3 {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 140%;
+    margin-bottom: 20px;
+  }
+
+  // .card__content-bottom
+
+  &__content-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // .card__price
+
+  &__price {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  // .card__cart
+
+  &__cart {
+    width: 20px;
+    height: 20px;
+  }
+
+  .currency {
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+.bg-absolute {
+  position: absolute;
+  z-index: -1;
+  left: -50%;
+  top: -50%;
+  opacity: .1;
+}

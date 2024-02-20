@@ -13,7 +13,7 @@ $fontSize: 16px; // где 16(px) - размер шрифта по умолча�
 
 // Основные цвета
 // $bodyColor: #ffffff;
-$bodyColor: #f3f3f3;
+$bodyColor: #f9f9f9;
 $mainColor: #253746; // Цвет шрифта по умолчанию
 // $accent: #CD0000;
 // $accent: #c2ab89;
@@ -179,3 +179,13 @@ body {
 @import './components/form';
 @import './components/breadcrumbs';
 @import './components/contact';
+
+/*
+    Подключение стилей отдельных блоков страницы
+*/
+
+@import './pages/home/index-slider';
+@import './pages/home/index-catalog';
+@import './pages/home/advantages';
+@import './pages/home/faq';
+@import './pages/home/index-about';
