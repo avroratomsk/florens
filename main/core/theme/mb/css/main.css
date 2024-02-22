@@ -53,13 +53,13 @@ html,
 body {
   height: 100%;
   min-width: 320px;
+  font-size: 10px;
 }
 
 body {
   color: #253746;
   line-height: 1;
   font-family: "Montserrat", sans-serif;
-  font-size: 16px;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -117,6 +117,12 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
   /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+p,
+span,
+div {
+  font-size: 16px;
 }
 
 html.lock body {
@@ -765,6 +771,60 @@ html.lock body::before {
   transition: 0.5s;
 }
 
+.footer {
+  padding: 60px 0px;
+}
+
+.footer__row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.footer__country {
+  line-height: 150%;
+}
+
+.footer__street {
+  line-height: 150%;
+}
+
+.footer__phone {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.footer__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(37, 55, 70, 0.9);
+}
+
+.footer__list li img {
+  width: 20px;
+}
+
+.footer__list a {
+  display: flex;
+  padding: 5px 0px;
+  transition: 0.5s;
+}
+
+.footer__list a:hover {
+  color: #F26A7E;
+}
+
+.footer .socials {
+  display: flex;
+  gap: 20px;
+}
+
 ._title-h2 {
   font-size: 35px;
   font-weight: 600;
@@ -778,6 +838,9 @@ section {
 
 section:nth-child(odd) {
   background-color: #ffffff;
+  border-width: 1px 0px 1px 0px;
+  border-style: solid;
+  border-color: rgba(37, 55, 70, 0.1);
 }
 
 /*
@@ -1120,6 +1183,112 @@ section:nth-child(odd) {
   font-weight: 400;
 }
 
+.reviews {
+  border-radius: 10px;
+  border: 1px solid rgba(37, 55, 70, 0.1);
+  box-shadow: 0px 0px 4px rgba(37, 55, 70, 0.1);
+  margin: 10px;
+  padding: 25px;
+  background-color: #ffffff;
+}
+
+.reviews__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.reviews__name {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.reviews__stars {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.reviews__star {
+  width: 15px;
+  height: 15px;
+}
+
+.reviews__star img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reviews__head-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.reviews__date {
+  font-size: 13px;
+  line-height: 150%;
+}
+
+.reviews__time {
+  font-size: 13px;
+  line-height: 150%;
+}
+
+.reviews__content {
+  line-height: 150%;
+  margin-bottom: 20px;
+}
+
+.callback {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.callback__container {
+  position: relative;
+  z-index: 1;
+}
+
+.callback__row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.callback__title {
+  text-wrap: balance;
+  text-align: center;
+}
+
+.callback__subtitle {
+  max-width: 700px;
+  text-align: center;
+  text-wrap: balance;
+  line-height: 150%;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.callback__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.callback__btn {
+  background-color: #F26A7E;
+  padding: 20px 40px;
+  border-radius: 6px;
+  color: #ffffff;
+  margin-top: 35px;
+}
+
 /*
     Подключение стилей отдельных блоков страницы
 */
@@ -1441,6 +1610,29 @@ section:nth-child(odd) {
   margin-bottom: 30px;
 }
 
+.index-reviews {
+  position: relative;
+}
+
+.index-reviews__image:nth-child(1) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 0.5;
+}
+
+.index-reviews__image:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(180deg);
+  opacity: 0.5;
+}
+
+.index-reviews__title {
+  margin-bottom: 30px;
+}
+
 @media screen and (min-width: 600px) {
   .product-page__image img {
     max-width: 100%;
@@ -1476,6 +1668,14 @@ section:nth-child(odd) {
 
   .product-page__content {
     flex: 0 0 50%;
+  }
+
+  .callback__content {
+    flex: 1 1 50%;
+  }
+
+  .callback__action {
+    flex: 1 1 50%;
   }
 }
 

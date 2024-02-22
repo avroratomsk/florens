@@ -9,7 +9,7 @@
 // Шрифт по умолчанию ==============================================================================================================================================================================================================================================================================
 $fontFamily: "Montserrat", sans-serif;
 
-$fontSize: 16px; // где 16(px) - размер шрифта по умолчанию из макета
+$fontSize: 10px; // где 16(px) - размер шрифта по умолчанию из макета
 
 // Основные цвета
 // $bodyColor: #ffffff;
@@ -18,7 +18,7 @@ $mainColor: #253746; // Цвет шрифта по умолчанию
 // $accent: #CD0000;
 // $accent: #c2ab89;
 $white: #ffffff;
-$accent: #9ac27c;
+$accent: #F26A7E;
 $grey: #939297;
 $orange: #e76642;
 $lightBlue: #d4e9f5;
@@ -179,6 +179,8 @@ body {
 @import './components/form';
 @import './components/breadcrumbs';
 @import './components/contact';
+@import './components/reviews';
+@import './components/callback';
 
 /*
     Подключение стилей отдельных блоков страницы
@@ -189,3 +191,4 @@ body {
 @import './pages/home/advantages';
 @import './pages/home/faq';
 @import './pages/home/index-about';
+@import './pages/home/index-reviews';

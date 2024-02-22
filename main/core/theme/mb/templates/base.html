@@ -21,9 +21,24 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+    <style>
+      .callback:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("{%static 'theme/mb/images/callback.png' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 0.5;
+      }
+    </style>
   </head>
   <body>
-    {% block content %}{% endblock %}
+    <div class="wrapper">{% include "./components/header.html" %}{% block content %}{% endblock %} {% include "./components/footer.html" %}</div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module">
       import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";
@@ -32,6 +47,16 @@
         navigation: {
           nextEl: ".index-slider__next",
           prevEl: ".index-slider__prev",
+        },
+      });
+
+      const swiper_reviews = new Swiper(".index-reviews__slider", {
+        slidesPerView: 3,
+        //slidesPerGroup: 1,
+        loop: true,
+        navigation: {
+          nextEl: ".index-reviews__next",
+          prevEl: ".index-reviews__prev",
         },
       });
     </script>
