@@ -7,13 +7,14 @@
 //@import "fonts/icons";
 
 // Шрифт по умолчанию ==============================================================================================================================================================================================================================================================================
-$fontFamily: "Montserrat", sans-serif;
+$fontFamily: "Manrope", sans-serif;
+$fontTitle: "Inter", sans-serif;
 
 $fontSize: 10px; // где 16(px) - размер шрифта по умолчанию из макета
 
 // Основные цвета
 // $bodyColor: #ffffff;
-$bodyColor: #f9f9f9;
+$bodyColor: #fdfdfd;
 $mainColor: #253746; // Цвет шрифта по умолчанию
 // $accent: #CD0000;
 // $accent: #c2ab89;
@@ -192,3 +193,6 @@ body {
 @import './pages/home/faq';
 @import './pages/home/index-about';
 @import './pages/home/index-reviews';
+
+
+@import './pages/contact/contact';
