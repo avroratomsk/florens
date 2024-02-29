@@ -1,50 +1,61 @@
 .index-catalog {
   position: relative;
-  // .index-catalog__container
-
-  &__container {}
-
+  padding: 60px 60px;
   // .index-catalog__inner
 
   &__inner {
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 
   // .index-catalog__head
 
   &__head {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 40px;
   }
 
   // .index-catalog__title
 
-  &__title {}
+  &__title {
+    font-family: $fontTitle;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    svg {
+      width: 30px;
+    }
+  }
 
   // .index-catalog__subtitle
   &__subtitle {
     font-size: 18px;
   }
 
+  // .index-catalog__links
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+
   // .index-catalog__link
 
   &__link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #F26A7E;
-    padding: 20px 40px;
-    border-radius: 10px;
-    font-weight: 600;
-    margin-top: 50px;
-    color: $white;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 136%;
+    transition: $animation_speed;
+    color: #3f3c38;
 
-    span {
-      display: inline-block;
-      margin-right: 10px;
+    &:hover {
+      color: #d71635;
     }
+
   }
 
   // .index-catalog__cards
@@ -59,15 +70,18 @@
 .cards-catalog {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 30px;
 }
 
 .card {
   overflow: hidden;
-  box-shadow: 0px 0px 4px rgba($color: $mainColor, $alpha: .1);
-  border: 1px solid rgba($color: $mainColor, $alpha: .1);
-  border-radius: 10px;
+  background: $white;
+  box-shadow: 0 10px 50px 15px rgba(164, 152, 141, .16);
+  border-radius: 20px;
+  z-index: 1000;
+  position: relative;
+  z-index: 2;
 
   &:hover {
     .card__click {
@@ -94,6 +108,7 @@
     min-width: 290px;
     min-height: 350px;
     width: 100%;
+    overflow: hidden;
 
     img {
       width: 100%;
@@ -102,6 +117,7 @@
       top: 0;
       left: 0;
       object-fit: cover;
+      border-radius: 20px;
       transition: $animation_speed;
 
       &:nth-child(1) {
@@ -120,18 +136,28 @@
 
   &__favorit {
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 10px;
-    z-index: 2;
+    z-index: 9;
+    width: 40px;
+    height: 40px;
+    background-color: $white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
   }
 
   // .card__hit
 
   &__hit {
     position: absolute;
-    top: 60px;
+    top: 10px;
     left: 10px;
-    z-index: 2;
+    z-index: 9;
+    width: 40px;
+    height: 40px;
   }
 
   // .card__content
@@ -145,25 +171,29 @@
 
   &__click {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    width: 70%;
     padding: 20px 0px;
     text-align: center;
-    background-color: rgba($color: $white, $alpha: .6);
-    font-weight: 500;
-    text-decoration: underline;
+    background-color: rgba($color: $white, $alpha: .8);
+    font-weight: 700;
     backdrop-filter: blur(4px);
+    border-radius: 20px;
     display: none;
   }
 
   // .card__title-h3
 
   &__title-h3 {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 140%;
-    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 120%;
+    letter-spacing: -.02em;
+    color: #232020;
+    margin-bottom: 25px;
+    font-family: $fontTitle;
   }
 
   // .card__content-bottom
@@ -177,8 +207,11 @@
   // .card__price
 
   &__price {
-    font-size: 22px;
     font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: -.04em;
+    color: #232020;
   }
 
   // .card__cart

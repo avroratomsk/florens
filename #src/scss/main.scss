@@ -15,14 +15,14 @@ $fontSize: 10px; // где 16(px) - размер шрифта по умолча�
 // Основные цвета
 // $bodyColor: #ffffff;
 $bodyColor: #fdfdfd;
-$mainColor: #253746; // Цвет шрифта по умолчанию
+$mainColor: #3f3c38; // Цвет шрифта по умолчанию
 // $accent: #CD0000;
 // $accent: #c2ab89;
 $white: #ffffff;
 $accent: #F26A7E;
 $grey: #939297;
 $orange: #e76642;
-$lightBlue: #d4e9f5;
+$lightBlue: #fdfdfd;
 $greenAplle: #59ce65;
 $animation_speed: 0.5s;
 
@@ -193,6 +193,7 @@ body {
 @import './pages/home/faq';
 @import './pages/home/index-about';
 @import './pages/home/index-reviews';
+@import './pages/home/index-category';
 
 
 @import './pages/contact/contact';

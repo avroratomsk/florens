@@ -1,14 +1,37 @@
 .index-slider {
-
+  padding: 0px 60px;
   // .index-slider__slider
 
   &__slider {
-    background-color: #FFDDE2;
+    position: relative;
   }
+
+  .swiper-wrapper {}
 
   // .index-slider__slide
 
-  &__slide {}
+  &__slide {
+    border-radius: 46px;
+    min-height: 650px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    padding: 50px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(2.2deg, rgba(0, 0, 0, .4) 1.69%, rgba(0, 0, 0, 0) 98.02%);
+      z-index: -1;
+    }
+  }
 
   // .index-slider__container
 
@@ -37,6 +60,8 @@
     line-height: 120%;
     margin-bottom: 40px;
     text-wrap: balance;
+    color: $white;
+    font-family: $fontTitle;
   }
 
   // .index-slider__subtitle
@@ -46,6 +71,7 @@
     font-weight: 300;
     line-height: 150%;
     text-wrap: balance;
+    color: $white;
   }
 
   // .index-slider__link
@@ -71,18 +97,59 @@
 
   // .index-slider__prev
   &__prev {
-    left: 5%;
+    top: 50%;
+    margin-top: -80px;
+    left: -3%;
+    margin-left: -10px;
+    z-index: 99;
+  }
+
+  // .index-slider__next
+  &__next {
+    top: 50%;
+    margin-top: -80px;
+    right: -3% !important;
+    margin-right: -10px;
+    z-index: 99;
+  }
+
+  .swiper-button-disabled {
+    opacity: 1;
   }
 
 
   &__prev,
   &__next {
-    background-color: $white;
-    width: 40px;
-    height: 40px;
+    background-color: transparent;
+    min-width: 108px;
+    min-height: 176px;
+    max-width: 108px;
+    max-height: 176px;
     border-radius: 4px;
 
+    &:hover {
+
+      &::after,
+      &::before {
+        background: #d71635;
+        color: $white;
+      }
+    }
+
+    svg {
+      height: 176px;
+    }
+
     &::after {
+      transition: $animation_speed;
+      background: transparent;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      position: absolute;
       font-size: 15px;
       font-weight: 600;
       color: rgba($color: $mainColor, $alpha: 1.0)
