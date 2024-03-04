@@ -42,12 +42,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     "debug_toolbar",
+    "corsheaders",
     
     "home",
     "shop",
     "users",
     "reviews",
     "service",
+    "cart",
     'django_ckeditor_5',
 ]
 
@@ -61,6 +63,12 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
 ]
 
 ROOT_URLCONF = "main.urls"

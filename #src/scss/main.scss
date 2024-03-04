@@ -162,8 +162,8 @@ body {
 @import './pages/service';
 @import './pages/about';
 @import './pages/service-page';
-@import './deps';
-@import './bootstrap';
+// @import './deps';
+// @import './bootstrap';
 
 /*
     Подключение стилей отдельных блоков
@@ -195,5 +195,8 @@ body {
 @import './pages/home/index-reviews';
 @import './pages/home/index-category';
 
-
 @import './pages/contact/contact';
+
+@import './pages/users/login';
+@import './pages/users/register';
+@import './pages/users/profile';
