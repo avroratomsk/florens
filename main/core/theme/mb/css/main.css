@@ -2032,6 +2032,29 @@ section:nth-child(odd) {
   text-align: left;
 }
 
+.mini-cart {
+  display: none;
+  margin: 10px 10px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 350px;
+  background-color: #ffffff;
+  z-index: 99;
+  box-shadow: 0px 0px 10px rgba(63, 60, 56, 0.1);
+  border-radius: 26px;
+}
+
+.mini-cart__close {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+}
+
 @media screen and (min-width: 600px) {
   .product-page__image img {
     max-width: 100%;
