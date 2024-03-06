@@ -1,10 +1,9 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load static %}{% load carts_tag %} {% block content %}
 <main class="page">
   <div class="index-slider">
     <div class="index-slider__slider swiper-container">
       <div class="swiper-wrapper">
-        <div class="index-slider__slide swiper-slide"
-          style="background-image: url({%static 'theme/mb/images/slide-3.jpg' %})">
+        <div class="index-slider__slide swiper-slide" style="background-image: url({})">
           <div class="index-slider__slide-inner">
             <div class="index-slider__content">
               <h1 class="index-slider__title">Скидки 20% на первый заказ</h1>
@@ -13,8 +12,7 @@
             </div>
           </div>
         </div>
-        <div class="index-slider__slide swiper-slide"
-          style="background-image: url({%static 'theme/mb/images/slide-2.jpg' %})">
+        <div class="index-slider__slide swiper-slide" style="background-image: url({})">
           <div class="index-slider__slide-inner">
             <div class="index-slider__content">
               <h1 class="index-slider__title">Скидки 2q0% на первый заказ</h1>
@@ -27,16 +25,22 @@
       <div class="swiper-pagination"></div>
       <button type="button" aria-label="Предыдущий слайд" class="index-slider__prev swiper-button-prev">
         <svg fill="none" viewBox="0 0 88 176" id="css--union-nav" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd"
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
             d="M37 169a7 7 0 1014 0v-27.785c0-5.845 4.309-10.677 9.684-12.972 15.57-6.649 26.48-22.1 26.48-40.1 0-17.998-10.91-33.45-26.48-40.098C55.31 45.75 51 40.918 51 35.073V7a7 7 0 10-14 0v27.736c0 5.934-4.434 10.811-9.924 13.06C11.19 54.302 0 69.916 0 88.144c0 18.228 11.19 33.842 27.076 40.348 5.49 2.248 9.924 7.126 9.924 13.059V169z"
-            fill="#FDFDFD" />
+            fill="#FDFDFD"
+          />
         </svg>
       </button>
       <button type="button" aria-label="Следующий слайд" class="index-slider__next swiper-button-next">
         <svg fill="none" viewBox="0 0 88 176" id="css--union-nav" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd"
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
             d="M37 169a7 7 0 1014 0v-27.785c0-5.845 4.309-10.677 9.684-12.972 15.57-6.649 26.48-22.1 26.48-40.1 0-17.998-10.91-33.45-26.48-40.098C55.31 45.75 51 40.918 51 35.073V7a7 7 0 10-14 0v27.736c0 5.934-4.434 10.811-9.924 13.06C11.19 54.302 0 69.916 0 88.144c0 18.228 11.19 33.842 27.076 40.348 5.49 2.248 9.924 7.126 9.924 13.059V169z"
-            fill="#FDFDFD" />
+            fill="#FDFDFD"
+          />
         </svg>
       </button>
     </div>
@@ -86,6 +90,7 @@
         </div>
       </div>
       <div class="index-catalog__cards cards-catalog">
+        {% if products %} {% for product in products %}
         <div class="index-catalog__card card">
           <div class="card__image">
             <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
@@ -93,87 +98,23 @@
             <button type="button" class="card__hit">
               <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
             </button>
-            <button type="button" class="card__click">Купить в один клик</button>
+            <button type="button" class="card__click" id="one-click">Купить в один клик</button>
           </div>
           <div class="card__content">
-            <h3 class="card__title-h3">Букет из 17 роз</h3>
+            <h3 class="card__title-h3">{{ product.name }}</h3>
             <div class="card__content-bottom">
-              <span class="card__price">2500 <span class="currency">₽</span></span>
-              <button type="button" class="card__cart">
+              <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
+              <a href="{% url 'cart_add' %}" class="card__cart add-to-cart" data-product-id="{{ product.id }}">
+                {% csrf_token %}
                 <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
-              </button>
+              </a>
               <button type="button" class="card__favorit">
                 <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
               </button>
             </div>
           </div>
         </div>
-        <div class="index-catalog__card card">
-          <div class="card__image">
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
-            <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="" />
-            <button type="button" class="card__hit">
-              <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
-            </button>
-            <button type="button" class="card__click">Купить в один клик</button>
-          </div>
-          <div class="card__content">
-            <h3 class="card__title-h3">Букет из 17 роз</h3>
-            <div class="card__content-bottom">
-              <span class="card__price">2500 <span class="currency">₽</span></span>
-              <button type="button" class="card__cart">
-                <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
-              </button>
-              <button type="button" class="card__favorit">
-                <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="index-catalog__card card">
-          <div class="card__image">
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
-            <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="" />
-            <button type="button" class="card__hit">
-              <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
-            </button>
-            <button type="button" class="card__click">Купить в один клик</button>
-          </div>
-          <div class="card__content">
-            <h3 class="card__title-h3">Букет из 17 роз</h3>
-            <div class="card__content-bottom">
-              <span class="card__price">2500 <span class="currency">₽</span></span>
-              <button type="button" class="card__cart">
-                <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
-              </button>
-              <button type="button" class="card__favorit">
-                <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="index-catalog__card card">
-          <div class="card__image">
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
-            <img src="{% static 'theme/mb/images/product-1.jpeg' %}" alt="" />
-            <button type="button" class="card__hit">
-              <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
-            </button>
-            <button type="button" class="card__click">Купить в один клик</button>
-          </div>
-          <div class="card__content">
-            <h3 class="card__title-h3">Букет из 17 роз</h3>
-            <div class="card__content-bottom">
-              <span class="card__price">2500 <span class="currency">₽</span></span>
-              <button type="button" class="card__cart">
-                <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
-              </button>
-              <button type="button" class="card__favorit">
-                <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
-              </button>
-            </div>
-          </div>
-        </div>
+        {% endfor %} {% endif %}
       </div>
       <!-- <a href="#" class="index-catalog__link">
         <span>Перейти в каталог</span>
@@ -200,8 +141,7 @@
       </div>
       <div class="advantages__border borderDotted"></div>
       <div class="index-category__grid">
-        <a href="" class="index-category__item"
-          style="background-image: url({% static 'theme/mb/images/slide-2.jpg' %})">
+        <a href="" class="index-category__item" style="background-image: url({})">
           <div class="index-category__item-col">
             <div class="index-category__item-top">
               <span>88 букетов</span>
@@ -210,12 +150,11 @@
           </div>
           <div class="index-category__item-col">
             <div class="index-category__arrow">
-              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="">
+              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="" />
             </div>
           </div>
         </a>
-        <a href="" class="index-category__item"
-          style="background-image: url({% static 'theme/mb/images/slide-2.jpg' %})">
+        <a href="" class="index-category__item" style="background-image: url({})">
           <div class="index-category__item-col">
             <div class="index-category__item-top">
               <span>88 букетов</span>
@@ -224,12 +163,11 @@
           </div>
           <div class="index-category__item-col">
             <div class="index-category__arrow">
-              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="">
+              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="" />
             </div>
           </div>
         </a>
-        <a href="" class="index-category__item"
-          style="background-image: url({% static 'theme/mb/images/slide-2.jpg' %})">
+        <a href="" class="index-category__item" style="background-image: url({})">
           <div class="index-category__item-col">
             <div class="index-category__item-top">
               <span>88 букетов</span>
@@ -238,12 +176,11 @@
           </div>
           <div class="index-category__item-col">
             <div class="index-category__arrow">
-              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="">
+              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="" />
             </div>
           </div>
         </a>
-        <a href="" class="index-category__item"
-          style="background-image: url({% static 'theme/mb/images/slide-2.jpg' %})">
+        <a href="" class="index-category__item" style="background-image: url({})">
           <div class="index-category__item-col">
             <div class="index-category__item-top">
               <span>88 букетов</span>
@@ -252,7 +189,7 @@
           </div>
           <div class="index-category__item-col">
             <div class="index-category__arrow">
-              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="">
+              <img src="{% static 'theme/mb/images/chevron-right.svg' %}" alt="" />
             </div>
           </div>
         </a>
@@ -278,45 +215,37 @@
     <div class="advantages__border borderDotted"></div>
     <div class="index-about__text">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis
-        tempora dicta vitae repudiandae, suscipit quasi facere alias! Temporibus, aperiam porro quibusdam aut doloremque
-        id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste.
-        Consequuntur aut unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis
-        repellendus molestias!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
+        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
+        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis
-        tempora dicta vitae repudiandae, suscipit quasi facere alias! Temporibus, aperiam porro quibusdam aut doloremque
-        id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste.
-        Consequuntur aut unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis
-        repellendus molestias!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
+        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
+        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis
-        tempora dicta vitae repudiandae, suscipit quasi facere alias! Temporibus, aperiam porro quibusdam aut doloremque
-        id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste.
-        Consequuntur aut unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis
-        repellendus molestias!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
+        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
+        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
       </p>
       <h3>Заголовок третьего уровня</h3>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis
-        tempora dicta vitae repudiandae, suscipit quasi facere alias! Temporibus, aperiam porro quibusdam aut doloremque
-        id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste.
-        Consequuntur aut unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis
-        repellendus molestias!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
+        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
+        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
       </p>
     </div>
     <div class="index-about__slider swiper">
       <div class="swiper-wrapper">
         <div class="index-about__slide swiper-slide">
-          <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="">
+          <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="" />
         </div>
         <div class="index-about__slide swiper-slide">
-          <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="">
+          <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="" />
         </div>
         <div class="index-about__slide swiper-slide">
-          <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="">
+          <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="" />
         </div>
       </div>
       <div class="swiper-pagination"></div>
@@ -380,9 +309,7 @@
   <section class="faq">
     <div class="advantages__border borderDotted"></div>
     <div class="index-catalog__head">
-      <h2 class="index-catalog__title _title-h2">
-        Вопросы и ответы
-      </h2>
+      <h2 class="index-catalog__title _title-h2">Вопросы и ответы</h2>
       <div class="index-catalog__links">
         <a href="#" class="index-catalog__link">Все отзывы</a>
       </div>
@@ -395,7 +322,8 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2" />
+              fill="#F3F3F2"
+            />
           </svg>
         </span>
       </a>
@@ -405,7 +333,8 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2" />
+              fill="#F3F3F2"
+            />
           </svg>
         </span>
       </a>
@@ -415,7 +344,8 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2" />
+              fill="#F3F3F2"
+            />
           </svg>
         </span>
       </a>
@@ -425,7 +355,8 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2" />
+              fill="#F3F3F2"
+            />
           </svg>
         </span>
       </a>

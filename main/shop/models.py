@@ -14,7 +14,7 @@ DAY_NAMES = (
 )
 
 
-class Categories(models.Model):
+class Category(models.Model):
   name = models.CharField(max_length=150, db_index=True, unique=True, verbose_name="Название категории")
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
   image = models.ImageField(upload_to="category_image", blank=True, null=True, verbose_name="Изображение категории")
@@ -35,35 +35,34 @@ class Categories(models.Model):
         return reverse("category_detail", kwargs={"slug": self.slug})
 
 
-class Day(models.Model):
-  name = models.CharField(max_length=50, db_index=True, blank=True, null=True, unique=True, verbose_name="Названия дня недел")
-  slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL day")
-  num_day = models.PositiveIntegerField(default=0, verbose_name="Номер дня")
+# class Day(models.Model):
+#   name = models.CharField(max_length=50, db_index=True, blank=True, null=True, unique=True, verbose_name="Названия дня недел")
+#   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL day")
+#   num_day = models.PositiveIntegerField(default=0, verbose_name="Номер дня")
   
-  class Meta:
-    db_table = 'day'
-    verbose_name = "День"
-    verbose_name_plural = "Дня"
-    ordering = ("id",)
+#   class Meta:
+#     db_table = 'day'
+#     verbose_name = "День"
+#     verbose_name_plural = "Дня"
+#     ordering = ("id",)
   
   
-  def __str__(self):
-    return self.name
+#   def __str__(self):
+#     return self.name
   
-class Subsidiary(models.Model):
-  name = models.CharField(max_length=150, blank=True, null=True, unique=True, verbose_name="Название филлиала")
-  address_fillial = models.CharField(max_length=255, blank=True, null=True, verbose_name="Адрес филлиала")
-  slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
-  image = models.ImageField(upload_to="fillial", blank=True, null=True, verbose_name="Фотографии залов")
+# class Subsidiary(models.Model):
+#   name = models.CharField(max_length=150, blank=True, null=True, unique=True, verbose_name="Название филлиала")
+#   address_fillial = models.CharField(max_length=255, blank=True, null=True, verbose_name="Адрес филлиала")
+#   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
+#   image = models.ImageField(upload_to="fillial", blank=True, null=True, verbose_name="Фотографии залов")
   
-  def __str__(self):
-    return f'{self.name}'
+#   def __str__(self):
+#     return f'{self.name}'
 
      
 class Product(models.Model):
   name = models.CharField(max_length=150, db_index=True, verbose_name="Наименование продукта")
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
-  short_description = models.TextField(null=True, blank=True, verbose_name="Краткое описание")
   description = models.TextField(blank=True, null=True, verbose_name="Описание")
   meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
@@ -73,15 +72,20 @@ class Product(models.Model):
   price = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена товра")
   discount = models.DecimalField(default=0, max_digits=4, decimal_places=2, verbose_name="Скидака в %")
   quantity = models.PositiveIntegerField(default=0, verbose_name="Количество")
-  category = models.ForeignKey("Categories", on_delete=models.CASCADE, null=True, default=None, verbose_name='День недели')
-  day = models.ManyToManyField(Day, blank=True, verbose_name='День недели')
-  subsidiary = models.ManyToManyField(Subsidiary, blank=True, verbose_name='Филлиал')
-  weight = models.CharField(max_length=150, blank=True, null=True, verbose_name="Вес в граммах")
-  calories = models.CharField(max_length=150, blank=True, null=True, verbose_name="Каллории")
-  proteins = models.CharField(max_length=50, blank=True, null=True, verbose_name="Белки")
-  fats = models.CharField(max_length=150, blank=True, null=True, verbose_name="Жиры")
-  carbonhydrates = models.CharField(max_length=150, blank=True, null=True, verbose_name="Углеводы")
-  status = models.BooleanField(default=True, verbose_name="Статус публикации")
+  category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, default=None, verbose_name='День недели')
+  composition = models.CharField(max_length=255, blank=True, null=True, verbose_name="Состав")
+  diameter = models.CharField(max_length=250, blank=True, null=True, verbose_name="Диаметр")
+  height = models.CharField(max_length=150, blank=True, null=True, verbose_name="Высота")
+  quantity_flower = models.CharField(max_length=250, blank=True, null=True, verbose_name="Количество цветков в букете")
+  latest = models.BooleanField(default=False, verbose_name="Новинка ?")
+  status = models.BooleanField(default=True, verbose_name="Опубликовать ?")
+  
+  def serialize(self):
+    return {
+        'id': self.id,
+        'name': str(self.name),
+        'price': str(self.price)
+    }
   
   
   class Meta:

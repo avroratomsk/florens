@@ -8,7 +8,7 @@ urlpatterns = [
     path('ckeditor5/', include('django_ckeditor_5.urls')),
     # path('admin/', admin.site.urls),
     path('about/', include('home.urls')),
-    path('catalog/', include('shop.urls')),
+    path('category/', include('shop.urls')),
     path('service/', include('service.urls')),
     path('user/', include('users.urls')),
     path('reviews/', include('reviews.urls')),

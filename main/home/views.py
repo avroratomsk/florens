@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from home.models import BaseSettings, HomeTemplate, Stock
+from cart.models import Cart
 from shop.models import Product
 from reviews.models import Reviews
 
@@ -9,25 +10,25 @@ from reviews.models import Reviews
 
 
 def index(request):
-    page = request.GET.get('page', 1)
-    
-    try: 
-        home_page = HomeTemplate.objects.get()
-        settings = BaseSettings.objects.get()
-    except:
-        home_page = HomeTemplate.objects.all()
-        settings = BaseSettings.objects.all()
-    
-    product = Product.objects.all()
-    reviews = Reviews.objects.filter(status=True)
-    
-    context = {
-        "home_page": home_page,
-        "products": product,
-        "settings": settings,
-        "reviews": reviews,
-    }
-    return render(request, 'pages/index.html', context)
+  page = request.GET.get('page', 1)
+  
+  try: 
+    home_page = HomeTemplate.objects.get()
+    settings = BaseSettings.objects.get()
+  except:
+    home_page = HomeTemplate.objects.all()
+    settings = BaseSettings.objects.all()
+
+  product = Product.objects.all()
+  reviews = Reviews.objects.filter(status=True)
+  
+  context = {
+    "home_page": home_page,
+    "products": product,
+    "settings": settings,
+    "reviews": reviews,
+  }
+  return render(request, 'pages/index.html', context)
 
 def about(request):
     return render(request, "pages/about.html")

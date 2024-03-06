@@ -4,11 +4,11 @@ import xlrd
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, DayForm, FillialForm, GlobalSettingsForm, HomeTemplateForm, ProductForm, ReviewsForm, ServiceForm, StockForm
+from admin.forms import CategoryForm, GlobalSettingsForm, HomeTemplateForm, ProductForm, ReviewsForm, ServiceForm, StockForm
 from home.models import BaseSettings, HomeTemplate, Stock
 from service.models import Service
 from reviews.models import Reviews
-from shop.models import Product,Categories,Day,Subsidiary
+from shop.models import Product,Category
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 # from django.contrib.auth.decorators import user_passes_test
@@ -191,7 +191,7 @@ def upload_goods(request):
   return render(request, "upload/upload.html")
 
 def admin_category(request):
-  categorys = Categories.objects.all()
+  categorys = Category.objects.all()
   
   context ={
     "categorys": categorys,
@@ -214,7 +214,7 @@ def category_add(request):
   return render(request, "shop/category/category_add.html", context)
 
 def category_edit(request, pk):
-  categorys = Categories.objects.get(id=pk)
+  categorys = Category.objects.get(id=pk)
   if request.method == "POST":
     form = CategoryForm(request.POST, request.FILES, instance=categorys)
     if form.is_valid():
@@ -231,7 +231,7 @@ def category_edit(request, pk):
   return render(request, "shop/category/category_edit.html", context)
 
 def category_delete(request, pk):
-  category = Categories.objects.get(id=pk)
+  category = Category.objects.get(id=pk)
   category.delete()
   
   return redirect('admin_category')
