@@ -47,8 +47,11 @@ def register(request):
     print(form)
     if form.is_valid:
       form.save()
+      session_key = request.session.session_key
       user = form.instance
       auth.login(request, user)
+      if session_key:
+        Cart.objects.filter(session_key=session_key).update(user=user)
       messages.success(request, f"{user.username}, Вы успешно зарегистрировались и вошли в аккаунт")
       return HttpResponseRedirect(reverse("home"))
   else:

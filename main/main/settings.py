@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "reviews",
     "service",
     "cart",
+    "order",
     'django_ckeditor_5',
 ]
 

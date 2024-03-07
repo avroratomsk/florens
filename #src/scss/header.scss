@@ -137,4 +137,20 @@
       width: 20px;
     }
   }
+
+  // .header__action-btn
+  &__action-btn {
+    position: relative;
+  }
+
+  .no-empty {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    display: block;
+    background-color: #d71635;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
 }

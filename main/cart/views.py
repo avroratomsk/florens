@@ -20,7 +20,6 @@ def cart(request):
 def cart_add(request):
   product_id = request.POST.get("product_id")
   product = Product.objects.get(id=product_id)
-  print(f"{product}--------------------------------------------------------")
   
   if request.user.is_authenticated:
     carts = Cart.objects.filter(user=request.user, product=product)
