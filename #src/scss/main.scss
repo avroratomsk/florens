@@ -19,7 +19,7 @@ $mainColor: #3f3c38; // Цвет шрифта по умолчанию
 // $accent: #CD0000;
 // $accent: #c2ab89;
 $white: #ffffff;
-$accent: #F26A7E;
+$accent: #d71635;
 $grey: #939297;
 $orange: #e76642;
 $lightBlue: #fdfdfd;
@@ -162,8 +162,8 @@ body {
 @import './pages/service';
 @import './pages/about';
 @import './pages/service-page';
-@import './deps';
-@import './bootstrap';
+// @import './deps';
+// @import './bootstrap';
 
 /*
     Подключение стилей отдельных блоков
@@ -200,6 +200,10 @@ body {
 @import './pages/users/login';
 @import './pages/users/register';
 @import './pages/users/profile';
+
+@import './pages/orders/create';
+
+@import './pages/catalog/category-details';
 
 
 @import './components/mini-cart/mini-cart';

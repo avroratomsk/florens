@@ -16,18 +16,24 @@ def category(request):
     "category": category,
   }
 
-  return render(request, "pages/catalog/products.html", context)
+  return render(request, "pages/catalog/category.html", context)
 
 
-def category_detail(request, slug=None):
+def category_detail(request, slug):
+  category = Category.objects.get(slug=slug)
+  products = Product.objects.filter(category=category)
+  
   context = {
-    "title": "Страница категории"
+    "category_name": category.name,
+    "title": "Название товара",
+    "products": products
   }
-  return render(request, "pages/catalog/single.html", context)
+  
+  return render(request, "pages/catalog/category-details.html", context)
 
 def product(request, slug):
 
   context = {
     "title": "Название продукта"
   }
-  return render(request, "pages/catalog/view-product.html", context)
+  return render(request, "pages/catalog/product.html", context)

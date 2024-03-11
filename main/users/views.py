@@ -7,6 +7,7 @@ from cart.models import Cart
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
 
 def login(request):
+  field_errors = {}
   if request.method == "POST":
     form = UserLoginForm(data=request.POST)
     if form.is_valid:
@@ -30,7 +31,7 @@ def login(request):
         if redirect_page_next and redirect_page_next != reverse("logout"):
           return HttpResponseRedirect(request.POST.get("next"))
         
-        return HttpResponseRedirect(reverse("home"))
+        return HttpResponseRedirect(reverse("home"))   
   else:
     form = UserLoginForm()
   

@@ -52,4 +52,54 @@
       opacity: .9;
     }
   }
+
+  // .form__group-boolean
+
+  &__group-boolean {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  // .form__boolean-label
+
+  &__boolean-label {
+    cursor: pointer;
+  }
+
+  // .form__controls-radio
+
+  &__controls-radio {
+    cursor: pointer;
+  }
+
+  // .form__controls-checkbox
+
+  &__controls-checkbox {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid rgba($color: $mainColor, $alpha: .7);
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      margin-top: -4px;
+      margin-left: -4px;
+      border-radius: 4px;
+      background-color: rgba($color: $accent, $alpha: 1.0);
+    }
+
+    &:checked::before {
+      display: block;
+    }
+  }
 }

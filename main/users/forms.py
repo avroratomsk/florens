@@ -1,16 +1,23 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm,UserChangeForm
-
+from django.contrib.auth import authenticate
 from users.models import User
 
-class UserLoginForm(AuthenticationForm):
-  """Форма для аутентификации на сайте(логинться)"""
-  username = forms.CharField()
-  password = forms.CharField()
-  
-  class Meta:
-    model = User
-    fields = ['username', 'password']
+class UserLoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    def clean(self):
+      cleaned_data = super().clean()
+      username = cleaned_data.get('username')
+      password = cleaned_data.get('password')
+
+      if username and password:
+          user = authenticate(username=username, password=password)
+          if not user:
+              raise forms.ValidationError("Неверное имя пользователя или пароль.")
+
+      return cleaned_data
 
 
 class UserRegistrationForm(UserCreationForm):

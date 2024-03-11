@@ -1,0 +1,20 @@
+.order-create {
+  padding: 60px 10px;
+  // .order-create__row
+
+  &__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  // .order-create__col
+
+  &__col {
+    flex: 1 1 50%;
+  }
+
+  // .order-create__title
+
+  &__title {}
+}
