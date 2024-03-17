@@ -248,3 +248,26 @@ let addToCartButton = document.querySelectorAll('.add-to-cart');
 //   });
 // }
 
+const whoGetRadio = document.querySelectorAll('.who-get');
+if (whoGetRadio) {
+  whoGetRadio.forEach(item => {
+    item.addEventListener('change', function (e) {
+      console.log(this);
+      if (item.dataset.id == 'another') {
+        document.getElementById('contact-human').classList.add('_show')
+      } else {
+        document.getElementById('contact-human').classList.remove('_show')
+      }
+    })
+  })
+}
+
+const pickupCheckbox = document.getElementById('pickup');
+pickupCheckbox.addEventListener('change', function (e) {
+  if (!pickupCheckbox.checked) {
+    document.getElementById('address-delivery').classList.add('_hidden');
+  } else {
+    document.getElementById('address-delivery').classList.remove('_hidden');
+  }
+})
+

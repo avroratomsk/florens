@@ -10,10 +10,18 @@
     gap: 10px;
   }
 
+  // .form__group-grid
+
+  &__group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
   // .form__label
 
   &__label {
-    font-weight: 600;
+    font-weight: 400;
 
     span {
       color: #d71635;
@@ -53,6 +61,25 @@
     }
   }
 
+  // .form__item
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0px 30px;
+    border-bottom: 1px solid rgba($color: $mainColor, $alpha: .4);
+  }
+
+  // .form__item-title
+
+  &__item-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 140%;
+    margin-bottom: 10px;
+  }
+
   // .form__group-boolean
 
   &__group-boolean {
@@ -70,7 +97,31 @@
   // .form__controls-radio
 
   &__controls-radio {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    border-radius: 10px;
+    border: 1px solid rgba($color: $mainColor, $alpha: .7);
     cursor: pointer;
+
+    &::before {
+      content: "";
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      margin-top: -4px;
+      margin-left: -4px;
+      border-radius: 4px;
+      background-color: rgba($color: $accent, $alpha: 1.0);
+    }
+
+    &:checked::before {
+      display: block;
+    }
   }
 
   // .form__controls-checkbox
@@ -101,5 +152,12 @@
     &:checked::before {
       display: block;
     }
+  }
+
+  // .form__help-text
+
+  &__help-text {
+    font-size: 13px;
+    font-weight: 600;
   }
 }

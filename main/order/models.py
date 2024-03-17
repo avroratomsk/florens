@@ -15,13 +15,24 @@ class OrderItemQuerySet(models.QuerySet):
 
 class Order(models.Model):
   user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, blank=True, null=True, default=None, verbose_name="Пользователь")
+  first_name = models.CharField(max_length=50, null=True, blank=True, verbose_name='Имя')
+  email = models.EmailField(null=True, blank=True, verbose_name='E-mail')
   created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания заказа")
-  phone_number = models.CharField(default=True, verbose_name="Номер телефона")
+  phone = models.CharField(default=True, null=True, blank=True, verbose_name="Номер телефона")
   requires_delivery = models.BooleanField(null=True, blank=True, verbose_name="Нужна доставка ?")
   delivery_address = models.TextField(null=True, blank=True, verbose_name="Адрес доставки")
-  payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при получении")
-  is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
-  status = models.CharField(max_length=50, default="В обработке", verbose_name="Статус заказа")
+  payment_id = models.CharField(max_length=250, verbose_name="ID платежа", null=True, blank=True)
+  payment_dop_info = models.CharField(max_length=550, verbose_name="Информация о платеже (ссылка на плптеж)", null=True, blank=True)
+  pay_method = models.CharField(max_length=250, verbose_name="Способ оплаты", null=True, blank=True)
+  is_paid = models.BooleanField(default=False, verbose_name="Оплачено ?")
+  ORDER_STATUS = (
+    ('Новый', 'Новый'),
+    ('В работе', 'В работе'),
+    ('Обработан', 'Обработан'),
+    ('Выполнен', 'Выполнен'),
+    ('Отказ', 'Отказ')
+  )
+  models.CharField(max_length=250, verbose_name='Статус заказа', choices=ORDER_STATUS, default='Новый',)
   
   class Meta:
     db_table="order"
@@ -32,7 +43,7 @@ class Order(models.Model):
     return f"Заказа № {self.pk} | Покупатель {self.user.first_name} {self.user.last_name}"
   
 class OrderItem(models.Model):
-  order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name="Заказ")
+  order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items", verbose_name="Заказ")
   product = models.ForeignKey(Product, on_delete=models.SET_DEFAULT, default=None, blank=True, null=True, verbose_name="Продукт")
   name = models.CharField(max_length=150, verbose_name="Имя товара")
   price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Цена")
