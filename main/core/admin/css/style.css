@@ -609,6 +609,14 @@ ol {
   grid-template-columns: 10% 1fr 20% 30%;
 }
 
+.table-2__head {
+  grid-template-columns: 1fr 1fr;
+}
+
+.table-2__body .body-table__row {
+  grid-template-columns: 1fr 1fr;
+}
+
 .head-table {
   display: grid;
   justify-items: center;

@@ -23,10 +23,11 @@
     <p class="header__text">Категории</p>
     {% endcomment %}
     <ul class="header__list">
-      <li><a href="#">8 марта</a></li>
-      <li><a href="#">Розы</a></li>
-      <li><a href="#">Цветы и монобукеты</a></li>
-      <li><a href="#">Композиции</a></li>
+      <li><a href="/category/buketyi-iz-lilij/">Лилии</a></li>
+      <li><a href="/category/buketyi-vip/">VIP</a></li>
+      <li><a href="/category/bukety-iz-roz/">Розы</a></li>
+      <li><a href="/category/bukety-mix/">MIX</a></li>
+      <li><a href="/category/myagkaya-igrushka/">Мягкие игрушки</a></li>
     </ul>
   </div>
   <a href="/" class="header__logo">
@@ -35,7 +36,7 @@
   <div class="header__right">
     <ul class="header__list">
       <li>
-        <a href="#"
+        <a href="{% url 'populate' %}"
           ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="none">
             <path fill="#3F3C38" d="M5.333 9.667a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
             <path
@@ -50,7 +51,7 @@
         >
       </li>
       <li>
-        <a href="#">
+        <a href="{% url 'news' %}">
           <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M7.38157 11.4294C5.57008 9.61494 5.57008 6.66262 7.38157 4.84815C9.17692 3.04979 12.0739 3.02573 13.8978 4.78656C14.8398 3.87846 16.0987 3.41365 17.4172 3.49584C16.6255 0.073482 12.3525 -1.19478 9.83762 1.32427L8.78237 2.38125L7.74856 1.34576C5.97604 -0.42962 3.10181 -0.431669 1.3272 1.34576C-0.442399 3.11825 -0.442399 6.00235 1.3272 7.77484L8.31012 14.7692C8.54542 15.0049 8.92772 15.005 9.16302 14.7692L9.93946 13.9915L7.38157 11.4294Z"
@@ -64,7 +65,7 @@
           Новинки
         </a>
       </li>
-      <li><a href="#">Дополнительно к цветам</a></li>
+      <li><a href="{% url 'category' %}">Каталог</a></li>
     </ul>
     <div class="header__action">
       <button type="button" class="header__action-btn" id="show-cart">

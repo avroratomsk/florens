@@ -3,7 +3,10 @@ from django_ckeditor_5.widgets import CKEditor5Widget
 from home.models import BaseSettings, HomeTemplate, Stock
 from service.models import Service
 from reviews.models import Reviews
-from shop.models import Category, Product
+from shop.models import Category, Product, ProductSpecification
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField()
 
 # class ProductForm(forms.ModelForm):
 #   # description = forms.CharField(label="Полное описание товара", required=False, widget=CKEditorUploadingWidget())
@@ -110,10 +113,13 @@ class ProductForm(forms.ModelForm):
             'image',
             'price',
             'discount',
+            'sale_price',
+            'quantity_purchase',
             'quantity',
             'category',
             'image',
             'status',
+            'latest',
         ]
         labels = {
             'name': 'Название блюда',
@@ -125,10 +131,13 @@ class ProductForm(forms.ModelForm):
             'meta_keywords':'Meta keywords',
             'image':'Изображение',
             'price':'Цена',
+            'sale_price':'Цена со скидкой',
+            'quantity_purchase':'Количество покупок',
             'discount':'Скидка в (%)',
             'quantity':'Количество',
             'image': 'Превью изображения',
-            'status': 'Статус публикации'
+            'status': 'Статус публикации',
+            'latest': 'Новинка ?'
         }
         widgets = {
             'name': forms.TextInput(attrs={
@@ -161,6 +170,14 @@ class ProductForm(forms.ModelForm):
                 'class': 'form__controls',
                 # 'placeholder': 'Цена (с учетом скидки)',
             }),
+            'sale_price': forms.NumberInput(attrs={
+                'class': 'form__controls',
+                # 'placeholder': 'Цена (с учетом скидки)',
+            }),
+            'quantity_purchase': forms.NumberInput(attrs={
+                'class': 'form__controls',
+                # 'placeholder': 'Цена (с учетом скидки)',
+            }),
             'quantity': forms.NumberInput(attrs={
                 'class': 'form__controls',
                 # 'placeholder': 'Количество',
@@ -186,28 +203,36 @@ class ProductForm(forms.ModelForm):
                 'class': 'submit-file',
                 'accept': 'image/*'
             }),
-            'calories': forms.TextInput(attrs={
-                'class': "form__controls",
-                # 'placeholder': 'Колорийность'
-            }),
-            'proteins': forms.TextInput(attrs={
-                'class': "form__controls",
-                # 'placeholder': 'Белки'
-            }),
-            'fats': forms.TextInput(attrs={
-                'class': "form__controls",
-                # 'placeholder': 'Жиры'
-            }),
-            'carbonhydrates': forms.TextInput(attrs={
-                'class': "form__controls",
-                # 'placeholder': 'Углеводы'
-            }),
-            # 'status': forms.CheckboxInput(attrs={
-            #     'class': "form__controls-checkbox",
-            #     'placeholder': 'Белки'
-            # })
         }
-   
+
+# class CharName(forms.ModelForm):
+#   class
+
+# class ProductCharForm(forms.ModelForm):
+#   class Meta:
+#       model = ProductSpecification
+#       fields = [
+#           'name',
+#           'value',
+#       ]
+#       labels = {
+#           'name': 'Название характеристики',
+#           'value': 'Значение',
+#       }
+#       widgets = {
+#           'name': forms.TextInput(attrs={
+#               'class': 'form__controls',
+#               'placeholder': 'Название характеристики',
+#               'id': 'id_char_name',
+              
+#           }),
+#           'value': forms.TextInput(attrs={
+#               'class': 'form__controls',
+#               'placeholder': 'Значение',
+#               'id': 'id_char_value'
+#           }),
+#       }
+
 class CategoryForm(forms.ModelForm):
   """ Form, отвечает за создание категорий и редактирование категорий"""
   class Meta:

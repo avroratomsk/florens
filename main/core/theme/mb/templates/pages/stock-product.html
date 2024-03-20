@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load shop_tags %} {% load thumbnail %}{% load static %}{% block content %}
 <main class="page">
   <section class="category-details">
-    <h1 class="category-details__title _title">Популярные товары</h1>
+    <h1 class="category-details__title _title">{{ title }}</h1>
     <div class="category-details__row">
       <div class="category-details__col">
         <form action="" method="GET" class="filter form">
@@ -92,12 +92,15 @@
                 <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
               </button>
               <button type="button" class="card__click" id="one-click">Купить в один клик</button>
+              {% if product.discount %}
+              <p class="card__stock">-{{ product.discount }}%</p>
+              {% endif %}
             </div>
             <div class="card__content">
               <h3 class="card__title-h3">{{ product.name }}</h3>
               <div class="card__content-bottom">
                 {% if product.sale_price %}
-                <span class="card__price">{{ product.sale_price }} <span class="currency">₽</span></span>
+                <p class="card__price"><s>{{ product.price }} ₽</s> <span class="card__price-number">{{ product.sale_price }}</span> <span class="currency">₽</span></p>
                 {% else %}
                 <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
                 {% endif %}

@@ -36,6 +36,7 @@ venv
 
 **/ckeditor
 **/folder.py
+**/media
 
 **/__pycache__
 **/migrations

@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     
     "debug_toolbar",
     "corsheaders",
-    
+    'sorl.thumbnail',
     "home",
     "shop",
     "users",

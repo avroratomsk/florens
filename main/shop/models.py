@@ -18,7 +18,7 @@ class Category(models.Model):
   name = models.CharField(max_length=150, db_index=True, unique=True, verbose_name="Название категории")
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
   image = models.ImageField(upload_to="category_image", blank=True, null=True, verbose_name="Изображение категории")
-  sub_category = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null=True, verbose_name="Подкатегория")
+  parent = models.ForeignKey('self', related_name='children', on_delete=models.CASCADE, null=True, blank=True, verbose_name="Дочерняя категория")
   meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="META заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="META описание")
@@ -45,14 +45,16 @@ class Product(models.Model):
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
   image = models.ImageField(upload_to="product_iamge", blank=True, null=True, verbose_name="Изображение товара")
-  price = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена товра")
-  discount = models.DecimalField(default=0, max_digits=4, decimal_places=2, verbose_name="Скидака в %")
+  price = models.DecimalField(default=0, max_digits=10, decimal_places=2, verbose_name="Цена товра")
+  sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Цена со скидкой")
+  discount = models.DecimalField(default=0, max_digits=10, decimal_places=2, verbose_name="Скидака в %")
   quantity = models.PositiveIntegerField(default=0, verbose_name="Количество")
   category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, default=None, verbose_name='День недели')
   composition = models.CharField(max_length=255, blank=True, null=True, verbose_name="Состав")
   diameter = models.CharField(max_length=250, blank=True, null=True, verbose_name="Диаметр")
   height = models.CharField(max_length=150, blank=True, null=True, verbose_name="Высота")
   quantity_flower = models.CharField(max_length=250, blank=True, null=True, verbose_name="Количество цветков в букете")
+  quantity_purchase = models.IntegerField(default=0, verbose_name="Количество покупок")
   latest = models.BooleanField(default=False, verbose_name="Новинка ?")
   status = models.BooleanField(default=True, verbose_name="Опубликовать ?")
   
@@ -93,7 +95,20 @@ class Product(models.Model):
   
   def get_absolute_url(self):
         return reverse("product", kwargs={"slug": self.slug})
+    
+class CharName(models.Model):
+  char_name = models.CharField(max_length=250, verbose_name="Название характеристки")
+
+class ProductSpecification(models.Model):
+  product = models.ManyToManyField(Product, related_name='character', verbose_name="Связь с продуктом")
+  char_name = models.ForeignKey(CharName, on_delete=models.CASCADE, related_name='chars', null=True, blank=True)
+  value = models.CharField(max_length=100, verbose_name="Значение")
   
+  class Meta:
+    db_table = 'characteristics'
+    
+  def __str__(self):
+     return self.name
   
   
   

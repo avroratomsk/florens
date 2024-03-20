@@ -43,6 +43,22 @@
 
 }
 
+.table-2 {
+
+  // .table-2__head
+  &__head {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  // .table-2__body 
+  &__body {
+    .body-table__row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+}
+
 .head-table {
   display: grid;
   justify-items: center;
