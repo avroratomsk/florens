@@ -118,6 +118,7 @@ class ProductForm(forms.ModelForm):
             'quantity',
             'category',
             'image',
+            'free_shipping',
             'status',
             'latest',
         ]
@@ -137,6 +138,7 @@ class ProductForm(forms.ModelForm):
             'quantity':'Количество',
             'image': 'Превью изображения',
             'status': 'Статус публикации',
+            'free_shipping': 'Бесплатная доставка',
             'latest': 'Новинка ?'
         }
         widgets = {

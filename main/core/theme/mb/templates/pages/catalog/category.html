@@ -5,7 +5,8 @@
     <div class="products__container">
       <div class="products__top title-page">
         <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-          <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
+          <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+            class="breadcrumbs__item">
             Главная
             <meta itemprop="position" content="1" />
           </a>
@@ -26,7 +27,12 @@
         <a href="{{ category.get_absolute_url }}" class="index-category__item" style="background-image: url()">
           <div class="index-category__item-col">
             <div class="index-category__item-top">
-              <span>{{ category.product_count }}</span>
+              <span>
+                {{ category.product_count }}
+                {% if category.name == "Мягкая игрушка" %}Игрушек{% endif %}
+                {% if category.name == "Горшечные растения" %}Растений{% endif %}
+                {% if category.name == "Воздушные шары" %}Шаров{% endif %}
+              </span>
             </div>
             <h3 class="index-category__title">{{ category.name }}</h3>
           </div>
@@ -72,10 +78,7 @@
     <div class="contact__map">
       <iframe
         src="https://yandex.ru/map-widget/v1/?um=constructor%3Ac1cf0d6cb1a0a77d749e2c1f0f9e9897a548d46e6449e8291a14966d1c6c5cfd&amp;source=constructor"
-        width="100%"
-        height="500"
-        frameborder="0"
-      ></iframe>
+        width="100%" height="500" frameborder="0"></iframe>
     </div>
   </section>
 </main>

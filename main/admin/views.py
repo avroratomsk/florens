@@ -190,28 +190,34 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 
 def parse_exсel(path):
-  data = pd.read_excel(path)
+  workbook = openpyxl.load_workbook(path)
+  sheet = workbook.active
+  start_row = 2
+    
   Product.objects.all().delete()
 
-  for index, row in data.iterrows():
-    name = row['name']
-    slug = slugify(row['name'])
-    description = row['description']
+  for row in sheet.iter_rows(min_row=start_row, values_only=True):
+    name = row[1]
+    slug = slugify(name)
+    description = row[3]
     meta_h1 = ''
     meta_title = ''
     meta_description = ''
     meta_keywords = ''
-    image = f"goods/{row['image']}"
-    price = float(row['price'])
+    image = f"goods/{row[4]}"
+    price = row[5]
     sale_price = 0.0
-    
-    if math.isnan(row['discount']):
+    if row[6] == None:
       discount = 0.0
     else:
-      discount = row['discount']
+      discount = row[6] * 100
+      discount = int(discount)
       sale_price = round(price - price * discount / 100, 1)
-    quantity = row['quantity']
-    category_name = row['category']
+    quantity = row[8]
+    if row[7]:
+      category_name = row[7]
+    else:
+      print("Категории нет")
     category_slug = slugify(category_name)
 
     try:
@@ -223,12 +229,13 @@ def parse_exсel(path):
           slug=category_slug
         )
       else:
+        # print("Ошибка: Имя категории не указано")
         category = Category.objects.filter(name=category_name).first()
     
-    composition = row['composition']
-    diameter = row['diameter']
-    height = row['height']
-    quantity_flower = row['quantity_flower']
+    composition = row[9]
+    diameter = row[10]
+    height = row[11]
+    quantity_flower = row[12]
     latest = False
     status = True
   
@@ -259,7 +266,8 @@ def parse_exсel(path):
             status=status
           )
         except Exception as e:
-          print(e)
+          pass
+          # print(e)
       else:
         new_product = Product.objects.filter(name=name).first() 
   

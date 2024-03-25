@@ -25,16 +25,22 @@
       <div class="swiper-pagination"></div>
       <button type="button" aria-label="Предыдущий слайд" class="index-slider__prev swiper-button-prev">
         <svg fill="none" viewBox="0 0 88 176" id="css--union-nav" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd"
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
             d="M37 169a7 7 0 1014 0v-27.785c0-5.845 4.309-10.677 9.684-12.972 15.57-6.649 26.48-22.1 26.48-40.1 0-17.998-10.91-33.45-26.48-40.098C55.31 45.75 51 40.918 51 35.073V7a7 7 0 10-14 0v27.736c0 5.934-4.434 10.811-9.924 13.06C11.19 54.302 0 69.916 0 88.144c0 18.228 11.19 33.842 27.076 40.348 5.49 2.248 9.924 7.126 9.924 13.059V169z"
-            fill="#FDFDFD" />
+            fill="#FDFDFD"
+          />
         </svg>
       </button>
       <button type="button" aria-label="Следующий слайд" class="index-slider__next swiper-button-next">
         <svg fill="none" viewBox="0 0 88 176" id="css--union-nav" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd"
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
             d="M37 169a7 7 0 1014 0v-27.785c0-5.845 4.309-10.677 9.684-12.972 15.57-6.649 26.48-22.1 26.48-40.1 0-17.998-10.91-33.45-26.48-40.098C55.31 45.75 51 40.918 51 35.073V7a7 7 0 10-14 0v27.736c0 5.934-4.434 10.811-9.924 13.06C11.19 54.302 0 69.916 0 88.144c0 18.228 11.19 33.842 27.076 40.348 5.49 2.248 9.924 7.126 9.924 13.059V169z"
-            fill="#FDFDFD" />
+            fill="#FDFDFD"
+          />
         </svg>
       </button>
     </div>
@@ -70,7 +76,7 @@
       <div class="index-catalog__head">
         <h2 class="index-catalog__title _title-h2">Онлайн-витрина</h2>
         <div class="index-catalog__links">
-          <a href="#" class="index-catalog__link">Лучшие предложения</a>
+          <a href="{% url 'best_offer' %}" class="index-catalog__link">Лучшие предложения</a>
           <a href="{% url 'populate' %}" class="index-catalog__link">Выбор покупателей</a>
           <a href="" class="index-catalog__link">Акции</a>
           <a href="{% url 'category' %}" class="index-catalog__link">Весь каталог</a>
@@ -81,30 +87,35 @@
         <div class="index-catalog__card card">
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
             {% endthumbnail %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
+            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
             {% else %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
+            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
             {% endif %}
-            <button type="button" class="card__hit">
-              <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
-            </button>
-            <button type="button" class="card__click" id="one-click">Купить в один клик</button>
+            <button type="button" class="card__click" id="one-click" data-id="{{ product.id }}">Купить в один клик</button>
+            {% if product.discount %}
+            <p class="card__stock">-{{ product.discount }}%</p>
+            {% endif %}
           </div>
           <div class="card__content">
             <h3 class="card__title-h3">{{ product.name }}</h3>
             <div class="card__content-bottom">
               {% if product.sale_price %}
-              <span class="card__price">{{ product.sale_price }} <span class="currency">₽</span></span>
+              <span class="card__price"><s>{{ product.price }}</s> <b class="card__price-number">{{ product.sale_price }}</b> <span class="currency">₽</span></span>
               {% else %}
               <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
               {% endif %}
-
               <a href="{% url 'cart_add' %}" class="card__cart add-to-cart" data-product-id="{{ product.id }}">
                 {% csrf_token %}
                 <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
               </a>
+              {% if product.quantity_purchase > 10 %}
+              <button type="button" class="card__hit">
+                <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
+              </button>
+              {% endif %}
+
               <button type="button" class="card__favorit">
                 <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
               </button>
@@ -126,30 +137,35 @@
         <div class="index-catalog__card card">
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
             {% endthumbnail %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
+            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
             {% else %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
+            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
             {% endif %}
-            <button type="button" class="card__hit">
-              <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
-            </button>
-            <button type="button" class="card__click" id="one-click">Купить в один клик</button>
+            <button type="button" class="card__click" id="one-click" data-id="{{ product.id }}">Купить в один клик</button>
+            {% if product.discount %}
+            <p class="card__stock">-{{ product.discount }}%</p>
+            {% endif %}
           </div>
           <div class="card__content">
             <h3 class="card__title-h3">{{ product.name }}</h3>
             <div class="card__content-bottom">
               {% if product.sale_price %}
-              <span class="card__price">{{ product.sale_price }} <span class="currency">₽</span></span>
+              <span class="card__price"><s>{{ product.price }}</s> <b class="card__price-number">{{ product.sale_price }}</b> <span class="currency">₽</span></span>
               {% else %}
               <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
               {% endif %}
-
               <a href="{% url 'cart_add' %}" class="card__cart add-to-cart" data-product-id="{{ product.id }}">
                 {% csrf_token %}
                 <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
               </a>
+              {% if product.quantity_purchase > 10 %}
+              <button type="button" class="card__hit">
+                <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
+              </button>
+              {% endif %}
+
               <button type="button" class="card__favorit">
                 <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
               </button>
@@ -174,35 +190,35 @@
         <div class="index-catalog__card card">
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
             {% endthumbnail %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
+            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
             {% else %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
+            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
             {% endif %}
-            <button type="button" class="card__hit">
-              <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
-            </button>
-            <button type="button" class="card__click" id="one-click">Купить в один клик</button>
+            <button type="button" class="card__click" id="one-click" data-id="{{ product.id }}">Купить в один клик</button>
             {% if product.discount %}
-            <p class="card__stock">
-              -{{ product.discount }}%
-            </p>
+            <p class="card__stock">-{{ product.discount }}%</p>
             {% endif %}
           </div>
           <div class="card__content">
             <h3 class="card__title-h3">{{ product.name }}</h3>
             <div class="card__content-bottom">
               {% if product.sale_price %}
-              <span class="card__price">{{ product.sale_price }} <span class="currency">₽</span></span>
+              <span class="card__price"><s>{{ product.price }}</s> <b class="card__price-number">{{ product.sale_price }}</b> <span class="currency">₽</span></span>
               {% else %}
               <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
               {% endif %}
-
               <a href="{% url 'cart_add' %}" class="card__cart add-to-cart" data-product-id="{{ product.id }}">
                 {% csrf_token %}
                 <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
               </a>
+              {% if product.quantity_purchase > 10 %}
+              <button type="button" class="card__hit">
+                <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
+              </button>
+              {% endif %}
+
               <button type="button" class="card__favorit">
                 <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
               </button>
@@ -302,37 +318,25 @@
     <div class="advantages__border borderDotted"></div>
     <div class="index-about__text">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis
-        tempora dicta vitae repudiandae, suscipit quasi facere alias!
-        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing
-        elit. Dolorum autem in accusamus a iste. Consequuntur aut
-        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus
-        molestias!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
+        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
+        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis
-        tempora dicta vitae repudiandae, suscipit quasi facere alias!
-        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing
-        elit. Dolorum autem in accusamus a iste. Consequuntur aut
-        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus
-        molestias!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
+        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
+        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis
-        tempora dicta vitae repudiandae, suscipit quasi facere alias!
-        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing
-        elit. Dolorum autem in accusamus a iste. Consequuntur aut
-        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus
-        molestias!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
+        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
+        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
       </p>
       <h3>Заголовок третьего уровня</h3>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis
-        tempora dicta vitae repudiandae, suscipit quasi facere alias!
-        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing
-        elit. Dolorum autem in accusamus a iste. Consequuntur aut
-        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus
-        molestias!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
+        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
+        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
       </p>
     </div>
     <div class="index-about__slider swiper">
@@ -421,7 +425,8 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2" />
+              fill="#F3F3F2"
+            />
           </svg>
         </span>
       </a>
@@ -431,7 +436,8 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2" />
+              fill="#F3F3F2"
+            />
           </svg>
         </span>
       </a>
@@ -441,7 +447,8 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2" />
+              fill="#F3F3F2"
+            />
           </svg>
         </span>
       </a>
@@ -451,7 +458,8 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2" />
+              fill="#F3F3F2"
+            />
           </svg>
         </span>
       </a>

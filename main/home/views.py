@@ -41,10 +41,20 @@ def populate(request):
   
   context = {
     "title": "Популярные товары",
-    "products": products
+    "products": products,
   }
   
   return render(request, "pages/populate.html", context)
+
+def best_offer(request):
+  free_shipping_products = Product.objects.filter(free_shipping=True)
+  
+  context = {
+    "title": "Лучшие предложения",
+    "free_shipping_products": free_shipping_products
+  }
+  
+  return render(request, "pages/best_offer.html", context)
 
 def stock_product(request):
   products = Product.objects.filter(discount__gte=1)

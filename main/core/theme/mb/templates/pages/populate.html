@@ -82,22 +82,22 @@
           <div class="index-catalog__card card">
             <div class="card__image">
               {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
               {% endthumbnail %}
-              <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
+              <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
               {% else %}
-              <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" />
+              <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
               {% endif %}
-              <button type="button" class="card__hit">
-                <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
-              </button>
-              <button type="button" class="card__click" id="one-click">Купить в один клик</button>
+              <button type="button" class="card__click" id="one-click" data-id="{{ product.id }}">Купить в один клик</button>
+              {% if product.discount %}
+              <p class="card__stock">-{{ product.discount }}%</p>
+              {% endif %}
             </div>
             <div class="card__content">
               <h3 class="card__title-h3">{{ product.name }}</h3>
               <div class="card__content-bottom">
                 {% if product.sale_price %}
-                <span class="card__price">{{ product.sale_price }} <span class="currency">₽</span></span>
+                <span class="card__price"><s>{{ product.price }}</s> <b class="card__price-number">{{ product.sale_price }}</b> <span class="currency">₽</span></span>
                 {% else %}
                 <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
                 {% endif %}
@@ -105,6 +105,12 @@
                   {% csrf_token %}
                   <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
                 </a>
+                {% if product.quantity_purchase > 10 %}
+                <button type="button" class="card__hit">
+                  <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
+                </button>
+                {% endif %}
+
                 <button type="button" class="card__favorit">
                   <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
                 </button>
