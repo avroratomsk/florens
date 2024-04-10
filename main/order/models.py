@@ -25,6 +25,8 @@ class Order(models.Model):
   payment_dop_info = models.CharField(max_length=550, verbose_name="Информация о платеже (ссылка на плптеж)", null=True, blank=True)
   pay_method = models.CharField(max_length=250, verbose_name="Способ оплаты", null=True, blank=True)
   is_paid = models.BooleanField(default=False, verbose_name="Оплачено ?")
+  summ = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+  
   ORDER_STATUS = (
     ('Новый', 'Новый'),
     ('В работе', 'В работе'),

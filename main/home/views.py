@@ -12,8 +12,6 @@ from reviews.models import Reviews
 def index(request):
   page = request.GET.get('page', 1)
   
-  
-  
   try: 
     home_page = HomeTemplate.objects.get()
     settings = BaseSettings.objects.get()
