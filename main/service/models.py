@@ -4,6 +4,7 @@ from django.urls import reverse
 
 class ServicePage(models.Model):
   name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Название услуги")
+  slug = models.SlugField(max_length=150, unique=True, blank=True, null=True, verbose_name="URL")
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")

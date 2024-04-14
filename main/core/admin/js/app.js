@@ -1,35 +1,34 @@
 /**
  * Добавление класса активности вкладкам sidebar
  */
-const sideBarItem = document.querySelectorAll('.sidebar__item');
-if (sideBarItem) {
-  sideBarItem.forEach(item => {
-    item.addEventListener('click', function (e) {
-      this.classList.toggle('_active');
-    })
-  })
-}
+// const sideBarItem = document.querySelectorAll('.sidebar__item');
+// if (sideBarItem) {
+//   sideBarItem.forEach(item => {
+//     item.addEventListener('click', function (e) {
+//       this.classList.toggle('_active');
+//     })
+//   })
+// }
+
+// const { locale } = require("yargs");
 
 /**
  * Переключение вкладок на страницах продуктов, категорий
  */
-const tabButton = document.querySelectorAll('[data-name]');
-const pageEditButton = document.querySelectorAll('.page-edit__item');
-if (tabButton) {
-  tabButton.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      tabButton.forEach(item => item.classList.remove('_active'));
-      pageEditButton.forEach(item => item.classList.remove('_show'));
 
-
-      let bodyTabBody = document.getElementById(this.dataset.name);
-
-      btn.classList.add('_active');
-      bodyTabBody.classList.add('_show');
-    })
+const data_name_tab = document.querySelectorAll('[data-name]');
+if (data_name_tab) {
+  data_name_tab.forEach(btn => {
+    btn.addEventListener('click', showPageConetnt)
   })
 }
 
+function showPageConetnt(e) {
+  document.querySelectorAll('.page-content').forEach(item => item.classList.remove('_show'));
+  document.getElementById(this.dataset.name).classList.add('_show');
+  data_name_tab.forEach(item => item.classList.remove('_active'));
+  this.classList.add('_active');
+}
 
 /**
  * Принимает на вход строку и конвертирует ее в английский язык
@@ -82,19 +81,58 @@ if (nameField) {
 /**
  * Подсчет и отображение количества символов в meta-полях
  */
-const metaFields = document.querySelectorAll('.meta_field');
+const metaFields = document.querySelectorAll('#meta_description');
 if (metaFields) {
   metaFields.forEach(item => {
     let parentItem = item.closest('.form__group').querySelector('.meta-lenght');
-    console.log(item);
     if (item.value <= 0) {
       parentItem.innerText = 0;
     } else {
       parentItem.innerText = item.value.length;
     }
+    let max_length = 150;
     item.addEventListener('input', function (e) {
       parentItem.innerText = item.value.length;
+      if (item.value.length > max_length) {
+        parentItem.classList.add('max_limit');
+      } else {
+        parentItem.classList.remove('max_limit');
+      }
     })
   })
 }
+
+const dropdownButtons = document.querySelectorAll('.dropdownButton');
+
+if (dropdownButtons) {
+  dropdownButtons.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      console.log(e.target);
+      let dropdownContent = this.querySelector('.dropdownContent');
+      if (dropdownContent.classList.contains('hidden')) {
+        dropdownContent.classList.remove('hidden');
+        dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+      } else {
+        dropdownContent.style.maxHeight = 0;
+        // setTimeout(function () {
+        dropdownContent.classList.add('hidden');
+        // }, 500); // transition duration
+      }
+    })
+  })
+}
+
+const banquetMenuCheckbox = document.getElementById('banquet_menu-checkbox');
+if (banquetMenuCheckbox) {
+  banquetMenuCheckbox.addEventListener('change', shwoField);
+}
+
+function shwoField() {
+  if (banquetMenuCheckbox.checked) {
+    document.getElementById('banquet_menu').classList.add('show');
+  } else {
+    document.getElementById('banquet_menu').classList.remove('show');
+  }
+}
+
 

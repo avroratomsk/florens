@@ -39,6 +39,7 @@ class Stock(models.Model):
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
+  slider_status = models.BooleanField(default=False, verbose_name="Слайдер на главной")
 
   def get_absolute_url(self):
       return reverse("stock_detail", kwargs={"slug": self.slug})

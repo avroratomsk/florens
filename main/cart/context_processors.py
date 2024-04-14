@@ -10,7 +10,3 @@ def user_carts(request):
 
   return {'user_cart': user_cart}
 
-def cart_my(request):
-    session_key = request.session.session_key
-    user_cart = Cart.objects.filter(session_key=session_key)
-    return {"cart_my": user_cart}

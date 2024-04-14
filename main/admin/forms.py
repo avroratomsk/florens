@@ -1,7 +1,7 @@
 from django import forms
 from django_ckeditor_5.widgets import CKEditor5Widget
 from home.models import BaseSettings, HomeTemplate, Stock
-from service.models import Service
+from service.models import Service, ServicePage
 from reviews.models import Reviews
 from shop.models import Category, Product, ProductSpecification
 
@@ -112,11 +112,15 @@ class ProductForm(forms.ModelForm):
             'meta_keywords',
             'image',
             'price',
+            'diameter',
             'discount',
             'sale_price',
             'quantity_purchase',
             'quantity',
             'category',
+            'composition',
+            'width',
+            'height',
             'image',
             'free_shipping',
             'status',
@@ -132,7 +136,11 @@ class ProductForm(forms.ModelForm):
             'meta_keywords':'Meta keywords',
             'image':'Изображение',
             'price':'Цена',
+            'diameter':'Диаметр',
             'sale_price':'Цена со скидкой',
+            'composition':'Состав букета',
+            'width':'Ширина',
+            'height':'Высота',
             'quantity_purchase':'Количество покупок',
             'discount':'Скидка в (%)',
             'quantity':'Количество',
@@ -145,61 +153,62 @@ class ProductForm(forms.ModelForm):
             'name': forms.TextInput(attrs={
                 'class': 'form__controls',
                 "id":"name"
-                # 'placeholder': 'Название товара',
-                
             }),
             'description': forms.Textarea(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Короткое описание товара',
+                
             }),
             'meta_h1': forms.TextInput(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'h1',
             }),
             'meta_title': forms.TextInput(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Мета заголовок',
             }),
-            'meta_description': forms.TextInput(attrs={
+            'composition': forms.Textarea(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Мета описание',
+            }),
+            'width': forms.TextInput(attrs={
+                'class': 'form__controls',
+            }),
+            'height': forms.TextInput(attrs={
+                'class': 'form__controls',
+            }),
+            'meta_description': forms.Textarea(attrs={
+                'class': 'form__controls',
+                "id": "meta_description"
             }),
             'meta_keywords': forms.TextInput(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Ключевые слова',
             }),
             'price': forms.NumberInput(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Цена (с учетом скидки)',
+            }),
+            'diameter': forms.NumberInput(attrs={
+                'class': 'form__controls',
             }),
             'sale_price': forms.NumberInput(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Цена (с учетом скидки)',
             }),
             'quantity_purchase': forms.NumberInput(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Цена (с учетом скидки)',
             }),
             'quantity': forms.NumberInput(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Количество',
             }),
             'slug': forms.TextInput(attrs={
                 'class': 'form__controls',
                 "id": "slug"
-                # 'placeholder': 'SEO URL',
             }),
             'category': forms.Select(attrs={
                 'class': 'form__controls', 
-                # 'placeholder': 'Категория',
+            }),
+            'free_shipping': forms.CheckboxInput(attrs={
             }),
             'weight': forms.TextInput(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Грамовка',
             }),
             'discount': forms.TextInput(attrs={
                 'class': 'form__controls',
-                # 'placeholder': 'Скидка',
             }),
             'image': forms.FileInput(attrs={
                 'class': 'submit-file',
@@ -242,6 +251,7 @@ class CategoryForm(forms.ModelForm):
     fields = [
       "name",
       "slug",
+      "description",
       "image",
       "meta_h1",
       "meta_title",
@@ -251,6 +261,7 @@ class CategoryForm(forms.ModelForm):
     labels = {
       "name": "Назване категории",
       "slug": "URL",
+      "description": "Описание категории",
       "image": "Изображение",
       "meta_h1": "Заголовок H1",
       "meta_title": "Meta заголовок",
@@ -268,10 +279,13 @@ class CategoryForm(forms.ModelForm):
         "id": "slug"
         # "placeholder": "Название категори"
       }),
-      'image': forms.FileInput(attrs={
-          'class': 'submit-file',
-          'accept': 'image/*'
+      "description": forms.Textarea(attrs={
+        "class":"form__controls",
       }),
+      # 'image': forms.FileInput(attrs={
+      #     'class': 'submit-file',
+      #     'accept': 'image/*'
+      # }),
       "meta_h1": forms.TextInput(attrs={
         "class":"form__controls",
         # "placeholder": "Заголовок H1"
@@ -478,6 +492,7 @@ class StockForm(forms.ModelForm):
         'description',
         'validity',
         'status',
+        'slider_status',
         'image',
         'meta_title',
         'meta_description',
@@ -489,6 +504,7 @@ class StockForm(forms.ModelForm):
         'validity':'Срок действия акции',
         'description':'Текст коментария',
         'status':'Статус публикации',
+        'slider_status':'Вывод на главный слайдер',
         'image': 'Изображение акции',
         'meta_title':'Meta title',
         'untitle': 'Надзаголовок',
@@ -514,6 +530,9 @@ class StockForm(forms.ModelForm):
       'status': forms.CheckboxInput(attrs={
         'class': 'form__controls-checkbox',
       }),
+      'slider_status': forms.CheckboxInput(attrs={
+        'class': 'form__controls-checkbox',
+      }),
       'meta_title': forms.TextInput(attrs={
         'class': 'form__controls',
       }),
@@ -525,7 +544,46 @@ class StockForm(forms.ModelForm):
         'class': 'form__controls'
       })
     }
-    
+
+class ServicePageForm(forms.ModelForm):
+  """ Поля настроек старницы услуг"""
+  # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
+  
+  class Meta:
+    model = Service
+    fields = [
+        'name',
+        'slug',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+    ]
+    labels = {
+        'name':'Название',
+        'slug': 'URL',
+        'meta_title':'Meta title',
+        'meta_description':'Мета description',
+        'meta_keywords':'Meta keywords',
+    }
+    widgets = {
+      'name': forms.TextInput(attrs={
+        'class': 'form__controls',
+        'id': 'name'
+      }),
+      'slug': forms.TextInput(attrs={
+        'class':'form__controls',
+        "id": "slug"
+      }),
+      'meta_title': forms.TextInput(attrs={
+        'class': 'form__controls',
+      }),
+      'meta_description': forms.Textarea(attrs={
+        'class': 'form-controls',
+      }),
+      'meta_keywords': forms.TextInput(attrs={
+        'class': 'form__controls'
+      })
+    }  
     
 class ServiceForm(forms.ModelForm):
   """ Form, добавление и редактирование услуг"""
@@ -563,7 +621,7 @@ class ServiceForm(forms.ModelForm):
         'class':'form__controls',
         "id": "slug"
       }),
-      'subtitle': forms.DateInput(attrs={
+      'subtitle': forms.Textarea(attrs={
         'class':'form__controls',
       }),
       'status': forms.CheckboxInput(attrs={

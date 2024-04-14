@@ -17,7 +17,6 @@ def order_create(request):
   if request.method == "POST":
     """Получаем способ оплаты и в зависимости от метода оплаты строим логику ниже"""
     payment_method = request.POST['payment_option']
-    print(payment_method)
     if form.is_valid():
       try:
         order = form.save(commit=False)
@@ -33,15 +32,43 @@ def order_create(request):
           
           try: 
             first_name = request.POST['first_name']
-            print(first_name)
             order.first_name = first_name
-            
           except:
             pass
           
           try:
             email = request.POST['email']
             order.email = email
+          except:
+            pass
+          
+          try:
+            first_name_human = request.POST['first_name_human']
+            order.first_name_human = first_name_human
+          except:
+            pass
+          
+          try:
+            phone_number_human = request.POST['phone_number_human']
+            order.phone_number_human = phone_number_human
+          except:
+            pass
+          
+          try:
+            pickup = request.POST['pickup']
+            order.pickup = True
+          except:
+            pass
+          
+          try:
+            surprise = request.POST['surprise']
+            order.surprise = True
+          except:
+            pass
+          
+          try:
+            anonymous = request.POST['anonymous']
+            order.anonymous = True
           except:
             pass
           
@@ -66,7 +93,6 @@ def order_create(request):
           
           
           order.save()
-          # print(f"{order}--------------------")
           for item in cart_items:
             product=item.product
             name=item.product.name
@@ -89,15 +115,14 @@ def order_create(request):
               order.payment_id = payment_id
               order.payment_dop_info = confirmation_url
               order.save()
+              email_send(order)
+              cart_items.delete()
               return redirect(confirmation_url)
           else:
-            print(f"Сюда пришел заказа номер {order.id}")
-            print(request.session['user_profile_id'])
             email_send(order)
             cart_items.delete()
             return redirect('order_succes')
       except Exception as e:
-        print("Сюда пришел тоже")
         print(e)
   
   # cart = request.context['cart_my']
@@ -113,7 +138,7 @@ def order_create(request):
   return render(request, "pages/orders/create.html", context)
 
 def order_error(request):
-    return render(request, "orders/order/error.html")
+    return render(request, "pages/orders/error.html")
 
 def order_success(request):
     session_key = request.session.session_key
@@ -136,7 +161,7 @@ def order_success(request):
         order.paid = True
 
         order.save()
-
+        
         return redirect("/?order=True")
 
     else:

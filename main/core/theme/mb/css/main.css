@@ -900,6 +900,10 @@ section:nth-child(odd) {
   border-radius: 10px;
 }
 
+._hidden {
+  display: none !important;
+}
+
 /*
     Подключение стилей отдельных компонентов
 */
@@ -2263,10 +2267,72 @@ section:nth-child(odd) {
   border-radius: 26px;
 }
 
+.order-create__col:last-child {
+  position: sticky;
+  top: 120px;
+  flex: 1 1 30%;
+}
+
 .order-create__title {
   font-size: 45px;
   text-align: center;
   line-height: 150%;
+}
+
+.order-create__title {
+  font-size: 35px;
+  line-height: 150%;
+}
+
+.order-create__thumb {
+  width: 50px;
+  height: 50px;
+}
+
+.order-create__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-create__info {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+}
+
+.order-create__name {
+  flex: 1 1 auto;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.order-create__price {
+  font-size: 18px;
+}
+
+.order-create__price span {
+  font-weight: 600;
+}
+
+.order-create__promocod input {
+  width: 100%;
+}
+
+.order-create__total {
+  font-size: 20px;
+}
+
+.order-create__total span {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.order-create__info-order {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #contact-human {

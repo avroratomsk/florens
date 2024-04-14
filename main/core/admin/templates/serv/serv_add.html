@@ -1,50 +1,66 @@
-{% extends 'admin_base.html' %} {% load shop_tags %} {% load static %} {% block body %}
-
+{% extends 'admin_base.html' %} {% block body %}
 <div class="page">
   <div class="page__inner">
-    <div class="page__add">
-      <h1 class="page__title">Новая услуга</h1>
-    </div>
+    <h1 class="page__title">{{ service.name }}</h1>
     <form action="." method="POST" class="form" enctype="multipart/form-data">
+      <div class="page__head">
+        <div class="page__head-inner">
+          <button type="button" data-name="basic" class="page__head-btn _active">Основные</button>
+          <button type="button" data-name="seo" class="page__head-btn">SEO</button>
+        </div>
+        <button type="submit" class="form__btn">Сохранить</button>
+      </div>
       {% csrf_token %}
-      <div class="page-edit__body">
-        <!-- Основные настройки -->
-        <div class="page-edit__item _show">
-          <div class="page-edit__form">
+      <div class="page-content _show" id="basic">
+        <div class="page-content__row">
+          <div class="page-content__col">
             <div class="form__group">
-              <label for="{{ form.name.id_for_label }}" class="form__controls-label"><span>*</span>Название <span>:</span></label>
+              <label for="{{ form.name.id_for_label }}" class="form__controls-label"><span>*</span>Название букета</label>
               {{ form.name }} {{ form.name.errors }}
             </div>
+
+            <div class="form__group">
+              <label for="{{ form.subtitle.id_for_label }}" class="form__controls-label"> Подзаголовок </label>
+              {{ form.subtitle }} {{ form.subtitle.errors }}
+            </div>
+          </div>
+          <div class="page-content__col">
             <div class="form__group">
               <label for="{{ form.slug.id_for_label }}" class="form__controls-label">
                 <span>*</span>
-                URL <span>:</span>
+                URL
               </label>
               {{ form.slug }} {{ form.slug.errors }}
             </div>
-            <div class="form__group">
-              <label for="{{ form.subtitle.id_for_label }}" class="form__controls-label"> Текст под заголовком <span>:</span> </label>
-              {{ form.subtitle }} {{ form.subtitle.errors }}
+            <div class="form__group form__group-image">
+              <label for="{{ form.image.id_for_label }}" class="form__controls-label">Изображение услуги</label>
+              {{ form.image.src }} {{ form.image }} {{ form.image.errors }}
             </div>
-            <div class="form__group">
-              <label for="{{ form.image.id_for_label }}" class="form__controls-label"> Изображение <span>:</span> </label>
-              {{ form.image }} {{ form.image.errors }}
-            </div>
-            <div class="form__group">
-              <label for="{{ form.status.id_for_label }}" class="form__controls-label">Статус публикации <span>:</span> </label>
+
+            <div class="form__group-checkbox">
               {{ form.status }} {{ form.status.errors }}
+              <label for="{{ form.status.id_for_label }}" class="form__controls-label"> Опубликовать ? </label>
             </div>
           </div>
         </div>
+      </div>
+      <div class="page-content" id="seo">
         <!-- SEO страницы -->
-        <div class="page-edit__item _show" id="seo">
-          <div class="page-edit__form">
+        <div class="page-content__row">
+          <div class="page-content__seo">
+            <div class="form__group">
+              <label for="{{ form.meta_h1.id_for_label }}" class="form__controls-label"> Заголовок h1 <span>:</span> </label>
+              {{ form.meta_h1 }} {{ form.meta_h1.errors }}
+            </div>
             <div class="form__group">
               <label for="{{ form.meta_title.id_for_label }}" class="form__controls-label"> Мета заголовок </label>
               {{ form.meta_title }} {{ form.meta_title.errors }}
             </div>
             <div class="form__group">
-              <label for="{{ form.meta_description.id_for_label }}" class="form__controls-label"> Мета описание </label>
+              <label for="{{ form.meta_description.id_for_label }}" class="form__controls-label">
+                Мета описание <span> :</span>
+                <div class="meta-lenght">0</div>
+              </label>
               {{ form.meta_description }} {{ form.meta_description.errors }}
             </div>
             <div class="form__group">
@@ -54,8 +70,6 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="form__btn">Сохранить</button>
-      <a href="javascript:history.back()"> Назад </a>
     </form>
   </div>
 </div>

@@ -4,10 +4,10 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, GlobalSettingsForm, HomeTemplateForm, ProductForm, ReviewsForm, ServiceForm, StockForm, UploadFileForm
+from admin.forms import CategoryForm, GlobalSettingsForm, HomeTemplateForm, ProductForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, UploadFileForm
 from home.models import BaseSettings, HomeTemplate, Stock
 from main.settings import BASE_DIR
-from service.models import Service
+from service.models import Service, ServicePage
 from reviews.models import Reviews
 from shop.models import Product,Category, ProductSpecification
 from django.core.paginator import Paginator
@@ -298,13 +298,15 @@ def category_add(request):
 
 def category_edit(request, pk):
   categorys = Category.objects.get(id=pk)
+  form = CategoryForm(request.POST, request.FILES, instance=categorys)
+  
   if request.method == "POST":
-    form = CategoryForm(request.POST, request.FILES, instance=categorys)
+    
     if form.is_valid():
       form.save()
       return redirect("admin_category")
     else:
-      return render(request, "shop/category/category_edit.html", {"form": form})
+      return render(request, "shop/category/category_edit.html", {"form": form, 'image_path': image_path})
   
   context = {
     "form": CategoryForm(instance=categorys),
@@ -434,6 +436,31 @@ def admin_home(request):
   context = {
     "form": form,
     "home_page":home_page
+  }  
+  
+  return render(request, "static/home_page.html", context)
+
+def admin_service_page(request):
+  try:
+    service_page = ServicePage.objects.get()
+  except:
+    service_page = ServicePage()
+    service_page.save()
+    
+  if request.method == "POST":
+    form_new = ServicePage(request.POST, request.FILES, instance=service_page)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect("admin")
+    else:
+      return render(request, "serv/serv_settings.html", {"form": form_new})
+  
+  service_page = HomeTemplate.objects.get()
+  
+  form = HomeTemplateForm(instance=service_page)
+  context = {
+    "form": form,
+    "service_page":service_page
   }  
   
   return render(request, "static/home_page.html", context)

@@ -3,6 +3,7 @@ from django.core.mail import EmailMultiAlternatives
 
 
 def email_send(order):
+  print("Зашел")
   subject = "Заказ №" + str(order.id)
   html_content = render_to_string("mail/order_mail.html", {"order": order})
   from_email = "info@xn----7sbah6bllcobpj.xn--p1ai"

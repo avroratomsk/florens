@@ -25,7 +25,13 @@ class Order(models.Model):
   payment_dop_info = models.CharField(max_length=550, verbose_name="Информация о платеже (ссылка на плптеж)", null=True, blank=True)
   pay_method = models.CharField(max_length=250, verbose_name="Способ оплаты", null=True, blank=True)
   is_paid = models.BooleanField(default=False, verbose_name="Оплачено ?")
-  summ = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+  summ = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Общая сумма платежа")
+  anonymous =  models.BooleanField(default=False, verbose_name="Не говорить от кого")
+  surprise =  models.BooleanField(default=False, verbose_name="Не предупреждать получателя")
+  first_name_human = models.CharField(max_length=250, null=True, blank=True, verbose_name="Имя получателя")
+  phone_number_human = models.CharField(max_length=50, null=True, blank=True, verbose_name="Номер получателя")
+  pickup = models.BooleanField(default=False, verbose_name="Самовывоз")
+  who_get_bouqets = models.BooleanField(default=False, verbose_name="Кто получатель ?")
   
   ORDER_STATUS = (
     ('Новый', 'Новый'),

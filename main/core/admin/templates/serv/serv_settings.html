@@ -1,21 +1,12 @@
-{% extends 'admin_base.html' %} {% block body %}
-<div class="page__title">Настройки страницы услуг</div>
-
-<div class="breadcrumb">
-  <div class="breadcrumb__inner">
-    <ol class="breadcrumb__list">
-      <li class="breadcrumb__item"><a class="breadcrumb__link" href="{% url 'admin' %}">Главная</a></li>
-
-      <li class="breadcrumb__item">Настройки страницы услуг</li>
-    </ol>
-  </div>
-</div>
+{% extends 'admin_base.html' %} {% load shop_tags %} {% load thumbnail %} {% load static %} {% block body %}
 
 <div class="page">
-  <form action="" class="form" method="post" enctype="multipart/form-data">
-    {% csrf_token %} {{ form.as_p }} {{ form.media }}
-    <button class="btn btn--primary">Сохранить</button>
-  </form>
+  <div class="page__inner">
+    <div class="page__add">
+      <h1 class="page__title">Настройки страницы услуг</h1>
+      <a href="{% url 'service_add' %}" class="page__add-btn">Добавить услугу</a>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

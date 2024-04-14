@@ -4,7 +4,7 @@
   <div class="page__inner">
     <div class="page__add">
       <h1 class="page__title">Товары</h1>
-      <a href="{% url 'product_add' %}">Добавить товар</a>
+      <a href="{% url 'product_add' %}" class="page__add-btn">Добавить товар</a>
     </div>
     <div class="table-4">
       <div class="head-table table-4__head">
@@ -31,7 +31,7 @@
             {% endif %}
           </div>
           <div class="body-table__price">
-            <span>{{ product.price }} руб.</span>
+            <span>{{ product.sell_price }} руб.</span>
           </div>
           <div class="body-table__action">
             <a href="{{ product.get_absolute_url }}" target="_blank" class="info">
