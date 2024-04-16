@@ -24,6 +24,7 @@ class Category(models.Model):
   meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="META заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="META описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="META keywords")
+  menu_add = models.BooleanField(default=False, null=True, blank=True, verbose_name="Добавить в меню")
   
   class Meta:
     db_table = 'category' 
@@ -48,7 +49,7 @@ class Product(models.Model):
   image = models.ImageField(upload_to="product_iamge", blank=True, null=True, verbose_name="Изображение товара")
   price = models.DecimalField(default=0, max_digits=10, decimal_places=2, verbose_name="Цена товра")
   sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Цена со скидкой")
-  discount = models.DecimalField(default=0, max_digits=10, decimal_places=2, verbose_name="Скидака в %")
+  discount = models.PositiveIntegerField(default=0, verbose_name="Скидака в %")
   quantity = models.PositiveIntegerField(default=0, verbose_name="Количество")
   category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, default=None, verbose_name='День недели')
   composition = models.CharField(max_length=255, blank=True, null=True, verbose_name="Состав")
@@ -98,7 +99,13 @@ class Product(models.Model):
   
   def get_absolute_url(self):
         return reverse("product", kwargs={"slug": self.slug})
-    
+
+class ProductImage(models.Model):
+    parent = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images", verbose_name="Привязка к продукту")
+    src = models.ImageField(upload_to="product_iamge", verbose_name="Дополнительны изображения")
+    class Meta:
+        verbose_name = 'Изображение'
+  
 class CharName(models.Model):
   char_name = models.CharField(max_length=250, verbose_name="Название характеристки")
 

@@ -265,48 +265,31 @@ if (whoGetRadio) {
 const pickupCheckbox = document.getElementById('pickup');
 if (pickupCheckbox) {
   pickupCheckbox.addEventListener('change', function (e) {
-    if (pickupCheckbox.checked) {
-      document.getElementById('id_delivery_address').classList.add('_hidden');
+    if (!pickupCheckbox.checked) {
+      document.getElementById('address-delivery').classList.add('_hidden');
     } else {
-      document.getElementById('id_delivery_address').classList.remove('_hidden');
+      document.getElementById('address-delivery').classList.remove('_hidden');
     }
   })
 }
 
+
+
 /**
- * Покупка в один клик
+ * Переключатели вкладок на странице продукта
  */
 
-const oneClickBtn = document.querySelectorAll('.card__click');
-if (oneClickBtn) {
-  oneClickBtn.forEach(btn => {
-    btn.addEventListener('click', buyOneСlick)
-  })
-}
+const tabProductTrigger = document.querySelectorAll('.specification-product__button');
+const tabProductContent = document.querySelectorAll('.specification-product__info');
 
-function buyOneСlick(e) {
-  let parent = this.closest('.card');
-  let img = parent.querySelector('.product-click-image').src;
-  let name = parent.querySelector('.card__title-h3').innerText;
-  let price = parent.querySelector('.card__price').innerText;
-  popup = document.getElementById('popup-one-click');
-  popup.classList.add('_open');
-
-  document.querySelector('.popup__product-img').src = img;
-  document.querySelector('.popup__product-name').innerText = name;
-  document.querySelector('.product__price-text').innerText = price;
-
-  bodyLock();
-}
-
-const closeBtn = document.querySelectorAll('.close-btn');
-if (closeBtn) {
-  closeBtn.forEach(btn => {
+if (tabProductTrigger) {
+  tabProductTrigger.forEach(btn => {
     btn.addEventListener('click', function (e) {
-      let parent = this.closest('.popup');
-      parent.classList.remove('_open');
-      bodyUnLock();
+      let element = document.getElementById(this.dataset.id);
+      tabProductContent.forEach(item => item.classList.remove('_show'));
+      tabProductTrigger.forEach(item => item.classList.remove('_active'));
+      this.classList.add('_active');
+      element.classList.add('_show');
     })
   })
 }
-

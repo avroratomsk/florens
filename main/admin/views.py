@@ -4,13 +4,14 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, GlobalSettingsForm, HomeTemplateForm, ProductForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, UploadFileForm
+from admin.forms import CategoryForm, GlobalSettingsForm, HomeTemplateForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, UploadFileForm
 from home.models import BaseSettings, HomeTemplate, Stock
 from main.settings import BASE_DIR
 from service.models import Service, ServicePage
 from reviews.models import Reviews
-from shop.models import Product,Category, ProductSpecification
+from shop.models import Product,Category, ProductImage, ProductSpecification
 from django.core.paginator import Paginator
+from django.core.files.images import ImageFile
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 import openpyxl
 import pandas as pd
@@ -80,16 +81,23 @@ def product_edit(request, pk):
   """
   product = Product.objects.get(id=pk)
   form = ProductForm(instance=product)
-  
+  image_form = ProductImageForm()
   form_new = ProductForm(request.POST, request.FILES, instance=product) 
   if request.method == 'POST':
     if form_new.is_valid():
       form_new.save()
+      product = Product.objects.get(slug=request.POST['slug'])
+      images = request.FILES.getlist('src')
+
+      for image in images:
+          img = ProductImage(parent=product, src=image)
+          img.save()
       return redirect('admin_product')
     else:
-      return render(request, 'shop/product/product_edit.html', {'form': form_new,})
+      return render(request, 'shop/product/product_edit.html', {'form': form_new, 'image_form': image_form,})
   context = {
-    "form":form
+    "form":form,
+    'image_form': image_form,
   }
   return render(request, "shop/product/product_edit.html", context)
 
@@ -167,10 +175,12 @@ def upload_goods(request):
           os.remove('upload/upload.zip')
           
           # Сжатие фотографий
+          
           for filename in os.listdir('media/upload'):
             if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.JPG') or filename.endswith('.JPEG'):
               with Image.open(os.path.join('media/upload', filename)) as img:
                 img.save(os.path.join('media/goods', filename), quality=60)  # quality=60 для JPEG файла
+            
                 
           # Очистка временной папки
           os.system('rm -rf media/upload')
@@ -204,20 +214,26 @@ def parse_exсel(path):
     meta_title = ''
     meta_description = ''
     meta_keywords = ''
-    image = f"goods/{row[4]}"
+    try:
+      image = f"goods/{row[4].split(';')[0]}"
+      image_list = row[4].split(';')
+      print(image_list)
+    except:
+      pass
     price = row[5]
     sale_price = 0.0
+    
     if row[6] == None:
-      discount = 0.0
+      discount = 0
     else:
-      discount = row[6] * 100
-      discount = int(discount)
+      discount = int(row[6])
       sale_price = round(price - price * discount / 100, 1)
     quantity = row[8]
     if row[7]:
       category_name = row[7]
     else:
-      print("Категории нет")
+      pass
+      # print("Категории нет")
     category_slug = slugify(category_name)
 
     try:
@@ -267,10 +283,25 @@ def parse_exсel(path):
           )
         except Exception as e:
           pass
-          # print(e)
       else:
         new_product = Product.objects.filter(name=name).first() 
-  
+        
+      for image in image_list:
+        
+        try:
+          # print('goods/' + image)
+          image_file = open('media/goods/' + image, 'rb')
+          image_image = ImageFile(image_file)
+          print(image_file)
+          # print(new_product.id)
+          image_create = ProductImage.objects.create(
+              parent=new_product,
+              src=image_image
+          )
+          print(image_create)
+        except Exception as e: 
+          print(e)
+    # print(os.path.abspath(__file__))
 # parse_exсel(path)
 
 def admin_category(request):

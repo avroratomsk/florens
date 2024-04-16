@@ -1,11 +1,29 @@
-{% extends 'admin_base.html' %} {% load shop_tags %} {% load thumbnail %} {% load static %} {% block body %}
+{% extends 'admin_base.html' %} {% load shop_tags %} {% load static %} {% block body %}
 <div class="page">
   <div class="page__inner">
     <div class="page__add">
-      <h1 class="page__title">Категории</h1>
-      <a href="{% url 'category_add' %}" class="page__add-btn">Добавить категорию</a>
+      <h1 class="page__title">Категории товаров</h1>
+      <a href="{% url 'category_add' %}">Добавить категорию</a>
+      {% comment %}
+      <div class="page__sort sort-admin" data-sort="" id="sort-admin">
+        <form action="." method="get" class="form sort-admin__form">
+          <div class="form__control-radio">
+            <input type="radio" id="deafult" name="order-by" checked />
+            <label for="deafult" class="sort-admin__label">По умолчанию</label>
+          </div>
+          <div class="form__control-radio">
+            <input type="radio" id="desc" name="order-by" />
+            <label for="desc" class="sort-admin__label">По убыванию</label>
+          </div>
+          <div class="form__control-radio">
+            <input type="radio" id="asc" name="order-by" />
+            <label for="asc" class="sort-admin__label">По возрастанию</label>
+          </div>
+          <button type="submit" class="sort-admin__btn form__btn" id="sort-admin__btn">Применить</button>
+        </form>
+      </div>
+      {% endcomment %}
     </div>
-    {% if categorys %}
     <div class="table-3">
       <div class="head-table table-3__head">
         <div class="head-table__image">Изображение</div>
@@ -16,10 +34,10 @@
         {% for category in categorys %}
         <div class="body-table__row">
           <div class="body-table__image">
-            {% if category.image %} {% thumbnail category.image "100x100" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-            {% endthumbnail %} {% else%}
-            <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
+            {% if category.image %}
+            <img src="{{ category.image.url }}" alt="{{ category.name }}" title="{{ category.name }}" />
+            {% else%}
+            <img src="{% static 'admin/images/no-image.png' %}" alt="" alt="{{ category.name }}" title="{{ category.name }}" />
             {% endif %}
           </div>
           <div class="body-table__name">
@@ -101,9 +119,6 @@
         {% endfor %}
       </div>
     </div>
-    {% else %}
-    <div class="empty">Список услуг пуст</div>
-    {% endif %}
   </div>
 </div>
 {% endblock %}

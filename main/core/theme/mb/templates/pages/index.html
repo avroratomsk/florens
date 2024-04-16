@@ -70,39 +70,40 @@
     </div>
     <div class="advantages__border borderDotted"></div>
   </section>
-
+  {% if products %}
   <section class="index-catalog">
     <div class="index-catalog__inner">
       <div class="index-catalog__head">
         <h2 class="index-catalog__title _title-h2">Онлайн-витрина</h2>
         <div class="index-catalog__links">
-          <a href="{% url 'best_offer' %}" class="index-catalog__link">Лучшие предложения</a>
+          <a href="#" class="index-catalog__link">Лучшие предложения</a>
           <a href="{% url 'populate' %}" class="index-catalog__link">Выбор покупателей</a>
           <a href="" class="index-catalog__link">Акции</a>
           <a href="{% url 'category' %}" class="index-catalog__link">Весь каталог</a>
         </div>
       </div>
       <div class="index-catalog__cards cards-catalog">
-        {% if products %} {% for product in products %}
+        {% for product in products %}
         <div class="index-catalog__card card">
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
-            {% endthumbnail %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
-            {% else %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %} {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            {% endthumbnail %} {% endif %} {% endfor %} {% else %}
+            <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
             {% endif %}
-            <button type="button" class="card__click" id="one-click" data-id="{{ product.id }}">Купить в один клик</button>
-            {% if product.discount %}
-            <p class="card__stock">-{{ product.discount }}%</p>
-            {% endif %}
+            <button type="button" class="card__click" id="one-click">Купить в один клик</button>
           </div>
           <div class="card__content">
-            <h3 class="card__title-h3">{{ product.name }}</h3>
+            <a href="{{ product.get_absolute_url }}" class="card__title-h3">{{ product.name }}</a>
             <div class="card__content-bottom">
               {% if product.sale_price %}
-              <span class="card__price"><s>{{ product.price }}</s> <b class="card__price-number">{{ product.sale_price }}</b> <span class="currency">₽</span></span>
+              <span class="card__price"
+                ><s>{{ product.price }}</s>
+                <span class="card__price-number">{{ product.sale_price }}</span>
+                <span class="currency">₽</span></span
+              >
               {% else %}
               <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
               {% endif %}
@@ -114,45 +115,47 @@
               <button type="button" class="card__hit">
                 <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
               </button>
+              {% endif %} {% if product.discount %}
+              <div class="card__stock">-{{ product.discount }}%</div>
               {% endif %}
-
               <button type="button" class="card__favorit">
                 <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
               </button>
             </div>
           </div>
         </div>
-        {% endfor %} {% endif %}
+        {% endfor %}
       </div>
     </div>
   </section>
-
+  {% endif %} {% if affordable %}
   <section class="index-catalog">
     <div class="index-catalog__inner">
       <div class="index-catalog__head">
         <h2 class="index-catalog__title _title-h2">Недорогие товары</h2>
       </div>
       <div class="index-catalog__cards cards-catalog">
-        {% if affordable %} {% for product in affordable %}
+        {% for product in affordable %}
         <div class="index-catalog__card card">
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
-            {% endthumbnail %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
-            {% else %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %} {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            {% endthumbnail %} {% endif %} {% endfor %} {% else %}
+            <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
             {% endif %}
-            <button type="button" class="card__click" id="one-click" data-id="{{ product.id }}">Купить в один клик</button>
-            {% if product.discount %}
-            <p class="card__stock">-{{ product.discount }}%</p>
-            {% endif %}
+            <button type="button" class="card__click" id="one-click">Купить в один клик</button>
           </div>
           <div class="card__content">
             <h3 class="card__title-h3">{{ product.name }}</h3>
             <div class="card__content-bottom">
               {% if product.sale_price %}
-              <span class="card__price"><s>{{ product.price }}</s> <b class="card__price-number">{{ product.sale_price }}</b> <span class="currency">₽</span></span>
+              <span class="card__price"
+                ><s>{{ product.price }}</s>
+                <span class="card__price-number">{{ product.sale_price }}</span>
+                <span class="currency">₽</span></span
+              >
               {% else %}
               <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
               {% endif %}
@@ -164,19 +167,20 @@
               <button type="button" class="card__hit">
                 <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
               </button>
+              {% endif %} {% if product.discount %}
+              <div class="card__stock">-{{ product.discount }}%</div>
               {% endif %}
-
               <button type="button" class="card__favorit">
                 <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
               </button>
             </div>
           </div>
         </div>
-        {% endfor %} {% endif %}
+        {% endfor %}
       </div>
     </div>
   </section>
-
+  {% endif %} {% if saleProduct %}
   <section class="index-catalog">
     <div class="index-catalog__inner">
       <div class="index-catalog__head">
@@ -186,26 +190,27 @@
         </div>
       </div>
       <div class="index-catalog__cards cards-catalog">
-        {% if products %} {% for product in products %}
+        {% for product in saleProduct %}
         <div class="index-catalog__card card">
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
-            {% endthumbnail %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
-            {% else %}
-            <img src="{% static 'theme/mb/images/product-2.jpeg' %}" alt="" class="product-click-image" />
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %} {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            {% endthumbnail %} {% endif %} {% endfor %} {% else %}
+            <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
             {% endif %}
-            <button type="button" class="card__click" id="one-click" data-id="{{ product.id }}">Купить в один клик</button>
-            {% if product.discount %}
-            <p class="card__stock">-{{ product.discount }}%</p>
-            {% endif %}
+            <button type="button" class="card__click" id="one-click">Купить в один клик</button>
           </div>
           <div class="card__content">
             <h3 class="card__title-h3">{{ product.name }}</h3>
             <div class="card__content-bottom">
               {% if product.sale_price %}
-              <span class="card__price"><s>{{ product.price }}</s> <b class="card__price-number">{{ product.sale_price }}</b> <span class="currency">₽</span></span>
+              <span class="card__price"
+                ><s>{{ product.price }}</s>
+                <span class="card__price-number">{{ product.sale_price }}</span>
+                <span class="currency">₽</span></span
+              >
               {% else %}
               <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
               {% endif %}
@@ -217,18 +222,20 @@
               <button type="button" class="card__hit">
                 <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
               </button>
+              {% endif %} {% if product.discount %}
+              <div class="card__stock">-{{ product.discount }}%</div>
               {% endif %}
-
               <button type="button" class="card__favorit">
                 <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
               </button>
             </div>
           </div>
         </div>
-        {% endfor %} {% endif %}
+        {% endfor %}
       </div>
     </div>
   </section>
+  {% endif %}
 
   <section class="index-category">
     <div class="index-catalog__inner">

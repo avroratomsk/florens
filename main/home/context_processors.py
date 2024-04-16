@@ -1,4 +1,8 @@
-from home.models import BaseSettings 
+from home.models import BaseSettings
+from shop.models import Category 
  
 def load_settings(request):
     return {'site_settings': BaseSettings.load()}
+
+def header_menu(request):
+    return {'header_menu': Category.objects.filter(menu_add=True)[:4]}

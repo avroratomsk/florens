@@ -1,51 +1,81 @@
-<div class="footer">
+{% load static %}
+<footer class="footer">
   <div class="footer__row">
     <div class="footer__col">
-      <a href="/" class="footer__logo">Florens</a>
-      <div class="footer__requisites">
-        <h3 class="footer__requisites-title">Реквизиты компании</h3>
-        <p>ИП Ткачова Анна Сергеевна</p>
-        <p>Юр. адрес: Иркутск, Байкальская 147</p>
-        <p>Факт. адрес: Иркутск, Байкальская 147</p>
-        <p>БИК 044525104</p>
+      <a href="/" class="footer__logo">
+        {% if site_settings.logo %}
+        <img src="{{ site_settings.logo.url }}" alt="" />
+        {% else %} LOGOTYPE {% endif %}
+      </a>
+      <div class="footer__address">
+        <p class="footer__country">Россия, г.Город</p>
+        <p class="footer__street">ул.Улица 23</p>
       </div>
+      <a href="#" class="footer__phone">+7 (999) 999-99-99</a>
+      <a href="mailto:info@florens.ru" class="footer__email">info@florens.ru</a>
+      <button type="button" aria-label="заказать обратный звонок">Заказать звонок</button>
     </div>
     <div class="footer__col">
-      <p class="footer__title">Каталог</p>
-      <ul class="footer__list">
-        <li><a href="#">Акции</a></li>
-        <li><a href="#">Розы</a></li>
-        <li><a href="#">Букеты</a></li>
-        <li><a href="#">Композиции</a></li>
-        <li><a href="#">До 2000</a></li>
-        <li><a href="#">Популярное</a></li>
-        <li><a href="#">Дучшие предложения</a></li>
-      </ul>
-    </div>
-    <div class="footer__col">
-      <p class="footer__title">Разделы сайта</p>
+      <h3 class="footer__title">О компании</h3>
       <ul class="footer__list">
         <li><a href="#">Отзывы</a></li>
         <li><a href="#">Оплата</a></li>
-        <li><a href="#">Вопросы - ответы</a></li>
+        <li><a href="#">Гарантии</a></li>
+        <li><a href="#">Доставка</a></li>
+        <li><a href="#">Вопросы-ответы</a></li>
         <li><a href="#">Контакты</a></li>
         <li><a href="#">Политика конфиденциальности</a></li>
       </ul>
     </div>
     <div class="footer__col">
-      <p class="footer__title">Контакты</p>
+      <h3 class="footer__title">Каталог</h3>
       <ul class="footer__list">
-        <li><a href="#">+7 (999) 999-99-99</a></li>
-        <li><a href="#">florens@mail.ru</a></li>
+        <li><a href="#">Акци</a></li>
+        <li><a href="#">Розы</a></li>
+        <li><a href="#">Букеты</a></li>
+        <li><a href="#">Композиции</a></li>
+        <li><a href="#">Подарки</a></li>
+        <li><a href="#">Поводы</a></li>
+        <li><a href="#">до 2000</a></li>
+        <li><a href="#">Цветы</a></li>
       </ul>
-      <div class="footer__social">
-        <a href="#"><i class="fa-brands fa-vk"></i></a>
-        <a href="#"><i class="fa-brands fa-square-whatsapp"></i></a>
-      </div>
+    </div>
+    <div class="footer__col">
+      <h3 class="footer__title">Праздники</h3>
+      <ul class="footer__list">
+        <li><a href="#">Акци</a></li>
+        <li><a href="#">Розы</a></li>
+        <li><a href="#">Букеты</a></li>
+        <li><a href="#">Композиции</a></li>
+        <li><a href="#">Подарки</a></li>
+        <li><a href="#">Поводы</a></li>
+        <li><a href="#">до 2000</a></li>
+        <li><a href="#">Цветы</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h3 class="footer__title">Поводы</h3>
+      <ul class="footer__list">
+        <li><a href="#">Акци</a></li>
+        <li><a href="#">Розы</a></li>
+        <li><a href="#">Букеты</a></li>
+        <li><a href="#">Композиции</a></li>
+        <li><a href="#">Подарки</a></li>
+        <li><a href="#">Поводы</a></li>
+        <li><a href="#">до 2000</a></li>
+        <li><a href="#">Цветы</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h3 class="footer__title">Мы в соц.сетях</h3>
+      <ul class="footer__list socials">
+        <li>
+          <a href="#"><img src="{% static 'theme/mb/images/wh.svg' %}" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="{% static 'theme/mb/images/wh.svg' %}" alt="" /></a>
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="footer__bottom">
-    <p class="footer__copyright">2024. Все права защищены</p>
-    <a href="#" class="footer__author">Разработка сайта | РА АВРОРА</a>
-  </div>
-</div>
+</footer>

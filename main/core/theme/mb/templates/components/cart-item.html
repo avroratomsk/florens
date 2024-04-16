@@ -1,11 +1,7 @@
-{% load static %}{% load thumbnail %} {% load carts_tag %}{% for cart in carts %}
+{% load static %} {% load carts_tag %}{% for cart in carts %}
 <div class="mini-cart__item">
   <div class="mini-cart__thumb">
-    {% comment %} {% if cart.product.image %} {% thumbnail cart.product.image "50x50" format="WEBP" crop="center" as im %}
-    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ cart.product.name }}" title="{{ cart.product.name  }}" />
-    {% endthumbnail %} {% else %}
-    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="{{ cart.product.name }}" title="{{ cart.product.name  }}" />
-    {% endif %} {% endcomment %}
+    <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
   </div>
   <div class="mini-cart__content">
     <div class="mini-cart__info">

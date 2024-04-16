@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     "cart",
     "order",
     "payment",
+    # "blog",
+    # "news",
     'django_ckeditor_5',
 ]
 
@@ -90,6 +92,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "home.context_processors.load_settings",
+                "home.context_processors.header_menu",
                 # "cart.context_processors.user_carts",
             ],
         },

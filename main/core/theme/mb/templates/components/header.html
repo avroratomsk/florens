@@ -7,7 +7,7 @@
     </a>
     <a href="#" class="topHeader__contact-link">
       <img src="{% static 'theme/mb/images/wh.svg' %}" alt="" />
-      <span>8 (999) 999-99-99</span>
+      <span>8 (999) 99W9-99-99</span>
     </a>
   </div>
   <ul class="topHeader__list">
@@ -23,15 +23,15 @@
     <p class="header__text">Категории</p>
     {% endcomment %}
     <ul class="header__list">
-      <li><a href="/category/buketyi-iz-lilij/">Лилии</a></li>
-      <li><a href="/category/buketyi-vip/">VIP</a></li>
-      <li><a href="/category/bukety-iz-roz/">Розы</a></li>
-      <li><a href="/category/bukety-mix/">MIX</a></li>
-      <li><a href="/category/myagkaya-igrushka/">Мягкие игрушки</a></li>
+      {% if header_menu %} {% for item in header_menu %}
+      <li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></li>
+      {% endfor %} {% endif %}
     </ul>
   </div>
   <a href="/" class="header__logo">
+    {% if site_settings.logo %}
     <img src="{{ site_settings.logo.url }}" alt="" />
+    {% else %} LOGOTYPE {% endif %}
   </a>
   <div class="header__right">
     <ul class="header__list">
@@ -80,6 +80,7 @@
         {% endif %}
         <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
       </button>
+      <button type="button" class="header__burger" id="burger"><span></span></button>
     </div>
   </div>
 </header>

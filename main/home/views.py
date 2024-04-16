@@ -20,6 +20,7 @@ def index(request):
     settings = BaseSettings.objects.all()
 
   category = Category.objects.all()[:4]
+  product = Product.objects.filter(quantity_purchase__gte=10)
   saleProduct = Product.objects.filter(sale_price__gt=0)[:8]
   affordable_products = Product.objects.filter(price__gt=0, price__lt=2500)[:8]
   reviews = Reviews.objects.filter(status=True)
@@ -27,7 +28,8 @@ def index(request):
   context = {
     "categorys": category,
     "home_page": home_page,
-    "products": saleProduct,
+    "products": product,
+    "saleProduct": saleProduct,
     "affordable": affordable_products,
     "settings": settings,
     "reviews": reviews,
@@ -73,7 +75,7 @@ def news(request):
     "products": products
   }
   
-  return render(request, "pages/stock-product.html", context)
+  return render(request, "pages/latest-product.html", context)
 
 def about(request):
     return render(request, "pages/about.html")
@@ -83,9 +85,15 @@ def contact(request):
 
 def stock(request):
     stocks = Stock.objects.filter(status=True)
+    news = Product.objects.filter(latest=True)
+    populate = Product.objects.filter(quantity_purchase__gte=10)
+    free_delivery = Product.objects.filter(free_shipping=True)
     
     context = {
-        "stocks": stocks
+        "stocks": stocks,
+        "news": news,
+        "populate": populate,
+        "free_delivery": free_delivery,
     }
     
     return render(request, "pages/stock/stock.html", context)

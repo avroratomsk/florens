@@ -3,32 +3,11 @@ from django_ckeditor_5.widgets import CKEditor5Widget
 from home.models import BaseSettings, HomeTemplate, Stock
 from service.models import Service, ServicePage
 from reviews.models import Reviews
-from shop.models import Category, Product, ProductSpecification
+from shop.models import Category, Product, ProductImage, ProductSpecification
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
-# class ProductForm(forms.ModelForm):
-#   # description = forms.CharField(label="Полное описание товара", required=False, widget=CKEditorUploadingWidget())
-#   class Meta:
-#     model = Product
-#     fields = (
-#       "name", 
-#       "short_description",
-#       "description",
-#       "meta_h1",
-#       "meta_title",
-#       "meta_description",
-#       "meta_keywords",
-#       "slug",
-#       "price",
-#       "discount",
-#       "quantity",
-#       "category",
-#       "day",
-#       "subsidiary",
-#       "weight",
-#       )
 class GlobalSettingsForm(forms.ModelForm):
   """ Form, глобальные и общие настройки сайта(лого, телефон, email)"""
   # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
@@ -216,6 +195,24 @@ class ProductForm(forms.ModelForm):
             }),
         }
 
+# Товар и опции товара
+class ProductImageForm(forms.ModelForm):
+    class Meta:
+        model = ProductImage
+
+        fields = [
+            'parent',
+            'src'
+        ]
+        labels = {
+            'src': 'Выбрать изображение'
+        }
+        widgets = {
+            'parent': forms.Select(attrs={
+                'class': 'form__controls', 
+            })
+        }
+
 # class CharName(forms.ModelForm):
 #   class
 
@@ -253,6 +250,7 @@ class CategoryForm(forms.ModelForm):
       "slug",
       "description",
       "image",
+      "menu_add",
       "meta_h1",
       "meta_title",
       "meta_description",
@@ -263,6 +261,7 @@ class CategoryForm(forms.ModelForm):
       "slug": "URL",
       "description": "Описание категории",
       "image": "Изображение",
+      "menu_add": "Добавить в меню ?",
       "meta_h1": "Заголовок H1",
       "meta_title": "Meta заголовок",
       "meta_description": "Meta описание",
@@ -281,6 +280,9 @@ class CategoryForm(forms.ModelForm):
       }),
       "description": forms.Textarea(attrs={
         "class":"form__controls",
+      }),
+      'menu_add': forms.CheckboxInput(attrs={
+        'class': 'form__controls-checkbox',
       }),
       # 'image': forms.FileInput(attrs={
       #     'class': 'submit-file',

@@ -1,32 +1,32 @@
-{% extends 'admin_base.html' %} {% load shop_tags %} {% load thumbnail %} {% load static %} {% block body %}
+{% extends 'admin_base.html' %} {% load shop_tags %} {% load static %} {% block body %}
 
 <div class="page">
   <div class="page__inner">
     <div class="page__add">
       <h1 class="page__title">Услуги</h1>
-      <a href="{% url 'service_add' %}" class="page__add-btn">Добавить товар</a>
+      <a href="{% url 'service_add' %}" class="page__add-btn">Добавить услугу</a>
+      <a href="javascript:history.back()"> Назад </a>
     </div>
-    {% if services %}
-    <div class="table-4">
-      <div class="head-table table-4__head">
+    {% if services.count > 0 %}
+    <div class="table-3">
+      <div class="head-table table-3__head">
         <div class="head-table__image">Изображение</div>
         <div class="head-table__name">Название</div>
-        <div class="head-table__price">Цена</div>
         <div class="head-table__action">Действия</div>
       </div>
-      <div class="body-table table-4__body">
+      <div class="body-table table-3__body">
         {% for service in services %}
         <div class="body-table__row">
           <div class="body-table__image">
-            {% if service.image %} {% thumbnail service.image "100x100" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-            {% endthumbnail %} {% else%}
-            <img src="{% static 'admin/images/no-image.png' %}" alt="" />
+            {% if service.image %}
+            <img src="{{ service.image.url }}" alt="{{ service.name }}" title="{{ service.name }}" />
+            {% else%}
+            <img src="{% static 'admin/images/food.webp' %}" alt="" />
             {% endif %}
           </div>
           <div class="body-table__name">
             {% if service.slug %}
-            <a href="{% url 'service_edit' service.id %}" class="">{{ service.name }}</a>
+            <a href="" class="">{{ service.name }}</a>
             {% else %}
             <p class="">{{ service.name }}</p>
             {% endif %}
@@ -57,7 +57,7 @@
                 </g>
               </svg>
             </a>
-            <a href="{% url 'service_edit' service_edit.pk %}" class="edit">
+            <a href="{% url "service_edit" service.pk %}" class="edit">
               <?xml version="1.0" ?><svg
                 id="Layer_1"
                 style="enable-background: new 0 0 24 24"
@@ -75,7 +75,7 @@
                 />
               </svg>
             </a>
-            <a href="{% url 'service_delete' service_edit.pk %}" class="remove" title="Удалить продукт">
+            <a href="{% url "service_delete" service.pk %}" class="remove" title="Удалить продукт">
               <?xml version="1.0" ?><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <style>
@@ -107,6 +107,6 @@
     <div class="empty">Список услуг пуст</div>
     {% endif %}
   </div>
-</div>
 
-{% endblock %}
+  {% endblock %}
+</div>

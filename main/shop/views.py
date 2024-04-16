@@ -35,8 +35,12 @@ def category_detail(request, slug):
   return render(request, "pages/catalog/category-details.html", context)
 
 def product(request, slug):
-
+  product = Product.objects.get(slug=slug)
+  images = ProductImage.objects.filter(parent_id=product.id)[:3]
+  
   context = {
-    "title": "Название продукта"
+    "title": "Название продукта",
+    "product": product,
+    "images": images
   }
   return render(request, "pages/catalog/product.html", context)
