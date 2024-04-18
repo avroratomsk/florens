@@ -3,7 +3,7 @@ from django_ckeditor_5.widgets import CKEditor5Widget
 from home.models import BaseSettings, HomeTemplate, Stock
 from service.models import Service, ServicePage
 from reviews.models import Reviews
-from shop.models import Category, Product, ProductImage, ProductSpecification
+from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
@@ -95,6 +95,7 @@ class ProductForm(forms.ModelForm):
             'discount',
             'sale_price',
             'quantity_purchase',
+            'quantity_flower',
             'quantity',
             'category',
             'composition',
@@ -121,6 +122,7 @@ class ProductForm(forms.ModelForm):
             'width':'Ширина',
             'height':'Высота',
             'quantity_purchase':'Количество покупок',
+            'quantity_flower':'Количество цветков',
             'discount':'Скидка в (%)',
             'quantity':'Количество',
             'image': 'Превью изображения',
@@ -171,6 +173,9 @@ class ProductForm(forms.ModelForm):
             'quantity_purchase': forms.NumberInput(attrs={
                 'class': 'form__controls',
             }),
+            'quantity_flower': forms.NumberInput(attrs={
+                'class': 'form__controls',
+            }),
             'quantity': forms.NumberInput(attrs={
                 'class': 'form__controls',
             }),
@@ -213,33 +218,7 @@ class ProductImageForm(forms.ModelForm):
             })
         }
 
-# class CharName(forms.ModelForm):
-#   class
 
-# class ProductCharForm(forms.ModelForm):
-#   class Meta:
-#       model = ProductSpecification
-#       fields = [
-#           'name',
-#           'value',
-#       ]
-#       labels = {
-#           'name': 'Название характеристики',
-#           'value': 'Значение',
-#       }
-#       widgets = {
-#           'name': forms.TextInput(attrs={
-#               'class': 'form__controls',
-#               'placeholder': 'Название характеристики',
-#               'id': 'id_char_name',
-              
-#           }),
-#           'value': forms.TextInput(attrs={
-#               'class': 'form__controls',
-#               'placeholder': 'Значение',
-#               'id': 'id_char_value'
-#           }),
-#       }
 
 class CategoryForm(forms.ModelForm):
   """ Form, отвечает за создание категорий и редактирование категорий"""
@@ -639,4 +618,83 @@ class ServiceForm(forms.ModelForm):
       'meta_keywords': forms.TextInput(attrs={
         'class': 'form__controls'
       })
+    }
+    
+class ProductCharForm(forms.ModelForm):
+    class Meta:
+        model = ProductChar
+        fields = [
+            'char_name',
+            'char_value',
+        ]
+        labels = {
+            'char_name': 'Название характеристики',
+            'char_value': 'Значение',
+        }
+        widgets = {
+            'char_name': forms.Select(attrs={
+                'class': 'input',
+                'placeholder': 'Название характеристики',
+                'id': 'id_char_name',
+               
+            }),
+            'char_value': forms.TextInput(attrs={
+                'class': 'input',
+                'placeholder': 'Значение',
+                'id': 'id_char_value'
+            }),
+        }
+
+class CharGroupForm(forms.ModelForm):
+    class Meta:
+        model = CharGroup
+        fields = [
+            'name',
+        ]
+        labels = {
+            'name': 'Название группы характеристик',
+           
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form__controls',
+            }),
+        }
+
+
+class CharNameForm(forms.ModelForm):
+  class Meta:
+    model = CharName
+    fields = [
+        'group',
+        'text_name',
+        'filter_add',
+        'filter_name',
+        'sort_order'
+        
+    ]
+    labels = {
+        'group': 'Группа опций',
+        'text_name': 'Название опции',
+        'filter_add': "Добавить в фильтрацию",
+        'filter_name': "Название фильтрации на английском",
+        'sort_order': "Сортировка"
+    }
+    widgets = {
+        'group': forms.Select(attrs={
+          'class': 'form__controls'
+        }),
+        'text_name': forms.TextInput(attrs={
+            'class': 'form__controls',
+            'id': 'char_name'
+        }),
+        'filter_add': forms.CheckboxInput(attrs={
+            'class': 'form__controls-checkbox',
+        }),
+        'filter_name': forms.TextInput(attrs={
+            'class': 'form__controls',
+        }),
+        'sort_order': forms.TextInput(attrs={
+            'class': 'form__controls',
+        }),
     }

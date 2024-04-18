@@ -1,35 +1,34 @@
 /**
  * Добавление класса активности вкладкам sidebar
  */
-const sideBarItem = document.querySelectorAll('.sidebar__item');
-if (sideBarItem) {
-  sideBarItem.forEach(item => {
-    item.addEventListener('click', function (e) {
-      this.classList.toggle('_active');
-    })
-  })
-}
+// const sideBarItem = document.querySelectorAll('.sidebar__item');
+// if (sideBarItem) {
+//   sideBarItem.forEach(item => {
+//     item.addEventListener('click', function (e) {
+//       this.classList.toggle('_active');
+//     })
+//   })
+// }
+
+// const { locale } = require("yargs");
 
 /**
  * Переключение вкладок на страницах продуктов, категорий
  */
-const tabButton = document.querySelectorAll('[data-name]');
-const pageEditButton = document.querySelectorAll('.page-edit__item');
-if (tabButton) {
-  tabButton.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      tabButton.forEach(item => item.classList.remove('_active'));
-      pageEditButton.forEach(item => item.classList.remove('_show'));
 
-
-      let bodyTabBody = document.getElementById(this.dataset.name);
-
-      btn.classList.add('_active');
-      bodyTabBody.classList.add('_show');
-    })
+const data_name_tab = document.querySelectorAll('[data-name]');
+if (data_name_tab) {
+  data_name_tab.forEach(btn => {
+    btn.addEventListener('click', showPageConetnt)
   })
 }
 
+function showPageConetnt(e) {
+  document.querySelectorAll('.page-content').forEach(item => item.classList.remove('_show'));
+  document.getElementById(this.dataset.name).classList.add('_show');
+  data_name_tab.forEach(item => item.classList.remove('_active'));
+  this.classList.add('_active');
+}
 
 /**
  * Принимает на вход строку и конвертирует ее в английский язык
@@ -82,19 +81,85 @@ if (nameField) {
 /**
  * Подсчет и отображение количества символов в meta-полях
  */
-const metaFields = document.querySelectorAll('.meta_field');
+const metaFields = document.querySelectorAll('#meta_description');
 if (metaFields) {
   metaFields.forEach(item => {
     let parentItem = item.closest('.form__group').querySelector('.meta-lenght');
-    console.log(item);
     if (item.value <= 0) {
       parentItem.innerText = 0;
     } else {
       parentItem.innerText = item.value.length;
     }
+    let max_length = 150;
     item.addEventListener('input', function (e) {
       parentItem.innerText = item.value.length;
+      if (item.value.length > max_length) {
+        parentItem.classList.add('max_limit');
+      } else {
+        parentItem.classList.remove('max_limit');
+      }
     })
   })
 }
+
+const dropdownButtons = document.querySelectorAll('.dropdownButton');
+
+if (dropdownButtons) {
+  dropdownButtons.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      console.log(e.target);
+      let dropdownContent = this.querySelector('.dropdownContent');
+      if (dropdownContent.classList.contains('hidden')) {
+        dropdownContent.classList.remove('hidden');
+        dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+      } else {
+        dropdownContent.style.maxHeight = 0;
+        // setTimeout(function () {
+        dropdownContent.classList.add('hidden');
+        // }, 500); // transition duration
+      }
+    })
+  })
+}
+
+const banquetMenuCheckbox = document.getElementById('banquet_menu-checkbox');
+if (banquetMenuCheckbox) {
+  banquetMenuCheckbox.addEventListener('change', shwoField);
+}
+
+function shwoField() {
+  if (banquetMenuCheckbox.checked) {
+    document.getElementById('banquet_menu').classList.add('show');
+  } else {
+    document.getElementById('banquet_menu').classList.remove('show');
+  }
+}
+
+
+/**
+ * Добавление характеристики
+ */
+
+document.addEventListener('click', function (event) {
+  if (event.target.classList.contains('char__plus')) {
+    const blockPasteChar = document.getElementById('paste-char');
+    let char_name_id = document.getElementById('id_char_name').innerHTML;
+    console.log(char_name_id);
+    blockPasteChar.innerHTML += `<div class="form__group form__group--chars">
+    <div class="form__group-char">
+      <label for="{{ product_char_form.char_name.id_for_label }}" class="form__controls-label">
+        Название характеристики <span>:</span>
+      </label>
+      <select name="text_name" class="input" placeholder="Название характеристики" id="id_name">${char_name_id}</select>
+    </div>
+    <div class="form__group-char">
+    <label for="id_char_value">Значение:</label>
+    <input type="text" name="char_value" class="input" placeholder="Значение" required="" id="id_char_value">
+    <div class="char__minus">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+    </div>
+    </div>
+  </div>`
+  }
+});
 

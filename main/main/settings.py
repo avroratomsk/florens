@@ -93,6 +93,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "home.context_processors.load_settings",
                 "home.context_processors.header_menu",
+                "home.context_processors.category_list",
                 # "cart.context_processors.user_carts",
             ],
         },

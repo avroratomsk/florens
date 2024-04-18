@@ -3,7 +3,9 @@
   <div class="footer__row">
     <div class="footer__col">
       <a href="/" class="footer__logo">
+        {% if site_settings.logo %}
         <img src="{{ site_settings.logo.url }}" alt="" />
+        {% else %} LOGOTYPE {% endif %}
       </a>
       <div class="footer__address">
         <p class="footer__country">Россия, г.Город</p>

@@ -1,6 +1,6 @@
 .footer {
   padding: 60px 50px;
-  margin: 0px 10px;
+  margin: 30px 10px 0px;
   border-radius: 46px 46px 0px 0px;
   background-color: #232020;
 
@@ -13,6 +13,15 @@
   &__row {
     display: flex;
     justify-content: space-between;
+    gap: 30px;
+
+    @media screen and (max-width:1135px) {
+      flex-wrap: wrap;
+    }
+
+    @media screen and (max-width: 425px) {
+      flex-direction: column;
+    }
   }
 
   // .footer__col

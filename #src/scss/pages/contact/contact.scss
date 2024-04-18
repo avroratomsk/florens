@@ -7,7 +7,9 @@
   // .contact__container
 
   &__container {
-    width: 100%;
+    @media screen and (min-width: 768px) {
+      width: 100%;
+    }
   }
 
   // .contact__row
@@ -26,12 +28,19 @@
     grid-template-columns: 25% 1fr;
     align-content: center;
     padding: 0px 0px 30px;
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
   }
 
   // .contact__row-label
 
   &__row-label {
     color: #3a67c0;
+
+    &:first-child {}
   }
 
   // .contact__row-dot
@@ -58,7 +67,11 @@
       text-wrap: balance;
       font-weight: 300;
       letter-spacing: -4px;
-      font-family: $fontTitle;
+
+      @media screen and (max-width: 768px) {
+        font-size: 30px;
+        letter-spacing: 1px;
+      }
     }
   }
 
@@ -67,6 +80,7 @@
   &__row-bottom {
     padding: 40px 0px 40px;
     display: grid;
+    gap: 30px;
     grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   }
 
@@ -89,6 +103,10 @@
   // .contact__map
   &__map {
     padding: 0px 60px;
+
+    @media screen and (max-width: 768px) {
+      padding: 0px 15px;
+    }
 
 
     iframe {

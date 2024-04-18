@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load static %}{% load carts_tag %}{% load thumbnail %}{% block content %}
-<main class="page">
+<main class="page index-page">
   <div class="index-slider">
     <div class="index-slider__slider swiper-container">
       <div class="swiper-wrapper">
@@ -87,11 +87,11 @@
         <div class="index-catalog__card card">
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
             {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %} {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
             {% endthumbnail %} {% endif %} {% endfor %} {% else %}
-            <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
+            <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" class="product-click-image" />
             {% endif %}
             <button type="button" class="card__click" id="one-click">Купить в один клик</button>
           </div>
@@ -148,7 +148,7 @@
             <button type="button" class="card__click" id="one-click">Купить в один клик</button>
           </div>
           <div class="card__content">
-            <h3 class="card__title-h3">{{ product.name }}</h3>
+            <a href="{{ product.get_absolute_url }}" class="card__title-h3">{{ product.name }}</a>
             <div class="card__content-bottom">
               {% if product.sale_price %}
               <span class="card__price"
@@ -203,7 +203,7 @@
             <button type="button" class="card__click" id="one-click">Купить в один клик</button>
           </div>
           <div class="card__content">
-            <h3 class="card__title-h3">{{ product.name }}</h3>
+            <a href="{{ product.get_absolute_url }}" class="card__title-h3">{{ product.name }}</a>
             <div class="card__content-bottom">
               {% if product.sale_price %}
               <span class="card__price"

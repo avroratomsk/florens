@@ -19,6 +19,21 @@
   }
 }
 
+.popup._open {
+  transform: scale(1) !important;
+  pointer-events: all !important;
+}
+
+.index-page {
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 620px) {
+  html {
+    overflow-x: hidden;
+  }
+}
+
 main {
   // overflow: hidden;
 }
@@ -30,7 +45,10 @@ main {
   font-size: 35px;
   font-weight: 600;
   line-height: 150%;
-  font-family: $fontTitle;
+
+  @media screen and (max-width: 425px) {
+    font-size: 30px;
+  }
 }
 
 section {

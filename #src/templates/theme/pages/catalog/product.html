@@ -1,111 +1,227 @@
-{% extends "base.html" %} {% load static %}{% block content %}
+{% extends "base.html" %} {% load static %} {% load thumbnail %}{% block content %}
 
-<div class="wrapper">
-  {% include "components/header.html" %}
-  <main class="page">
-    <section class="product-page">
-      <div class="product-page__container">
-        <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-          <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-            class="breadcrumbs__item">
-            Главная
-            <meta itemprop="position" content="1" />
-          </a>
-          <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-            class="breadcrumbs__item">
-            Продукция
-            <meta itemprop="position" content="2" />
-          </a>
-          <span itemprop="name" class="breadcrumbs__item">
-            {{ product.name }}
-            <meta itemprop="position" content="3" />
-          </span>
-        </div>
-        <div class="product-page__row">
-          <div class="product-page__image">
-            {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" title="{{ product.name }}" />
-            {% else %}
-            <img src="{% static 'admin/images/food.webp' %}" alt="{{ product.name }}" title="{{ product.name }}" />
-            {% endif %}
+<main class="page">
+  <div class="product">
+    <div class="product__container">
+      <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+        <a href="https://avroratomsk.github.io/" itemprop="itemListElement" itemscope=""
+          itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
+          Главная
+          <meta itemprop="position" content="1" />
+        </a>
+        <span itemprop="name" class="breadcrumbs__item">
+          {{ product.name }}
+          <meta itemprop="position" content="2" />
+        </span>
+      </div>
+      <div class="product__content">
+        <div class="product__image">
+          {% if images|length > 1 %}
+          <div class="product-thumb__slider swiper">
+            <div class="product-thumb__wrapper swiper-wrapper">
+
+              {% for image in images %}
+              <div class="product-thumb__slide swiper-slide">
+                <img src="{{ image.src.url }}" alt="{{ product.name }}" title="{{ product.name }}">
+              </div>
+              {% endfor %}
+            </div>
           </div>
-          <div class="product-page__content">
-            <h1 class="product-page__title _title">{{ product.name }}</h1>
-            {% comment %}
-            <div class="product-page__text">
-              <p class="product-page__label">Категория:</p>
-              <p class="product-page__category">{{ product.category }}</p>
+          {% endif %}
+          <div class="product__slider swiper">
+            <div class="product__wrapper swiper-wrapper">
+              {% for image in images %}
+              <div class="product__slide swiper-slide">
+                <img src="{{ image.src.url }}" alt="{{ product.name }}" title="{{ product.name }}">
+              </div>
+              {% endfor %}
             </div>
-            {% endcomment %} {% if product.short_description %}
-            <div class="product-page__text">
-              <span class="product-page__label">Краткое описание блюда:</span>
-              <p>{{ product.short_description }}</p>
-            </div>
-            {% endif %}
-            <div class="product-page__price">
-              {% if product.price %}
-              <span class="product-page__label">Цена:</span>
-              <p>{{ product.price }} руб.</p>
+          </div>
+        </div>
+        <div class="product__info info-product">
+          <div class="info-product__name-inner">
+            <h1 class="info-product__name">{{ product.name }}</h1>
+            <button type="button" class="info-product__favorit-btn">
+              <svg width="21" height="21" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M12.896 0.489402C13.5829 0.1663 14.319 0 15.0624 0C15.8058 0 16.542 0.166301 17.2288 0.489402C17.9155 0.812443 18.5394 1.2859 19.0649 1.88272C19.5906 2.47936 20.0079 3.18805 20.2923 3.96768C20.577 4.74746 20.7234 5.58325 20.7234 6.42732C20.7234 7.27139 20.577 8.10718 20.2923 8.88695C20.0078 9.66666 19.5907 10.375 19.065 10.9717C19.0649 10.9718 19.0651 10.9717 19.065 10.9717L11.3683 19.7104C11.0283 20.0965 10.4769 20.0965 10.1369 19.7104L2.44015 10.9717C1.3786 9.76648 0.782227 8.1318 0.782227 6.42732C0.782227 4.72283 1.3786 3.08815 2.44015 1.88289C3.5017 0.677634 4.94148 0.000528645 6.44274 0.000528645C7.94401 0.000528645 9.38378 0.677634 10.4453 1.88289L10.7526 2.23174L11.0597 1.88305C11.0597 1.88311 11.0598 1.883 11.0597 1.88305C11.5852 1.28615 12.2093 0.812473 12.896 0.489402ZM15.0624 1.97708C14.5478 1.97708 14.0381 2.09222 13.5626 2.31589C13.0871 2.53958 12.6552 2.86744 12.2913 3.28074L11.3683 4.32875C11.0283 4.7148 10.4769 4.7148 10.1369 4.32875L9.21401 3.2809C8.47903 2.44642 7.48217 1.9776 6.44274 1.9776C5.40331 1.9776 4.40646 2.44642 3.67148 3.2809C2.93649 4.11538 2.52358 5.24718 2.52358 6.42732C2.52358 7.60745 2.93649 8.73925 3.67148 9.57374L10.7526 17.6134L17.8337 9.57374C18.1977 9.16063 18.4866 8.66998 18.6837 8.13014C18.8806 7.59029 18.9821 7.01167 18.9821 6.42732C18.9821 5.84297 18.8806 5.26434 18.6837 4.72449C18.4866 4.18465 18.1978 3.69417 17.8338 3.28106C17.47 2.86777 17.0377 2.53958 16.5623 2.31589C16.0868 2.09222 15.5771 1.97708 15.0624 1.97708Z" />
+              </svg>
+            </button>
+          </div>
+          {% if product.height or product.width or product.diameter or product.quantity_flower %}
+          <div class="info-product__sizes">
+            <p class="info-product__sizes-title">Размеры:</p>
+            <div class="info-product__sizes-grid">
+              {% if product.height %}
+              <div class="info-product__sizes-width">
+                <img src="{% static 'theme/mb/images/height.png' %}" alt="" />
+                <div class="">
+                  <span>{{ product.height }} см</span>
+                  <!-- <span>Высота</span> -->
+                </div>
+              </div>
+              {% endif %} {% if product.width %}
+              <div class="info-product__sizes-width">
+                <img src="{% static 'theme/mb/images/width.png' %}" alt="" />
+                <div class="">
+                  <span>{{ product.width }} см</span>
+                  <!-- <span>Ширина</span> -->
+                </div>
+              </div>
+              {% endif %} {% if product.diameter %}
+              <div class="info-product__sizes-width">
+                <img src="{% static 'theme/mb/images/diametr.png' %}" alt="" />
+                <div class="">
+                  <span>{{ product.diameter }} см</span>
+                  <!-- <span>Диаметр</span> -->
+                </div>
+              </div>
+              {% endif %} {% if product.quantity_flower %}
+              <div class="info-product__sizes-width">
+                <img src="{% static 'theme/mb/images/flowers.png' %}" alt="" />
+                <div class="">
+                  <span>{{ product.quantity_flower }} шт.</span>
+                  <!-- <span>Цветков</span> -->
+                </div>
+              </div>
               {% endif %}
             </div>
-            <div class="product-page__nutritional nutritional">
-              <span class="product-page__label">Пицевая ценность продукта на 100г :</span>
-              <div class="nutritional__grid">
-                {% if product.calories %}
-                <div class="nutritional__card">
-                  <p class="nutritional__meaning">{{ product.calories }}</p>
-                  <p class="nutritional__name">Калории</p>
-                </div>
-                {% endif %} {% if product.proteins%}
-                <div class="nutritional__card">
-                  <p class="nutritional__meaning">{{ product.proteins }}</p>
-                  <p class="nutritional__name">Белки</p>
-                </div>
-                {% endif %} {% if product.fats %}
-                <div class="nutritional__card">
-                  <p class="nutritional__meaning">{{ product.fats }}</p>
-                  <p class="nutritional__name">Жиры</p>
-                </div>
-                {% endif %} {% if product.carbonhydrates %}
-                <div class="nutritional__card">
-                  <p class="nutritional__meaning">{{ product.carbonhydrates }}</p>
-                  <p class="nutritional__name">Углеводы</p>
-                </div>
+          </div>
+          {% endif %}
+          {% if product.composition %}
+          <div class="info-product__description">
+            <p class="info-product__sizes-title">Состав:</p>
+            <p>{{ product.composition }}</p>
+          </div>
+          {% endif %}
+          <div class="info-product__inner">
+            <div class="info-product__action action-product">
+              <span class="action-product__price">Цена: {% if product.sale_price %} {{ product.sale_price }} {% else %}
+                {{ product.price }} {% endif %} ₽</span>
+              <button type="submit" class="action-product__submit">Добавить в корзину</button>
+            </div>
+            <!-- <div class="info-product__favorit">
+              <button type="button" class="info-product__click btn">Купить в один клик</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      {% if product.description %}
+      <div class="product__specification specification-product">
+        <div class="specification-product__header">
+          <button type="button" data-id="compound" class="specification-product__button _active">Описание</button>
+        </div>
+        <div class="specification-product__content">
+          <div class="specification-product__info _show" id="compound">
+            <p>{{ product.description }}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if products %}
+      <div class="product__similar similar-product">
+        <h2 class="similar-product__title _title">Похожие товары</h2>
+        <div class="similar-product__grid">
+          {% for product in products %}
+          <div class="index-catalog__card card">
+            <div class="card__image">
+              {% if product.image %}
+              {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+              {% endthumbnail %}
+              {% for image in product.images.all %}
+              {% if forloop.counter == 2 %}
+              {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+              {% endthumbnail %} {% endif %} {% endfor %} {% else %}
+              <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
+              {% endif %}
+              <button type="button" class="card__click" id="one-click">Купить в один клик</button>
+            </div>
+            <div class="card__content">
+              <h3 class="card__title-h3">{{ product.name }}</h3>
+              <div class="card__content-bottom">
+                {% if product.sale_price %}
+                <span class="card__price"><s>{{ product.price }}</s>
+                  <span class="card__price-number">{{ product.sale_price }}</span>
+                  <span class="currency">₽</span></span>
+                {% else %}
+                <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
                 {% endif %}
+                <a href="{% url 'cart_add' %}" class="card__cart add-to-cart" data-product-id="{{ product.id }}">
+                  {% csrf_token %}
+                  <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
+                </a>
+                {% if product.quantity_purchase > 10 %}
+                <button type="button" class="card__hit">
+                  <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
+                </button>
+                {% endif %} {% if product.discount %}
+                <div class="card__stock">-{{ product.discount }}%</div>
+                {% endif %}
+                <button type="button" class="card__favorit">
+                  <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
+                </button>
               </div>
             </div>
           </div>
-        </div>
-        <div class="product-page__text product-page__text-full">
-          {% if product.description %}
-          <p class="product-page__label">Полное описание:</p>
-          <p>{{ product.description }}</p>
-          {% endif %}
+          {% endfor %}
         </div>
       </div>
-    </section>
-
-    {% if products > 0 %}
-      <section class="product-related">
-        <div class="product-related__container">
-          <h2 class="product-related__title _title">Похожие товары</h2>
-          <div class="product-related__grid">
-            {% for product in products %} 
-              <div class="card-product" data-id="{{ product.display_id }}">
-                <a href="{{ product.get_absolute_url }}" class="card-product__image">
-                  <img src="{% static 'admin/images/food.webp' %}" alt="{{ product.name }}" title="{{ product.name }}" />
+      {% endif %}
+      {% if saleProducts %}
+      <div class="product__similar similar-product">
+        <h2 class="similar-product__title _title">Товары со скидкой</h2>
+        <div class="similar-product__grid">
+          {% for product in saleProducts %}
+          <div class="index-catalog__card card">
+            <div class="card__image">
+              {% if product.image %}
+              {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+              {% endthumbnail %}
+              {% for image in product.images.all %}
+              {% if forloop.counter == 2 %}
+              {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+              {% endthumbnail %} {% endif %} {% endfor %} {% else %}
+              <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
+              {% endif %}
+              <button type="button" class="card__click" id="one-click">Купить в один клик</button>
+            </div>
+            <div class="card__content">
+              <h3 class="card__title-h3">{{ product.name }}</h3>
+              <div class="card__content-bottom">
+                {% if product.sale_price %}
+                <span class="card__price"><s>{{ product.price }}</s>
+                  <span class="card__price-number">{{ product.sale_price }}</span>
+                  <span class="currency">₽</span></span>
+                {% else %}
+                <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
+                {% endif %}
+                <a href="{% url 'cart_add' %}" class="card__cart add-to-cart" data-product-id="{{ product.id }}">
+                  {% csrf_token %}
+                  <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
                 </a>
-                <a href="#" class="card-product__name">{{ product.name }}</a>
-                <p class="card-product__price">{{ product.price }} руб.</p>
-                <div class="card-product__btns">
-                  <button class="card-product__btn">Корзина</button>
-                  <a href="{{ product.get_absolute_url }}" class="card-product__btn">Описание</a>
-                </div>
+                {% if product.quantity_purchase > 10 %}
+                <button type="button" class="card__hit">
+                  <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
+                </button>
+                {% endif %} {% if product.discount %}
+                <div class="card__stock">-{{ product.discount }}%</div>
+                {% endif %}
+                <button type="button" class="card__favorit">
+                  <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
+                </button>
               </div>
-            {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
         </div>
-      </section>
-    {% endif %}
-  </main>
-</div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</main>
+
 {% endblock content %}

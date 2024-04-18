@@ -12,7 +12,7 @@
         <button type="submit" class="form__btn">Сохранить</button>
       </div>
       {% csrf_token %}
-      <div class="page-content _show" id="basic">
+      <div class="page-content" id="basic">
         <div class="page-content__row">
           <div class="page-content__col">
             <div class="form__group">
@@ -42,9 +42,7 @@
                   </path>
                 </svg>
               </div>
-              <div class="product-field">
-
-              </div>
+              <div class="product-field"></div>
             </div>
             <div class="form__grid">
               <div class="form__group">
@@ -60,6 +58,12 @@
               <div class="form__group">
                 <label for="{{ form.height.id_for_label }}" class="form__controls-label"> Высота </label>
                 {{ form.height }} {{ form.height.errors }}
+              </div>
+
+              <div class="form__group">
+                <label for="{{ form.quantity_flower.id_for_label }}" class="form__controls-label"> Количество цветков
+                </label>
+                {{ form.quantity_flower }} {{ form.quantity_flower.errors }}
               </div>
 
               <div class="form__group">
@@ -156,7 +160,57 @@
           </div>
         </div>
       </div>
+      <div class="page-content _show" id="char">
+        <button type="button" id="add-char" class="form__btn char__plus">Добавить характеристику</button>
+        <!-- Характеристики товара страницы -->
+        <div class="page-content__row">
+          <div class="page-content__seo" id="paste-char">
+            {% for char in chars %}
+            <div class="char__row">
+              <input type="text" name="old_char_id" value="{{ char.id }}" hidden />
+              <p>
+                <label for="id_name">Название характеристики:</label>
+                <select name="old_text_name" class="input" placeholder="Название характеристики" id="id_name">
+                  <option value="{{ char.char_name.id }}">{{ char.char_name.text_name }}</option>
+                  {% for ch in all_chars %}
+                  <option value="{{ ch.id }}">{{ ch.text_name }}</option>
+                  {% endfor %}
+                </select>
+              </p>
+              <p>
+                <label for="id_char_value">Значение:</label>
+                <input type="text" name="old_char_value" class="input" placeholder="Значение" required=""
+                  id="id_char_value" value="{{ char.char_value }}" />
+              </p>
+              <a href="" class="char__remove">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20">
+                  <path
+                    d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                  </path>
+                </svg>
+              </a>
+            </div>
+            {% endfor %}
+            <!-- <div class="form__group form__group--chars">
+              <div class="form__group-char">
+                <label for="{{ product_char_form.char_name.id_for_label }}" class="form__controls-label">
+                  Название характеристики <span>:</span>
+                </label>
+                {{ product_char_form.char_name }} {{ product_char_form.char_name.errors }}
+              </div>
+              <div class="form__group-char">
+                <label for="{{ product_char_form.char_value.id_for_label }}" class="form__controls-label">
+                  Значение характеристики <span>:</span> </label>
+                {{ product_char_form.char_value }} {{ product_char_form.char_value.errors }}
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
     </form>
+    <div class="select-hide" id="select-hide" style="opacity:0; position: absolute;">
+      {{ option_form.type }} {{ product_char_form.char_name }}
+    </div>
   </div>
 </div>
 

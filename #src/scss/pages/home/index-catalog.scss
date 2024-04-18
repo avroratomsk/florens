@@ -1,6 +1,11 @@
 .index-catalog {
   position: relative;
   padding: 60px 60px;
+
+  @media screen and (max-width: 768px) {
+    padding: 60px 20px;
+  }
+
   // .index-catalog__inner
 
   &__inner {
@@ -15,6 +20,10 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 40px;
+
+    @media screen and (max-width: 920px) {
+      flex-direction: column;
+    }
   }
 
   // .index-catalog__title
@@ -40,6 +49,10 @@
     display: flex;
     align-items: center;
     gap: 20px;
+
+    @media screen and (max-width: 620px) {
+      display: none;
+    }
   }
 
 
@@ -51,6 +64,7 @@
     line-height: 136%;
     transition: $animation_speed;
     color: #3f3c38;
+    display: flex;
 
     &:hover {
       color: #d71635;
@@ -72,6 +86,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 30px;
+
+  @media screen and (max-width: 850px) {
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  }
 }
 
 .card {
@@ -198,6 +216,7 @@
   // .card__title-h3
 
   &__title-h3 {
+    display: flex;
     font-weight: 700;
     font-size: 18px;
     line-height: 120%;

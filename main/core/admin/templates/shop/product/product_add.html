@@ -12,11 +12,12 @@
         <button type="submit" class="form__btn">Сохранить</button>
       </div>
       {% csrf_token %}
-      <div class="page-content _show" id="basic">
+      <div class="page-content" id="basic">
         <div class="page-content__row">
           <div class="page-content__col">
             <div class="form__group">
-              <label for="{{ form.name.id_for_label }}" class="form__controls-label"><span>*</span>Название букета</label>
+              <label for="{{ form.name.id_for_label }}" class="form__controls-label"><span>*</span>Название
+                букета</label>
               {{ form.name }} {{ form.name.errors }}
             </div>
 
@@ -30,16 +31,18 @@
               {{ form.description }} {{ form.description.errors }}
             </div>
 
-            <div class="form__group form__group-images">
-              <label for="{{ image_form.src.id_for_label }}" class="form__controls-label"> Дополнительные изображения </label>
+            <div class="form__group form__group-image">
+              <label for="{{ image_form.src.id_for_label }}" class="form__controls-label"> Дополнительные изображения
+              </label>
               {{ image_form.src }} {{ image_form.src.errors }}
               <div class="product-block__plus" style="width: 20px; height: 20px">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                   <path
-                    d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-                  ></path>
+                    d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+                  </path>
                 </svg>
               </div>
+              <div class="product-field"></div>
             </div>
             <div class="form__grid">
               <div class="form__group">
@@ -55,6 +58,12 @@
               <div class="form__group">
                 <label for="{{ form.height.id_for_label }}" class="form__controls-label"> Высота </label>
                 {{ form.height }} {{ form.height.errors }}
+              </div>
+
+              <div class="form__group">
+                <label for="{{ form.quantity_flower.id_for_label }}" class="form__controls-label"> Количество цветков
+                </label>
+                {{ form.quantity_flower }} {{ form.quantity_flower.errors }}
               </div>
 
               <div class="form__group">
@@ -74,16 +83,19 @@
               </div>
 
               <div class="form__group">
-                <label for="{{ form.quantity_purchase.id_for_label }}" class="form__controls-label"> Количество купленных </label>
+                <label for="{{ form.quantity_purchase.id_for_label }}" class="form__controls-label"> Количество
+                  купленных </label>
                 {{ form.quantity_purchase }} {{ form.quantity_purchase.errors }}
               </div>
 
               <div class="form__group">
-                <label for="{{ form.discount.id_for_label }}" class="form__controls-label"> Скидка в (<span>%</span>) </label>
+                <label for="{{ form.discount.id_for_label }}" class="form__controls-label"> Скидка в (<span>%</span>)
+                </label>
                 {{ form.discount }} {{ form.discount.errors }}
               </div>
               <div class="form__group">
-                <label for="{{ form.slug.id_for_label }}" class="form__controls-label"> Количество товара в наличии </label>
+                <label for="{{ form.slug.id_for_label }}" class="form__controls-label"> Количество товара в наличии
+                </label>
                 {{ form.quantity }} {{ form.quantity.errors }}
               </div>
             </div>
@@ -110,7 +122,8 @@
             </div>
             <div class="form__group-checkbox">
               {{ form.free_shipping }} {{ form.free_shipping.errors }}
-              <label for="{{ form.free_shipping.id_for_label }}" class="form__controls-label"> Бесплатная доставка ? </label>
+              <label for="{{ form.free_shipping.id_for_label }}" class="form__controls-label"> Бесплатная доставка ?
+              </label>
             </div>
 
             <div class="form__group-checkbox">
@@ -125,7 +138,8 @@
         <div class="page-content__row">
           <div class="page-content__seo">
             <div class="form__group">
-              <label for="{{ form.meta_h1.id_for_label }}" class="form__controls-label"> Заголовок h1 <span>:</span> </label>
+              <label for="{{ form.meta_h1.id_for_label }}" class="form__controls-label"> Заголовок h1 <span>:</span>
+              </label>
               {{ form.meta_h1 }} {{ form.meta_h1.errors }}
             </div>
             <div class="form__group">
@@ -146,7 +160,33 @@
           </div>
         </div>
       </div>
+      <div class="page-content _show" id="char">
+        <button type="button" id="add-char" class="form__btn char__plus">Добавить характеристику</button>
+        <!-- Характеристики товара страницы -->
+        <div class="page-content__row">
+          <div class="page-content__seo" id="paste-char">
+
+            <!-- <div class="form__group form__group--chars">
+              <div class="form__group-char">
+                <label for="{{ product_char_form.char_name.id_for_label }}" class="form__controls-label">
+                  Название характеристики <span>:</span>
+                </label>
+                {{ product_char_form.char_name }} {{ product_char_form.char_name.errors }}
+              </div>
+              <div class="form__group-char">
+                <label for="{{ product_char_form.char_value.id_for_label }}" class="form__controls-label">
+                  Значение характеристики <span>:</span> </label>
+                {{ product_char_form.char_value }} {{ product_char_form.char_value.errors }}
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
     </form>
+
+    <div class="select-hide" id="select-hide" style="opacity:0; position: absolute;">
+      {{ option_form.type }} {{ product_char_form.char_name }}
+    </div>
   </div>
 </div>
 

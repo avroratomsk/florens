@@ -136,3 +136,30 @@ function shwoField() {
 }
 
 
+/**
+ * Добавление характеристики
+ */
+
+document.addEventListener('click', function (event) {
+  if (event.target.classList.contains('char__plus')) {
+    const blockPasteChar = document.getElementById('paste-char');
+    let char_name_id = document.getElementById('id_char_name').innerHTML;
+    console.log(char_name_id);
+    blockPasteChar.innerHTML += `<div class="form__group form__group--chars">
+    <div class="form__group-char">
+      <label for="{{ product_char_form.char_name.id_for_label }}" class="form__controls-label">
+        Название характеристики <span>:</span>
+      </label>
+      <select name="text_name" class="input" placeholder="Название характеристики" id="id_name">${char_name_id}</select>
+    </div>
+    <div class="form__group-char">
+    <label for="id_char_value">Значение:</label>
+    <input type="text" name="char_value" class="input" placeholder="Значение" required="" id="id_char_value">
+    <div class="char__minus">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+    </div>
+    </div>
+  </div>`
+  }
+});
+

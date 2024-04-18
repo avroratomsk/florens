@@ -8,7 +8,19 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    // .form__group--chars
+
+    &--chars {
+      flex-direction: row !important;
+    }
   }
+
+
+
+  // .form__group-char
+
+  &__group-char {}
 
   // .form__group-grid
 
@@ -58,6 +70,11 @@
 
     &:hover {
       opacity: .9;
+    }
+
+    @media screen and (max-width: 420px) {
+      width: 100%;
+      min-width: 100%;
     }
   }
 

@@ -22,6 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css?_v=20240126172157"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -32,12 +33,72 @@
   <div class="wrapper">
     {% include "./components/header.html" %}{% block content %}{% endblock %} {% include "./components/footer.html" %}
     {% include "./components/notification/modal.html" %}
+    {% include "./components/popup.html" %}
     {% include "./components/mini-cart.html" %}
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
+    var galleryThumbs = new Swiper(".product-thumb__slider", {
+      spaceBetween: 10,
+      slidesPerView: 3,
+      direction: "vertical",
+    });
+
+    {% comment %} const swiper = new Swiper(".swiper", {
+      // Optional parameters
+      direction: "horizontal",
+      loop: true,
+
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination",
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+      // And if we need scrollbar
+      scrollbar: {
+        el: ".swiper-scrollbar",
+      },
+
+      thumbs: {
+        swiper: galleryThumbs,
+      },
+    }); {% endcomment %}
+
+    const product__slider = new Swiper(".product__slider", {
+      // Optional parameters
+      direction: "horizontal",
+      loop: true,
+
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination",
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+      // And if we need scrollbar
+      scrollbar: {
+        el: ".swiper-scrollbar",
+      },
+
+      thumbs: {
+        swiper: galleryThumbs,
+      },
+    });
+
     // Ловим собыитие клика по кнопке добавить в корзину
     $(document).on("click", ".add-to-cart", function (e) {
       // Блокируем его базовое действие
@@ -86,7 +147,6 @@
         },
       });
     });
-
   </script>
   <script>
     $(document).on("click", ".remove-from-cart", function (e) {

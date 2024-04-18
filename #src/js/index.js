@@ -263,11 +263,134 @@ if (whoGetRadio) {
 }
 
 const pickupCheckbox = document.getElementById('pickup');
-pickupCheckbox.addEventListener('change', function (e) {
-  if (!pickupCheckbox.checked) {
-    document.getElementById('address-delivery').classList.add('_hidden');
+if (pickupCheckbox) {
+  pickupCheckbox.addEventListener('change', function (e) {
+    if (!pickupCheckbox.checked) {
+      document.getElementById('address-delivery').classList.add('_hidden');
+    } else {
+      document.getElementById('address-delivery').classList.remove('_hidden');
+    }
+  })
+}
+
+
+
+/**
+ * Переключатели вкладок на странице продукта
+ */
+
+const tabProductTrigger = document.querySelectorAll('.specification-product__button');
+const tabProductContent = document.querySelectorAll('.specification-product__info');
+
+if (tabProductTrigger) {
+  tabProductTrigger.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      let element = document.getElementById(this.dataset.id);
+      tabProductContent.forEach(item => item.classList.remove('_show'));
+      tabProductTrigger.forEach(item => item.classList.remove('_active'));
+      this.classList.add('_active');
+      element.classList.add('_show');
+    })
+  })
+}
+
+const burger = document.getElementById('burger');
+if (burger) {
+  burger.addEventListener('click', function (e) {
+    console.log(this);
+    document.querySelector('.header_mobile').classList.add('_show');
+    bodyLock();
+  })
+}
+
+const closeMenu = document.getElementById('close-menu');
+if (closeMenu) {
+  closeMenu.addEventListener('click', function (e) {
+    console.log(this);
+    document.querySelector('.header_mobile').classList.remove('_show');
+    bodyUnLock();
+  })
+}
+
+/**
+ * Покупка в один клик
+ */
+
+const oneClickBtn = document.querySelectorAll('.card__click');
+if (oneClickBtn) {
+  oneClickBtn.forEach(btn => {
+    btn.addEventListener('click', buyOneСlick)
+  })
+}
+
+function buyOneСlick(e) {
+  let parent = this.closest('.card');
+  let img = parent.querySelectorAll('.product-click-image')[0].src;
+
+  let name = parent.querySelector('.card__title-h3').innerText;
+  let price = parent.querySelector('.card__price').innerText;
+  popup = document.getElementById('popup-one-click');
+
+  document.querySelector('.popup__product-img').src = img;
+  document.querySelector('.popup__product-name').innerText = name;
+  document.querySelector('.product__price-text').innerText = price;
+
+  bodyLock();
+
+
+}
+
+window.addEventListener('DOMContentLoaded', function (e) {
+  const param_mass = []
+  var params = window.location.search.replace('?', '').split('&');
+  params.forEach(item => {
+    param_mass.push(item.split('=')[0]);
+  });
+  if (param_mass[0] != '') {
+    param_mass.forEach(item => {
+      let checkbox = document.querySelector('[name=' + item + ']')
+      checkbox.checked = true;
+    })
   } else {
-    document.getElementById('address-delivery').classList.remove('_hidden');
+    console.log('Четко');
   }
 })
 
+const categoryDetailsFilterBtn = document.querySelector('.category-details__filter');
+if (categoryDetailsFilterBtn) {
+  categoryDetailsFilterBtn.addEventListener('click', function (e) {
+    document.getElementById('filter-category').classList.add('_show');
+    bodyLock();
+  })
+}
+
+const closeFilter = document.getElementById('close-filter');
+if (closeFilter) {
+  closeFilter.addEventListener('click', function (e) {
+    document.getElementById('filter-category').classList.remove('_show');
+    bodyUnLock();
+  })
+}
+
+
+const closeBtn = document.querySelectorAll('.close-btn');
+if (closeBtn) {
+  closeBtn.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      let parent = this.closest('.popup');
+      parent.classList.remove('_open');
+      bodyUnLock();
+    })
+  })
+}
+
+// document.getElementById('apply-filter').addEventListener('click', function (e) {
+//   e.target.preventDefault();
+//   var checkedValues = Array.from(document.querySelectorAll('input[name="diametr"]:checked')).map(function (el) {
+//     return el.value;
+//   });
+//   var params = new URLSearchParams(window.location.search);
+//   console.log(params);
+//   params.set('diametr', checkedValues.join(','));
+//   window.location.search = params.toString();
+// });

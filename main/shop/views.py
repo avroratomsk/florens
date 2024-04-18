@@ -21,15 +21,51 @@ def category(request):
 
   return render(request, "pages/catalog/category.html", context)
 
-
+import itertools
 def category_detail(request, slug):
   category = Category.objects.get(slug=slug)
+  # chars = CharName.objects.filter(group=None)
+  groups = CharGroup.objects.all()
   products = Product.objects.filter(category=category)
+  if request.method == "GET":
+    get_filtres = request.GET
+    char_filtres_list = list(get_filtres.keys())
+    parametrs_value = []
+    for parametr in char_filtres_list:
+      parametrs_value.append(request.GET.getlist(parametr))# [['Малиновый', 'Белый'], ['25']]
+    
+    merged_array = list(itertools.chain(*parametrs_value))
+    product = ProductChar.objects.filter(char_value__in=merged_array)
+    
+    id_filter = [pr.parent.id for pr in product]
+    if id_filter:
+        products = products.filter(id__in=id_filter)
+  
+  products_all = Product.objects.filter(status=True, category_id=category)
+  chars_all = ProductChar.objects.filter(parent__in=products_all).distinct()
+  char_name = CharName.objects.filter(c_chars__in=chars_all, filter_add=True).exclude(filter_name=None).distinct()
+  
+  chars_list_name_noduble = []
+  for li in chars_all:
+    if li.char_value not in chars_list_name_noduble:
+      chars_list_name_noduble.append(li.char_value)
+  # print(chars_list_name_noduble)
+  
+  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).distinct('char_value')
+  print(chars)
+  
+  chars_list_name_noduble_a = ProductChar.objects.filter(parent__in=products_all).distinct().values_list('char_value', flat=True).distinct()
+  # print(chars_list_name_noduble_a)
+
+  # chars = ProductChar.objects.filter(char_value__in=chars_list_noduble)
+  # print(chars)
   
   context = {
     "category_name": category.name,
     "title": "Название товара",
-    "products": products
+    "products": products,
+    "chars": chars,
+    "char_name": char_name,
   }
   
   return render(request, "pages/catalog/category-details.html", context)
@@ -37,10 +73,14 @@ def category_detail(request, slug):
 def product(request, slug):
   product = Product.objects.get(slug=slug)
   images = ProductImage.objects.filter(parent_id=product.id)[:3]
+  products = Product.objects.filter(category_id=product.category.id).exclude(slug=slug)[:4]
+  saleProducts = Product.objects.filter(sale_price__gt=0)[:4]
   
   context = {
     "title": "Название продукта",
     "product": product,
-    "images": images
+    "images": images,
+    "products": products,
+    "saleProducts": saleProducts
   }
   return render(request, "pages/catalog/product.html", context)
