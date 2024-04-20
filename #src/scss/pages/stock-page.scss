@@ -1,0 +1,8 @@
+.page-stock {
+
+  .cards-catalog {
+    &:not(:last-child) {
+      margin-bottom: 50px;
+    }
+  }
+}

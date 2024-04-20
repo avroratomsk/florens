@@ -1,6 +1,6 @@
 from django import forms
 from django_ckeditor_5.widgets import CKEditor5Widget
-from home.models import BaseSettings, HomeTemplate, Stock
+from home.models import BaseSettings, HomeTemplate, Stock, QuestionPage, Questions
 from service.models import Service, ServicePage
 from reviews.models import Reviews
 from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage
@@ -15,12 +15,15 @@ class GlobalSettingsForm(forms.ModelForm):
     model = BaseSettings
     fields = [
         'logo',
-        'phone_one',
-        'phone_two',
+        'phone',
         'time_work',
+        'instagram',
+        'telegram',
+        'vk',
+        'viber',
+        'phone_whatsapp',
         'email',
-        'address_one',
-        'address_two',
+        'address',
         'meta_h1',
         'meta_title',
         'meta_description',
@@ -28,25 +31,17 @@ class GlobalSettingsForm(forms.ModelForm):
     ]
     labels = {
         'logo': 'Логотип',
-        'phone_one': 'Номер телефона Пролетарская',
-        'phone_two': 'Номер телефона Ракетная',
+        'phone': 'Номер телефона',
         'time_work': 'Режим работы',
         'email': 'Email',
-        'address_one': 'Адрес Пролетарская',
-        'address_two': 'Адрес Ракетная',
+        'address': 'Адрес',
         'meta_h1':'Заголвок первого уровня',
         'meta_title':'Meta title',
         'meta_description':'Мета description',
         'meta_keywords':'Meta keywords',
     }
     widgets = {
-        'phone_one': forms.TextInput(attrs={
-            'class': 'form__controls'
-        }),
-        'phone_one': forms.TextInput(attrs={
-            'class': 'form__controls'
-        }),
-        'phone_two': forms.TextInput(attrs={
+        'phone': forms.TextInput(attrs={
             'class': 'form__controls'
         }),
         'time_work': forms.TextInput(attrs={
@@ -55,10 +50,7 @@ class GlobalSettingsForm(forms.ModelForm):
         'email': forms.EmailInput(attrs={
             'class': 'form__controls'
         }),
-        'address_one': forms.TextInput(attrs={
-            'class': 'form__controls'
-        }),
-        'address_two': forms.TextInput(attrs={
+        'address': forms.TextInput(attrs={
             'class': 'form__controls'
         }),
         'meta_h1': forms.TextInput(attrs={
@@ -472,6 +464,7 @@ class StockForm(forms.ModelForm):
         'slug',
         'description',
         'validity',
+        'home_slider',
         'status',
         'slider_status',
         'image',
@@ -483,6 +476,7 @@ class StockForm(forms.ModelForm):
         'title':'Название акции',
         'slug': 'URL',
         'validity':'Срок действия акции',
+        'home_slider':'Вывести в слайдер на главную',
         'description':'Текст коментария',
         'status':'Статус публикации',
         'slider_status':'Вывод на главный слайдер',
@@ -509,6 +503,9 @@ class StockForm(forms.ModelForm):
         'rows': 5,
       }),
       'status': forms.CheckboxInput(attrs={
+        'class': 'form__controls-checkbox',
+      }),
+      'home_slider': forms.CheckboxInput(attrs={
         'class': 'form__controls-checkbox',
       }),
       'slider_status': forms.CheckboxInput(attrs={
@@ -697,4 +694,62 @@ class CharNameForm(forms.ModelForm):
         'sort_order': forms.TextInput(attrs={
             'class': 'form__controls',
         }),
+    }
+    
+    
+class QuestionPageForm(forms.ModelForm):
+  class Meta:
+    model = QuestionPage
+    fields = [
+        'meta_title',
+        'meta_h1',
+        'meta_description',
+        'meta_keywords',
+        
+    ]
+    labels = {
+        'meta_title': 'Группа опций',
+        'meta_h1': 'Название опции',
+        'meta_description': "Добавить в фильтрацию",
+        'meta_keywords': "Название фильтрации на английском",
+    }
+    widgets = {
+        'meta_title': forms.TextInput(attrs={
+            'class': 'form__controls-checkbox',
+        }),
+        'meta_h1': forms.TextInput(attrs={
+            'class': 'form__controls',
+        }),
+        'meta_description': forms.Textarea(attrs={
+            'class': 'form__controls',
+        }),
+        'meta_keywords': forms.TextInput(attrs={
+            'class': 'form__controls',
+        }),
+    }
+    
+class QuestionsForm(forms.ModelForm):
+  class Meta:
+    model = Questions
+    fields = [
+        'title',
+        'description',
+        'status',
+        
+    ]
+    # labels = {
+    #     'title': 'Группа опций',
+    #     'description': 'Название опции',
+    #     'status': "Добавить в фильтрацию",
+    # }
+    widgets = {
+        'meta_title': forms.CheckboxInput(attrs={
+            'class': 'form__controls-checkbox',
+        }),
+        'title': forms.TextInput(attrs={
+            'class': 'form__controls',
+        }),
+        'description': forms.Textarea(attrs={
+            'class': 'form__controls',
+        })
     }

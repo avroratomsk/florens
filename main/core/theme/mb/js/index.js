@@ -7,7 +7,28 @@
 //   selector: ".index-gallery__item"
 // });
 
-console.log("Работает");
+
+
+/**
+ * Всплывающее окно для чтения ответа на вопросы
+ */
+
+const faqBtn = document.querySelectorAll('.read-answer');
+
+if (faqBtn) {
+  faqBtn.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      let parent = this.closest('.faq__item');
+      let title = parent.querySelector('.faq__item-title').innerText;
+      let description = parent.querySelector('.faq__item-description').innerText;
+      const popup_answer = document.getElementById('read-answer');
+      popup_answer.classList.add('_open');
+      bodyLock();
+      popup_answer.querySelector('.popup__title').innerText = title;
+      popup_answer.querySelector('.popup__description').innerText = description;
+    })
+  })
+}
 
 /**
  * Функция отктия и закрытия строку поиска  и фильтрацию по убыванию/возрастанию
@@ -325,18 +346,17 @@ if (oneClickBtn) {
 
 function buyOneСlick(e) {
   let parent = this.closest('.card');
-  let img = parent.querySelectorAll('.product-click-image')[0].src;
+  // let img = parent.querySelectorAll('.product-click-image')[0].src;
 
   let name = parent.querySelector('.card__title-h3').innerText;
   let price = parent.querySelector('.card__price').innerText;
   popup = document.getElementById('popup-one-click');
 
-  document.querySelector('.popup__product-img').src = img;
+  // document.querySelector('.popup__product-img').src = img;
   document.querySelector('.popup__product-name').innerText = name;
   document.querySelector('.product__price-text').innerText = price;
-
+  popup.classList.add('_open');
   bodyLock();
-
 
 }
 
@@ -394,3 +414,100 @@ if (closeBtn) {
 //   params.set('diametr', checkedValues.join(','));
 //   window.location.search = params.toString();
 // });
+
+
+
+// Ловим собыитие клика по кнопке добавить в корзину
+$(document).on("click", ".add-to-cart", function (e) {
+  // Блокируем его базовое действие
+  e.preventDefault();
+
+  // Берем элемент счетчика в значке корзины и берем оттуда значение
+  var goodsInCartCount = $("#mini-cart-count");
+  var cartCount = parseInt(goodsInCartCount.text() || 0);
+
+  // Получаем id товара из атрибута data-product-id
+  var product_id = $(this).data("product-id");
+
+  // Из атрибута href берем ссылку на контроллер django
+  var add_to_cart_url = $(this).attr("href");
+  console.log(add_to_cart_url);
+
+  // делаем post запрос через ajax не перезагружая страницу
+  $.ajax({
+    type: "POST",
+    url: add_to_cart_url,
+    data: {
+      product_id: product_id,
+      csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+    },
+    success: function (data) {
+      $("#notification-modal .success__body").html('<div class="success__body-inner"><p class="success__name">' + data.product_name + '</p> <p  class="success__price">' + data.product_price + '₽</p></div> <div class="success__image"><img src="' + data.product_image + '" alt=""></div>');
+      $("#notification-modal").addClass("show");
+
+      // Закрытие модального окна после 5 секунд
+      setTimeout(function () {
+        $("#notification-modal").removeClass("show");
+      }, 5000);
+
+      $('#show-cart').append('<div class="no-empty"></div>');
+
+
+
+      // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
+      cartCount++;
+      goodsInCartCount.text(cartCount);
+      // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+      var cartItemsContainer = $("#cart-item");
+      cartItemsContainer.html(data.cart_items_html);
+    },
+
+    error: function (data) {
+      console.log("Ошибка при добавлении товара в корзину");
+    },
+  });
+});
+
+$(document).on("click", ".remove-from-cart", function (e) {
+  // Блокируем его базовое действие
+  e.preventDefault();
+
+  // Берем элемент счетчика в значке корзины и берем оттуда значение
+  var goodsInCartCount = $("#mini-cart-count");
+  var cartCount = parseInt(goodsInCartCount.text() || 0);
+
+  // Получаем id корзины из атрибута data-cart-id
+  var cart_id = $(this).data("cart-id");
+  // Из атрибута href берем ссылку на контроллер django
+  var remove_from_cart = $(this).attr("href");
+  console.log(remove_from_cart);
+  console.log($("[name=csrfmiddlewaretoken]").val());
+  // делаем post запрос через ajax не перезагружая страницу
+  $.ajax({
+    type: "POST",
+    url: remove_from_cart,
+    data: {
+      cart_id: cart_id,
+      csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+    },
+    success: function (data) {
+      // Уменьшаем количество товаров в корзине (отрисовка)
+      cartCount -= data.quantity_deleted;
+      goodsInCartCount.text(cartCount);
+
+      if (cartCount <= 0) {
+        $('#show-cart .no-empty').remove();
+      }
+
+      // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+      var cartItemsContainer = $("#cart-item");
+      cartItemsContainer.html(data.cart_items_html);
+    },
+
+    error: function (data) {
+      console.log("Ошибка при добавлении товара в корзину");
+    },
+  });
+});
+
+

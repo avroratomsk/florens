@@ -1,7 +1,17 @@
+{% load static %}
 <div class="success" id="notification-modal">
   <div class="success__dialog">
     <div class="success__content">
-      <div class="success__body">Уведомление</div>
+      <p class="success__title">Добавлено в корзину</p>
+      <div class="success__body">
+        <div class="success__body-inner">
+          <p class="success__name">Композиция в сумочке №2</p>
+          <p class="success__price">3990 ₽</p>
+        </div>
+        <div class="success__image">
+          <img src="{% static 'theme/mb/images/no-image.png' %}" alt="">
+        </div>
+      </div>
       {% comment %}
       <div class="success__footer">
         <button type="button" class="success__btn-close">Закрыть</button>

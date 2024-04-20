@@ -95,7 +95,7 @@
   margin-top: -1px;
   width: 100%;
   height: 2px;
-  background: #d71635;
+  background: $accent;
 }
 
 .close-btn::before {
@@ -104,4 +104,21 @@
 
 .close-btn::after {
   transform: rotate(45deg);
+}
+
+.popup__answer {
+  border-top: 1px solid rgba($color: $mainColor, $alpha: .1);
+  border-bottom: 1px solid rgba($color: $mainColor, $alpha: .1);
+  padding: 20px 0px;
+
+  span {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: block;
+  }
+}
+
+.popup__description {
+  line-height: 150%;
 }

@@ -2,7 +2,7 @@
   padding: 0px 60px;
 
   @media screen and (max-width: 768px) {
-    padding: 0px 20px;
+    padding: 0px 15px;
   }
 
   // .about__top
@@ -55,6 +55,7 @@
 
     @media screen and (max-width: 425px) {
       height: 100%;
+      margin-bottom: 40px;
     }
   }
 
@@ -86,6 +87,10 @@
   .title-gallery {
     margin-bottom: 30px;
     margin-top: 60px;
+
+    @media screen and (max-width: 425px) {
+      margin-top: 40px;
+    }
   }
 }
 

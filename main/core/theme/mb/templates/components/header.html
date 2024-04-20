@@ -1,20 +1,31 @@
 {% load static %}{% load carts_tag %}{% user_carts request as carts %}
 <div class="topHeader">
   <div class="topHeader__contact">
-    <a href="#" class="topHeader__contact-link">
+    {% if site_settings.phone %}
+    <a href="tel:{{ site_settings.phone }}" class="topHeader__contact-link">
       <img src="{% static 'theme/mb/images/phone.svg' %}" alt="" />
-      <span>8 (999) 999-99-99</span>
+      <span>{{ site_settings.phone }}</span>
     </a>
-    <a href="#" class="topHeader__contact-link">
+    {% else %}
+    <p class="topHeader__contact-link">
+      <img src="{% static 'theme/mb/images/phone.svg' %}" alt="" />
+      <span>Номер телефона</span>
+    </p>
+    {% endif %} {% if site_settings.phone_whatsapp %}
+    <a href="https://wa.me/{{ site_settings.phone_whatsapp }}" class="topHeader__contact-link">
       <img src="{% static 'theme/mb/images/wh.svg' %}" alt="" />
-      <span>8 (999) 999-99-99</span>
+      <span>{{ site_settings.phone_whatsapp }}</span>
     </a>
+    {% endif %}
   </div>
   <ul class="topHeader__list">
     <li><a href="{% url 'stock' %}">Акции</a></li>
     <li><a href="{% url 'about' %}">О нас</a></li>
     <li><a href="{% url 'contact' %}">Контакты</a></li>
+    <li><a href="{% url 'questions' %}">Вопросы-ответы</a></li>
+    {% comment %}
     <li><a href="#">Отзывы</a></li>
+    {% endcomment %}
   </ul>
 </div>
 <header class="header">
@@ -36,25 +47,31 @@
   <div class="header__right">
     <ul class="header__list">
       <li>
-        <a href="{% url 'populate' %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="none">
+        <a href="{% url 'populate' %}"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="none">
             <path fill="#3F3C38" d="M5.333 9.667a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
-            <path fill="#3F3C38"
-              d="M14.854 6.975C14.93 6.32 15 5.572 15 5.058 15 1.373 10.707 0 8 0 6.244 0 4.977.942 4.55 1.308 3.218 1.385 1 2.233 1 5.058c0 .521.07 1.265.145 1.918A1.827 1.827 0 0 0 0 8.666a1.83 1.83 0 0 0 1.693 1.82C2.596 13.108 5.079 15 8 15c2.92 0 5.404-1.891 6.307-4.514A1.83 1.83 0 0 0 16 8.666c0-.761-.47-1.415-1.146-1.69Zm-1.404 2.91-.001.003v.002C12.765 12.26 10.583 14 8 14c-2.817 0-5.154-2.069-5.594-4.767l.665-2.328c.594-.188 1.925-.722 2.508-1.85.896.848 2.906 1.888 7.377 1.943l.639 2.231a5.655 5.655 0 0 1-.145.656Z">
-            </path>
-            <path fill="#3F3C38"
-              d="M10.667 9.667a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM9.32 11.14a1.914 1.914 0 0 1-2.64 0 .502.502 0 0 0-.694.72A2.892 2.892 0 0 0 8 12.665c.73 0 1.459-.267 2.014-.803a.5.5 0 0 0-.695-.721Z">
-            </path>
-          </svg>Популярное</a>
+            <path
+              fill="#3F3C38"
+              d="M14.854 6.975C14.93 6.32 15 5.572 15 5.058 15 1.373 10.707 0 8 0 6.244 0 4.977.942 4.55 1.308 3.218 1.385 1 2.233 1 5.058c0 .521.07 1.265.145 1.918A1.827 1.827 0 0 0 0 8.666a1.83 1.83 0 0 0 1.693 1.82C2.596 13.108 5.079 15 8 15c2.92 0 5.404-1.891 6.307-4.514A1.83 1.83 0 0 0 16 8.666c0-.761-.47-1.415-1.146-1.69Zm-1.404 2.91-.001.003v.002C12.765 12.26 10.583 14 8 14c-2.817 0-5.154-2.069-5.594-4.767l.665-2.328c.594-.188 1.925-.722 2.508-1.85.896.848 2.906 1.888 7.377 1.943l.639 2.231a5.655 5.655 0 0 1-.145.656Z"
+            ></path>
+            <path
+              fill="#3F3C38"
+              d="M10.667 9.667a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM9.32 11.14a1.914 1.914 0 0 1-2.64 0 .502.502 0 0 0-.694.72A2.892 2.892 0 0 0 8 12.665c.73 0 1.459-.267 2.014-.803a.5.5 0 0 0-.695-.721Z"
+            ></path></svg
+          >Популярное</a
+        >
       </li>
       <li>
         <a href="{% url 'news' %}">
           <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M7.38157 11.4294C5.57008 9.61494 5.57008 6.66262 7.38157 4.84815C9.17692 3.04979 12.0739 3.02573 13.8978 4.78656C14.8398 3.87846 16.0987 3.41365 17.4172 3.49584C16.6255 0.073482 12.3525 -1.19478 9.83762 1.32427L8.78237 2.38125L7.74856 1.34576C5.97604 -0.42962 3.10181 -0.431669 1.3272 1.34576C-0.442399 3.11825 -0.442399 6.00235 1.3272 7.77484L8.31012 14.7692C8.54542 15.0049 8.92772 15.005 9.16302 14.7692L9.93946 13.9915L7.38157 11.4294Z"
-              fill="#3F3C38"></path>
+              fill="#3F3C38"
+            ></path>
             <path
               d="M19.5583 5.70237C18.2117 4.3536 16.0319 4.35348 14.6853 5.70237L13.8977 6.49123L13.1074 5.69968C11.761 4.35107 9.58115 4.35075 8.23447 5.69968C6.89173 7.04463 6.89173 9.23296 8.23447 10.5779L13.4713 15.8232C13.7065 16.0589 14.0889 16.059 14.3242 15.8232L19.5582 10.5806C20.901 9.23562 20.901 7.04729 19.5583 5.70237Z"
-              fill="#3F3C38"></path>
+              fill="#3F3C38"
+            ></path>
           </svg>
           Новинки
         </a>
@@ -83,7 +100,7 @@
   <div class="header_mobile__inner">
     <button class="close" id="close-menu"><span>X</span></button>
     <a href="" class="header_mobile__logo">
-      <img src="{% static 'theme/mb/images/logo.png' %}" alt="">
+      <img src="{% static 'theme/mb/images/logo.png' %}" alt="" />
     </a>
     <nav class="header_mobile__nav">
       <ul class="header_mobile__list">

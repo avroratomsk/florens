@@ -57,6 +57,14 @@ urlpatterns = [
     path('stock/edit/<int:pk>/', views.stock_edit, name='stock_edit'),
     path('stock/delete/<int:pk>/', views.stock_delete, name='stock_delete'),
     
+    
+    #URl - отвечающие за отображение акций, редактирование и удаление акций
+    path('admin-questions/', views.admin_question, name='admin_question'),
+    path('questions/', views.questions, name='questions'),
+    path('questions/add/', views.question_add, name='question_add'),
+    path('questions/edit/<int:pk>/', views.question_edit, name='question_edit'),
+    path('questions/delete/<int:pk>/', views.question_delete, name='question_delete'),
+    
     #URl - отвечающие за отображение услуг, редактирование и удаление услуг
     path('service-page/', views.admin_service_page, name='admin_service_page'),
     path('serv/', views.admin_service, name='admin_service'),

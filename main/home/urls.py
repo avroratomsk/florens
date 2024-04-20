@@ -11,7 +11,7 @@ urlpatterns = [
     path('stock/', views.stock_product, name="stock_product"),
     path('news/', views.news, name="news"),
     path('best-offer/', views.best_offer, name="best_offer"),
-    # path('uslugi/', views.about, name="about"),
+    path('questions/', views.questions, name="questions"),
     # path('valancy/', views.about, name="about"),
     
     path('', views.index, name="home"),

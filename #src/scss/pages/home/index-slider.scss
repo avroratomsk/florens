@@ -2,7 +2,7 @@
   padding: 0px 60px;
 
   @media screen and (max-width: 768px) {
-    padding: 0px 20px 60px;
+    padding: 0px 15px 0px;
   }
 
   // .index-slider__slider
@@ -17,11 +17,11 @@
 
   &__slide {
     border-radius: 46px;
-
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
     padding: 50px;
+    height: 550px !important;
     position: relative;
     display: flex;
     align-items: flex-end;
@@ -33,13 +33,15 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient(2.2deg, rgba(0, 0, 0, .4) 1.69%, rgba(0, 0, 0, 0) 98.02%);
+      background-image: linear-gradient(2.2deg, rgba(0, 0, 0, .8) 1.69%, rgba(0, 0, 0, 0) 98.02%);
       z-index: -1;
     }
 
-    @media screen and (min-width: 768px) {
-      height: 550px;
+    @media screen and (max-width: 768px) {
+      padding: 50px 15px;
+      height: 450px !important;
     }
+
   }
 
   // .index-slider__container
@@ -51,19 +53,16 @@
     display: flex;
     align-items: center;
     gap: 20px;
-
-    @media screen and (min-width: 768px) {
-      height: 550px;
-    }
-
-    @media screen and (max-width: 768px) {
-      flex-direction: column;
-    }
+    width: 100%;
+    height: 100%;
   }
 
   // .index-slider__content
 
-  &__content {}
+  &__content {
+    // height: 100%;
+    // width: 100%;
+  }
 
   // .index-slider__title
 
@@ -119,7 +118,7 @@
   // .index-slider__prev
   &__prev {
     top: 50% !important;
-    margin-top: -80px;
+    margin-top: -80px !important;
     left: 0% !important;
     margin-left: -61px;
     z-index: 99;
@@ -128,7 +127,7 @@
   // .index-slider__next
   &__next {
     top: 50% !important;
-    margin-top: -80px;
+    margin-top: -80px !important;
     right: 0% !important;
     margin-right: -61px;
     z-index: 99;
@@ -150,14 +149,14 @@
     max-height: 176px;
     border-radius: 4px;
 
-    &:hover {
 
-      &::after,
-      &::before {
-        background: #d71635;
-        color: $white;
-      }
+
+    &::after,
+    &::before {
+      background: $accent;
+      color: $white;
     }
+
 
     svg {
       height: 176px;
@@ -165,7 +164,6 @@
 
     &::after {
       transition: $animation_speed;
-      background: transparent;
       width: 60px;
       height: 60px;
       display: flex;
@@ -175,7 +173,6 @@
       position: absolute;
       font-size: 15px !important;
       font-weight: 600;
-      color: rgba($color: $mainColor, $alpha: 1.0)
     }
 
     @media screen and (max-width: 768px) {

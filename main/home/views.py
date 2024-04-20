@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from home.models import BaseSettings, HomeTemplate, Stock
+from home.models import BaseSettings, HomeTemplate, Questions, Stock
 from cart.models import Cart
 from shop.models import Category, Product
 from reviews.models import Reviews
@@ -20,10 +20,15 @@ def index(request):
     settings = BaseSettings.objects.all()
 
   category = Category.objects.all()[:4]
+  for cat in category:
+    cat.product_count = cat.product_set.count() # Получаем количество товаров в каждой категории
+    
   product = Product.objects.filter(quantity_purchase__gte=10)
   saleProduct = Product.objects.filter(sale_price__gt=0)[:8]
   affordable_products = Product.objects.filter(price__gt=0, price__lt=2500)[:8]
   reviews = Reviews.objects.filter(status=True)
+  slider_image = Stock.objects.filter(status=True)
+  questions = Questions.objects.filter(status=True)[:3]
   
   context = {
     "categorys": category,
@@ -33,11 +38,15 @@ def index(request):
     "affordable": affordable_products,
     "settings": settings,
     "reviews": reviews,
+    "questions": questions,
+    "slider_image": slider_image,
   }
   return render(request, 'pages/index.html', context)
 
 def populate(request):
   products = Product.objects.filter(quantity_purchase__gte=10)
+  
+  
   
   context = {
     "title": "Популярные товары",
@@ -106,3 +115,13 @@ def stock_detail(request, slug):
     }
     
     return render(request, "pages/stock/stock_detail.html", context)
+
+
+def questions(request):
+  questions = Questions.objects.filter(status=True)
+  
+  context = {
+    "questions": questions
+  }
+  
+  return render(request, "pages/question.html", context)

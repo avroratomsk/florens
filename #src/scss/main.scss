@@ -15,11 +15,14 @@ $fontSize: 10px; // где 16(px) - размер шрифта по умолча�
 // Основные цвета
 // $bodyColor: #ffffff;
 $bodyColor: #fdfdfd;
+// $bodyColor: #ffdde2;
 $mainColor: #3f3c38; // Цвет шрифта по умолчанию
+// $mainColor: #cdc273; // Цвет шрифта по умолчанию
 // $accent: #CD0000;
 // $accent: #c2ab89;
 $white: #ffffff;
-$accent: #d71635;
+// $accent: #d71635;
+$accent: #e97e8f;
 $grey: #939297;
 $orange: #e76642;
 $lightBlue: #fdfdfd;
@@ -196,10 +199,13 @@ body {
 @import './pages/home/index-category';
 
 @import './pages/contact/contact';
+@import './pages/stock-page';
 
 @import './pages/users/login';
 @import './pages/users/register';
 @import './pages/users/profile';
+
+@import './pages/questions';
 
 @import './pages/orders/create';
 

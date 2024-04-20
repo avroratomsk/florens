@@ -67,7 +67,7 @@
     display: flex;
 
     &:hover {
-      color: #d71635;
+      color: $accent;
     }
 
   }
@@ -174,7 +174,7 @@
     right: 10px;
     padding: 10px;
     border-radius: 10px;
-    background-color: #d71635;
+    background-color: $accent;
     color: $white;
   }
 

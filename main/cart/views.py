@@ -48,6 +48,9 @@ def cart_add(request):
   response_data = {
       "message": "Товар добавлен в корзину",
       "cart_items_html": cart_items_html,
+      "product_name": product.name,
+      "product_price": product.price,
+      "product_image": product.image.url,
   }
   return JsonResponse(response_data)
   

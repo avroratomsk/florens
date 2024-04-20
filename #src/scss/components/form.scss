@@ -36,7 +36,7 @@
     font-weight: 400;
 
     span {
-      color: #d71635;
+      color: $accent;
     }
   }
 
@@ -61,7 +61,7 @@
 
   &__submit {
     padding: 20px 40px;
-    background-color: #d71635;
+    background-color: $accent;
     align-self: flex-end;
     min-width: 290px;
     border-radius: 10px;

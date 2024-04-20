@@ -81,7 +81,7 @@
     font-size: 18px;
 
     span {
-      color: #d71635;
+      color: $accent;
     }
 
     strong {
@@ -113,7 +113,7 @@
 
   &__item-link {
     font-weight: 600;
-    // color: #d71635;
+    // color: $accent;
   }
 
   // .profile__total-sum
@@ -131,7 +131,7 @@
       span {
         font-size: 20px;
         font-weight: 800;
-        color: #d71635;
+        color: $accent;
       }
     }
   }

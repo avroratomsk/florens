@@ -4,8 +4,8 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, CharGroupForm, CharNameForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, UploadFileForm
-from home.models import BaseSettings, HomeTemplate, Stock
+from admin.forms import CategoryForm, CharGroupForm, CharNameForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, QuestionPageForm, QuestionsForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, UploadFileForm
+from home.models import BaseSettings, HomeTemplate, QuestionPage, Questions, Stock
 from main.settings import BASE_DIR
 from service.models import Service, ServicePage
 from reviews.models import Reviews
@@ -555,7 +555,7 @@ def fillial_add(request):
   #   "form": form
   # }
   
-  return render(request, "fillials/fillial_add.html", context)
+  # return render(request, "fillials/fillial_add.html", context)
 
 def admin_home(request):
   try:
@@ -574,16 +574,80 @@ def admin_home(request):
       return redirect("admin")
     else:
       return render(request, "static/home_page.html", {"form": form_new})
+    
+def admin_question(request):
+  try:
+    question_page = QuestionPage.objects.get()
+  except:
+    question_page = QuestionPage()
+    question_page.save()
+    
+  if request.method == "POST":
+    form_new = QuestionPageForm(request.POST, request.FILES, instance=question_page)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect("admin")
+    else:
+      return render(request, "static/question_page.html", {"form": form_new})
   
-  home_page = HomeTemplate.objects.get()
+  question_page = QuestionPage.objects.get()
   
-  form = HomeTemplateForm(instance=home_page)
+  form = QuestionPageForm(instance=question_page)
   context = {
     "form": form,
-    "home_page":home_page
+    "question_page": question_page
   }  
   
-  return render(request, "static/home_page.html", context)
+  return render(request, "static/question_page.html", context)
+
+def questions(request):
+  questions = Questions.objects.all()
+  print(questions)
+  
+  context = {
+    "questions": questions 
+  }
+  
+  return render(request, "questions/questions.html", context)
+
+def question_add(request):
+  form = QuestionsForm()
+  
+  if request.method == "POST":
+    form_new = QuestionsForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect("questions")
+    else: 
+      return render(request, "questions/question_add.html", {"form": form_new})
+  
+  context = {
+    "form": form
+  }
+  
+  return render(request, "questions/question_add.html", context)
+
+def question_edit(request, pk):
+  question = Questions.objects.get(id=pk)
+  form = QuestionsForm(instance=question)
+  if request.method == "POST":
+    form_new = QuestionsForm(request.POST, request.FILES, instance=question)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect("questions")
+    else:
+      return render(request, "questions/question_edit.html", {"form": form_new})
+  
+  context = {
+    "form": form
+  }
+  
+  return render(request, "questions/question_edit.html", context)
+
+def question_delete(request,pk):
+  question = Questions.objects.get()
+  question.delete()
+  return redirect("question")
 
 def admin_service_page(request):
   try:

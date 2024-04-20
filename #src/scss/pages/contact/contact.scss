@@ -6,11 +6,7 @@
 
   // .contact__container
 
-  &__container {
-    @media screen and (min-width: 768px) {
-      width: 100%;
-    }
-  }
+  &__container {}
 
   // .contact__row
 
@@ -104,7 +100,7 @@
   &__map {
     padding: 0px 60px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 925px) {
       padding: 0px 15px;
     }
 

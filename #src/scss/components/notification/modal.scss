@@ -1,13 +1,66 @@
 .success {
   position: fixed;
-  top: 20px;
-  right: -100%;
+  bottom: 150px;
+  right: -150%;
   padding: 15px 30px;
-  background-color: #3c8100;
-  min-width: 290px;
+  background-color: #e97e8f;
   border-radius: 10px;
   transition: $animation_speed;
   z-index: 999;
+
+  // .success__body
+
+  &__body {
+    color: rgba($color: $white, $alpha: 1.0);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 15px;
+    padding: 10px 0px;
+    border-top: 1px solid rgba($color: $white, $alpha: .4);
+  }
+
+  // .success__title
+
+  &__title {
+    color: rgba($color: $white, $alpha: 1.0);
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: .5px;
+    padding: 0px 0px 0px !important;
+  }
+
+  // .success__body-inner
+
+  &__body-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  // .success_name
+  &__name {}
+
+  // .success__price
+
+  &__price {
+    font-size: 14px;
+  }
+
+  // .success__image
+
+  &__image {
+    width: 50px;
+    height: 50px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+  }
 
   // .success__dialog
 
@@ -16,13 +69,6 @@
   // .success__content
 
   &__content {}
-
-  // .success__body
-
-  &__body {
-    text-align: center;
-    color: rgba($color: $white, $alpha: 1.0);
-  }
 
   // .success__footer
 
