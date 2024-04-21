@@ -111,9 +111,8 @@ def order_create(request):
 
               order.payment_id = payment_id
               order.payment_dop_info = confirmation_url
+              print(confirmation_url)
               order.save()
-              email_send(order)
-              cart_items.delete()
               return redirect(confirmation_url)
           else:
             email_send(order)
@@ -154,6 +153,7 @@ def order_success(request):
 
         session_key = request.session.session_key
         cart_items = Cart.objects.filter(session_key=session_key)
+        cart_items.delete()
         request.session["delivery"] = 1
         order.paid = True
 
