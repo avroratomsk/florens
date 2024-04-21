@@ -6,7 +6,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
+    'ckeditor',
+    'ckeditor_uploader',
     # "debug_toolbar",
     # "corsheaders",
     'sorl.thumbnail',
@@ -18,7 +19,8 @@ INSTALLED_APPS = [
     "cart",
     "order",
     "payment",
-    'django_ckeditor_5',
+    # "blog",
+    # "news",
 ]
 
 MIDDLEWARE = [
