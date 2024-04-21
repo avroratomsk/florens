@@ -69,9 +69,9 @@
       <div class="index-catalog__head">
         <h2 class="index-catalog__title _title-h2">Онлайн-витрина</h2>
         <div class="index-catalog__links">
-          <a href="#" class="index-catalog__link">Лучшие предложения</a>
-          <a href="{% url 'populate' %}" class="index-catalog__link">Выбор покупателей</a>
-          <a href="" class="index-catalog__link">Акции</a>
+          {% comment %} <a href="#" class="index-catalog__link">Лучшие предложения</a> {% endcomment %} {% comment %}
+          <a href="{% url 'populate' %}" class="index-catalog__link">Выбор покупателей</a> {% endcomment %}
+          <a href="{% url 'stock' %}" class="index-catalog__link">Акции</a>
           <a href="{% url 'category' %}" class="index-catalog__link">Весь каталог</a>
         </div>
       </div>
@@ -272,31 +272,22 @@
             </svg> -->
       </h2>
       <div class="index-catalog__links">
-        <a href="#" class="index-catalog__link">Подробнее</a>
+        <a href="{% url 'about' %}" class="index-catalog__link">Подробнее</a>
       </div>
     </div>
     <div class="advantages__border borderDotted"></div>
+    {% comment %}
+    <div class="index-about__text">{{ home_page.about_text }}</div>
+    {% endcomment %}
     <div class="index-about__text">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
-        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
-        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
+        Наш интернет магазин осуществляет доставку цветов и подарков. Мы помогаем людям со всего мира быть ближе с их родными и близкими, проживающими в Иркутске и Иркутской
+        области. У нас работают лучшие флористы, которые внимательно относятся к каждому цветку. Соберут для вас букеты любой сложности, на любой вкус и случай. Команда вежливых
+        курьеров, понимающих важность своевременной доставки.
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
-        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
-        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
-        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
-        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
-      </p>
-      <h3>Заголовок третьего уровня</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore voluptatem molestias tempore? Magni omnis tempora dicta vitae repudiandae, suscipit quasi facere alias!
-        Temporibus, aperiam porro quibusdam aut doloremque id quam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum autem in accusamus a iste. Consequuntur aut
-        unde consectetur consequatur reprehenderit, facilis qui pariatur! Quam, libero a non corporis repellendus molestias!
+        У нас имеется программа лояльности и накопительная система скидок. Мы готовы прислать фото готового букета, а также фото с получателем. Гарантируем конфиденциальность.
+        Получатель узнает только то, что написано в открытке.
       </p>
     </div>
     <div class="index-about__slider swiper">
@@ -418,7 +409,7 @@
           Оставьте номер телефона. <br />
           Флорист свяжется с вами и подберет букет по вашему пожеланию.
         </p>
-        <button type="button" class="callback__btn" aria-label="Заказать обратный звонок">Связаться со мной</button>
+        <button type="button" class="callback__btn" data-popup="callback" aria-label="Заказать обратный звонок">Связаться со мной</button>
       </div>
     </div>
   </section>

@@ -1,0 +1,4 @@
+PassengerEnabled On
+PassengerAppRoot /home/a/avroraweb/florens38.ru/public_html/main/main
+PassengerPython /home/a/avroraweb/florens38.ru/public_html/venv/bin/python
+PassengerFriendlyErrorPages On

@@ -17,6 +17,10 @@
 
       <div class="content__inner">{% include 'components/admin_header.html' %} {% block body %} {% endblock %}</div>
     </div>
+    <script>
+      {% comment %} CKEDITOR.replace("id_description"); {% endcomment %}
+    </script>
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
     <script async src="{% static 'admin/js/app.js' %}?v{% now 'H:i:s' %}"></script>
   </body>
 </html>

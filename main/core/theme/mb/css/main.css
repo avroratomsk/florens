@@ -1293,6 +1293,15 @@ html.lock body::before {
   cursor: pointer;
 }
 
+.django-ckeditor-widget {
+  width: 100% !important;
+}
+
+.django-ckeditor-widget input,
+.django-ckeditor-widget textarea {
+  width: 100% !important;
+}
+
 .popup._open {
   transform: scale(1) !important;
   pointer-events: all !important;
@@ -1333,8 +1342,44 @@ section:nth-child(odd) {
   content: "";
   width: 10px;
   height: 10px;
-  background: #c5b89a;
+  background: #e97e8f;
   border-radius: 10px;
+}
+
+.price-filter__numbers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.price-filter__numbers input[type=number] {
+  height: 40px;
+  outline: 0;
+  width: 100px;
+  text-align: center;
+  font-size: 14px;
+  border-left: 1px solid rgba(63, 60, 56, 0.4);
+}
+
+.price-filter__number {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid rgba(63, 60, 56, 0.4);
+  overflow: hidden;
+}
+
+.price-filter__number span {
+  display: block;
+  padding: 0 10px;
+}
+
+.price-filter__line {
+  display: block;
+  width: 20px;
+  height: 1px;
+  background-color: #4d6469;
 }
 
 /*
@@ -2279,6 +2324,14 @@ section:nth-child(odd) {
   margin-bottom: 30px;
 }
 
+.category-top {
+  padding: 0px 60px;
+}
+
+.category-top .products__title {
+  text-align: left;
+}
+
 .index-category {
   padding: 60px 60px;
 }
@@ -2290,7 +2343,7 @@ section:nth-child(odd) {
 
 .index-category__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 32px;
   grid-auto-flow: dense;
   margin-top: 30px;
@@ -2682,6 +2735,14 @@ section:nth-child(odd) {
   align-items: flex-start;
   justify-content: space-between;
   gap: 30px;
+}
+
+.category-details__row-onecol {
+  width: 100%;
+}
+
+.category-details__row-onecol .category-details__col:nth-child(1) {
+  width: 100%;
 }
 
 .category-details__col {
@@ -3186,6 +3247,12 @@ section:nth-child(odd) {
   .callback__action {
     flex: 1 1 50%;
   }
+}
+
+@media screen and (min-width: 1024px) {
+  #burger {
+    display: none;
+  }
 
   .index-category__item:nth-child(1) {
     grid-column: span 3;
@@ -3256,12 +3323,6 @@ section:nth-child(odd) {
   }
 }
 
-@media screen and (min-width: 1024px) {
-  #burger {
-    display: none;
-  }
-}
-
 @media screen and (min-width: 1100px) {
   .header__logo {
     position: absolute;
@@ -3325,6 +3386,10 @@ section:nth-child(odd) {
 @media screen and (max-width: 1024px) {
   .header__left {
     display: none;
+  }
+
+  .index-category__grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -3442,6 +3507,10 @@ section:nth-child(odd) {
 
   .index-about {
     padding: 60px 20px;
+  }
+
+  .category-top {
+    padding: 0px 15px;
   }
 
   .index-category {

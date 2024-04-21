@@ -1,10 +1,9 @@
 from django import forms
-from django_ckeditor_5.widgets import CKEditor5Widget
 from home.models import BaseSettings, HomeTemplate, Stock, QuestionPage, Questions
 from service.models import Service, ServicePage
 from reviews.models import Reviews
 from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage
-
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
@@ -69,7 +68,7 @@ class GlobalSettingsForm(forms.ModelForm):
     
 class ProductForm(forms.ModelForm):
     """ Form, отвечает за создание товара и редактирование товара"""
-    # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
+    description = forms.CharField(label='Описание производителя', required=False, widget=CKEditorUploadingWidget)
     
     class Meta:
         model = Product
@@ -101,7 +100,6 @@ class ProductForm(forms.ModelForm):
         labels = {
             'name': 'Название блюда',
             'slug':'URL',
-            'description':'Полное описание',
             'meta_h1':'Заголвок первого уровня',
             'meta_title':'Meta title',
             'meta_description':'Мета description',
@@ -126,10 +124,6 @@ class ProductForm(forms.ModelForm):
             'name': forms.TextInput(attrs={
                 'class': 'form__controls',
                 "id":"name"
-            }),
-            'description': forms.Textarea(attrs={
-                'class': 'form__controls',
-                
             }),
             'meta_h1': forms.TextInput(attrs={
                 'class': 'form__controls',
@@ -339,6 +333,7 @@ class CategoryForm(forms.ModelForm):
 class HomeTemplateForm(forms.ModelForm):
   """ Form, редактирование главной страницы"""
   # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
+  about_text = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
   
   class Meta:
       model = HomeTemplate
@@ -383,9 +378,9 @@ class HomeTemplateForm(forms.ModelForm):
           'meta_keywords': forms.TextInput(attrs={
               'class': 'form__controls',
           }),
-          'about_text': forms.TextInput(attrs={
-              'class': 'form__controls',
-          }),
+          # 'about_text': forms.TextInput(attrs={
+          #     'class': 'form__controls',
+          # }),
       }
            
 class ReviewsForm(forms.ModelForm):

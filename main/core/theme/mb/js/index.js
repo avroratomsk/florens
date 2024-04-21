@@ -360,6 +360,19 @@ function buyOneСlick(e) {
 
 }
 
+let popupBtn = document.querySelectorAll('[data-popup]')
+
+if (popupBtn) {
+  popupBtn.forEach(btn => {
+    btn.addEventListener('click', openPopup);
+  })
+}
+
+function openPopup(e) {
+  document.getElementById(this.dataset.popup).classList.add('_open');
+  bodyLock();
+}
+
 window.addEventListener('DOMContentLoaded', function (e) {
   const param_mass = []
   var params = window.location.search.replace('?', '').split('&');
@@ -457,6 +470,11 @@ $(document).on("click", ".add-to-cart", function (e) {
       // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
       cartCount++;
       goodsInCartCount.text(cartCount);
+      if (cartCount > 0) {
+        $('#mini-cart__inner').html('<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + cartCount + ' </strong><span>)<span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div>')
+
+        $('#mini-cart').append('<div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>')
+      }
       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
       var cartItemsContainer = $("#cart-item");
       cartItemsContainer.html(data.cart_items_html);
@@ -495,10 +513,12 @@ $(document).on("click", ".remove-from-cart", function (e) {
       cartCount -= data.quantity_deleted;
       goodsInCartCount.text(cartCount);
 
-      if (cartCount <= 0) {
+      if (cartCount == 0) {
         $('#show-cart .no-empty').remove();
+        $('#mini-cart__inner').html('<div class="mini-cart__empty" id="mini-cart__empty"><p class="mini-cart__empty-text">Корзина пуста</p><a href="{% url "category" %}"class="mini-cart__empty-link">Перейти в каталог</a></div>')
+        $('#mini-cart .mini-cart__links').remove()
       }
-
+      console.log(cartCount);
       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
       var cartItemsContainer = $("#cart-item");
       cartItemsContainer.html(data.cart_items_html);

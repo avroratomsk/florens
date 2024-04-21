@@ -12,7 +12,7 @@ urlpatterns = [
     path('news/', views.news, name="news"),
     path('best-offer/', views.best_offer, name="best_offer"),
     path('questions/', views.questions, name="questions"),
-    # path('valancy/', views.about, name="about"),
+    path('callback/', views.callback, name="callback"),
     
     path('', views.index, name="home"),
 ]

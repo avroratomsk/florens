@@ -1,16 +1,41 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-
+from django.shortcuts import redirect, render
+import itertools
 from home.models import BaseSettings, HomeTemplate, Questions, Stock
 from cart.models import Cart
-from shop.models import Category, Product
+from home.forms import CallbackForm
+from home.callback_send import email_callback
+from shop.models import Category, CharGroup, CharName, Product, ProductChar
 from reviews.models import Reviews
+from django.http import HttpResponseRedirect
 
 
-
+def callback(request):
+  if request.method == "POST":
+    form = CallbackForm(request.POST)
+    if form.is_valid():
+      name  = form.cleaned_data['name']
+      phone = form.cleaned_data['phone']
+      message = form.cleaned_data['message']
+      title = 'Заказ обратного звонка'
+      messages = "Заказ обратного звонка:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n" + "*Сообщение*: " +str(message)
+      
+      email_callback(messages, title)
+      
+      return redirect('home')
+  else:
+    form = CallbackForm()
+  
+  context = {
+    'form': form
+  }
+  
+  return render(request, 'pages/index.html', context)
 
 def index(request):
   page = request.GET.get('page', 1)
+  
+  form = CallbackForm()
   
   try: 
     home_page = HomeTemplate.objects.get()
@@ -40,17 +65,48 @@ def index(request):
     "reviews": reviews,
     "questions": questions,
     "slider_image": slider_image,
+    "form": form
   }
   return render(request, 'pages/index.html', context)
 
 def populate(request):
+  groups = CharGroup.objects.all()
   products = Product.objects.filter(quantity_purchase__gte=10)
+  if request.method == "GET":
+    get_filtres = request.GET
+    char_filtres_list = list(get_filtres.keys())
+    parametrs_value = []
+    for parametr in char_filtres_list:
+      parametrs_value.append(request.GET.getlist(parametr))# [['Малиновый', 'Белый'], ['25']]
+    
+    merged_array = list(itertools.chain(*parametrs_value))
+    product = ProductChar.objects.filter(char_value__in=merged_array)
+    
+    id_filter = [pr.parent.id for pr in product]
+    if id_filter:
+        products = products.filter(id__in=id_filter)
   
+  products_all = Product.objects.filter(status=True, quantity_purchase__gte=10)
+  chars_all = ProductChar.objects.filter(parent__in=products_all).distinct()
+  char_name = CharName.objects.filter(c_chars__in=chars_all, filter_add=True).exclude(filter_name=None).distinct()
+  
+  chars_list_name_noduble = []
+  for li in chars_all:
+    if li.char_value not in chars_list_name_noduble:
+      chars_list_name_noduble.append(li.char_value)
+  # print(chars_list_name_noduble)
+  
+  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).distinct('char_value')
+  print(chars)
+  
+  chars_list_name_noduble_a = ProductChar.objects.filter(parent__in=products_all).distinct().values_list('char_value', flat=True).distinct()
   
   
   context = {
     "title": "Популярные товары",
     "products": products,
+    "char_name": char_name,
+    "chars": chars
   }
   
   return render(request, "pages/populate.html", context)
@@ -79,15 +135,50 @@ def stock_product(request):
 def news(request):
   products = Product.objects.filter(latest=True)
   
+  groups = CharGroup.objects.all()
+  if request.method == "GET":
+    get_filtres = request.GET
+    char_filtres_list = list(get_filtres.keys())
+    parametrs_value = []
+    for parametr in char_filtres_list:
+      parametrs_value.append(request.GET.getlist(parametr))# [['Малиновый', 'Белый'], ['25']]
+    
+    merged_array = list(itertools.chain(*parametrs_value))
+    product = ProductChar.objects.filter(char_value__in=merged_array)
+    
+    id_filter = [pr.parent.id for pr in product]
+    if id_filter:
+        products = products.filter(id__in=id_filter)
+  
+  products_all = Product.objects.filter(status=True, latest=True)
+  chars_all = ProductChar.objects.filter(parent__in=products_all).distinct()
+  char_name = CharName.objects.filter(c_chars__in=chars_all, filter_add=True).exclude(filter_name=None).distinct()
+  
+  chars_list_name_noduble = []
+  for li in chars_all:
+    if li.char_value not in chars_list_name_noduble:
+      chars_list_name_noduble.append(li.char_value)
+  # print(chars_list_name_noduble)
+  
+  chars = ProductChar.objects.filter(char_value__in=chars_list_name_noduble).distinct('char_value')
+  
+  chars_list_name_noduble_a = ProductChar.objects.filter(parent__in=products_all).distinct().values_list('char_value', flat=True).distinct()
+  
   context = {
     "title": "Новинки",
-    "products": products
+    "products": products,
+    "char_name": char_name,
+    "chars": chars
   }
   
   return render(request, "pages/latest-product.html", context)
 
 def about(request):
-    return render(request, "pages/about.html")
+    form = CallbackForm()
+    context = {
+      "form": form,
+    }
+    return render(request, "pages/about.html", context)
 
 def contact(request):
     return render(request, "pages/contact.html")

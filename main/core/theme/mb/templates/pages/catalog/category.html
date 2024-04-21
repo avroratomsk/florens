@@ -1,23 +1,21 @@
 {% extends 'base.html' %} {% block content %}{% load static %}
 
 <main class="page">
-  <section class="products">
-    <div class="products__container">
-      <div class="products__top title-page">
-        <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-          <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
-            Главная
-            <meta itemprop="position" content="1" />
-          </a>
-          <span itemprop="name" class="breadcrumbs__item">
-            Категории
-            <meta itemprop="position" content="2" />
-          </span>
-        </div>
-        <h1 class="products__title title-page__title">Категории</h1>
+  <div class="products category-top">
+    <div class="products__top title-page">
+      <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+        <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
+          Главная
+          <meta itemprop="position" content="1" />
+        </a>
+        <span itemprop="name" class="breadcrumbs__item">
+          Категории
+          <meta itemprop="position" content="2" />
+        </span>
       </div>
+      <h1 class="products__title title-page__title">Категории</h1>
     </div>
-  </section>
+  </div>
   <section class="index-category">
     <div class="index-catalog__inner">
       <div class="advantages__border borderDotted"></div>

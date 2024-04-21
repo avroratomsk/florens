@@ -34,6 +34,15 @@
     }
   }
 
+  // .category-details__row-onecol
+  &__row-onecol {
+    width: 100%;
+
+    .category-details__col:nth-child(1) {
+      width: 100%;
+    }
+  }
+
   // .category-details__col
 
   &__col {

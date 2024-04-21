@@ -89,9 +89,7 @@ def order_create(request):
             order.pay_method = pay_method
           except: 
             pass
-          
-          
-          
+        
           order.save()
           for item in cart_items:
             product=item.product
@@ -106,7 +104,6 @@ def order_create(request):
               price=price,
               quantity=quantity
             )
-          print(payment_method)
           if payment_method == "На сайте картой":
               data = create_payment(orderItem, cart_items, request)
               payment_id = data["id"]
@@ -121,7 +118,7 @@ def order_create(request):
           else:
             email_send(order)
             cart_items.delete()
-            return redirect('order_succes')
+            return redirect('order_success')
       except Exception as e:
         print(e)
   

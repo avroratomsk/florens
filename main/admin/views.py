@@ -568,12 +568,19 @@ def admin_home(request):
     form_new = HomeTemplateForm(request.POST, request.FILES, instance=home_page)
     if form_new.is_valid():
       form_new.save()
-      
-      print("Все хорошо")
-      # subprocess.call(["touch", RESET_FILE])
       return redirect("admin")
     else:
       return render(request, "static/home_page.html", {"form": form_new})
+    
+  home_page = HomeTemplate.objects.get()
+  
+  form = HomeTemplateForm(instance=home_page)
+  context = {
+    "form": form,
+    "home_page": home_page,
+  }  
+  
+  return render(request, "static/home_page.html", context)
     
 def admin_question(request):
   try:

@@ -16,9 +16,6 @@ except:
 
 gateway_url = ""
 
-[{'positionId': 1, 'name': 'Букет из кустовых роз и хризантем', 'quantity': {'value': 4500, 'measure': 'шт'}, 'itemAmount': '450000', 'itemCode': 4651, 'itemPrice': '450000'}, 
- {'positionId': 2, 'name': 'Букет с герберами', 'quantity': {'value': 3600, 'measure': 'шт'}, 'itemAmount': '720000', 'itemCode': 4650, 'itemPrice': '360000'}, {'positionId': 3, 'name': 'Композиция в конверте', 'quantity': {'value': 1700, 'measure': 'шт'}, 'itemAmount': '170000', 'itemCode': 4663, 'itemPrice': '170000'}]
-
 def create_payment(order, cart, request):
     returnUrl = "https://" + request.META["HTTP_HOST"] + "/orders/order-succes/"
     failUrl = "https://" + request.META["HTTP_HOST"] + "/orders/order-error/"
@@ -46,8 +43,6 @@ def create_payment(order, cart, request):
     sum = 0
     for item in items:
         sum += int(item["itemAmount"])
-        
-    print(round(sum, 2))
         
     post_data = {
         "userName": login,

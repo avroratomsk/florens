@@ -9,6 +9,24 @@
         <form action="" method="GET" class="filter form">
           <div class="filter__body">
             <p class="filter__label">Цена:</p>
+            <div class="filter__body">
+              <p class="filter__label">Цена:</p>
+              <div class="filter-catalog__rows price-filter">
+                <div class="price-filter__rows">
+                  <div class="price-filter__numbers">
+                    <div class="price-filter__number">
+                      <span>От:</span>
+                      <input type="number" name="min" id="min" placeholder="3000" />
+                    </div>
+                    <span class="price-filter__line"></span>
+                    <div class="price-filter__number">
+                      <span>До:</span>
+                      <input type="number" name="max" id="max" placeholder="5000000" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           {% for char in char_name %}
           <div class="filter__body">

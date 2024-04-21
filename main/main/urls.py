@@ -5,7 +5,6 @@ from django.contrib import admin
 from main import settings
 
 urlpatterns = [
-    path('ckeditor5/', include('django_ckeditor_5.urls')),
     # path('admin/', admin.site.urls),
     path('about/', include('home.urls')),
     path('category/', include('shop.urls')),
@@ -13,6 +12,7 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('reviews/', include('reviews.urls')),
     path('cart/', include('cart.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('orders/', include('order.urls')),
     path('admin/', include('admin.urls')),
     path('', include('home.urls')),

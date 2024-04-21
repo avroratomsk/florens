@@ -45,12 +45,17 @@ def cart_add(request):
   user_cart = get_user_carts(request)
   cart_items_html = render_to_string("components/cart-item.html", {"carts": user_cart}, request=request)
 
+  try:
+    product_image = product.image.url
+  except:
+    product_image = 'core/theme/mb/images/no-image.png'
+  
   response_data = {
       "message": "Товар добавлен в корзину",
       "cart_items_html": cart_items_html,
       "product_name": product.name,
       "product_price": product.price,
-      "product_image": product.image.url,
+      "product_image": product_image,
   }
   return JsonResponse(response_data)
   
