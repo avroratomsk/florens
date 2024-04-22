@@ -2,6 +2,7 @@ from django.db import transaction
 from django.forms import ValidationError
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from cart.models import Cart
 from payment.alfabank import create_payment, get_status
 from .email_send import email_send
@@ -159,7 +160,8 @@ def order_success(request):
 
         order.save()
         
-        return redirect("/?order=True")
+        return redirect(reverse('order-succes') + "?order=True")
+        # return redirect("/orders/order-succes/?order=True")
 
     else:
         return redirect("order_error")
