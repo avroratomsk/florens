@@ -5,14 +5,11 @@ from .models import AlfaBank
 from order.models import Order
 from shop.models import Product
 
-try:
-    login = "r-florens38-api"
-    password = "r-florens38*?1"
-    token = AlfaBank.objects.get().token
-except:
-    login = ""
-    password = ""
-    token = ""
+
+login = "r-florens38-api"
+password = "r-florens38*?1"
+# token = AlfaBank.objects.get().token
+
 
 gateway_url = ""
 

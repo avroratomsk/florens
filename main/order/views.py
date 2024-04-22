@@ -112,7 +112,6 @@ def order_create(request):
 
               order.payment_id = payment_id
               order.payment_dop_info = confirmation_url
-              print(confirmation_url)
               order.save()
               return redirect(confirmation_url)
           else:
