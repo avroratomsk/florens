@@ -152,12 +152,11 @@ def order_success(request):
 
         session_key = request.session.session_key
         cart_items = Cart.objects.filter(session_key=session_key)
-        cart_items.delete()
         request.session["delivery"] = 1
         order.paid = True
-
+        cart_items.delete()
         order.save()
-        
+
         return redirect("/?order=True")
 
     else:
