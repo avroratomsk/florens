@@ -159,7 +159,7 @@ def order_success(request):
 
         order.save()
         
-        return redirect("order_success")
+        return redirect("/orders/order-succes/?order=True")
 
     else:
         return redirect("order_error")
