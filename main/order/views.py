@@ -117,7 +117,7 @@ def order_create(request):
           else:
             email_send(order)
             cart_items.delete()
-            return redirect('order_success')
+            return redirect('order_succes')
       except Exception as e:
         print(e)
   
