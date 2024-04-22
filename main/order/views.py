@@ -140,7 +140,7 @@ def order_success(request):
     session_key = request.session.session_key
     cart = Cart.objects.filter(session_key=session_key)
 
-    pay_id = request.GET["orderId"]
+    pay_id = request.GET["orderId", None]
 
     data = get_status(pay_id)
 
