@@ -79,7 +79,7 @@
       <li><a href="{% url 'category' %}">Каталог</a></li>
     </ul>
     <div class="header__action">
-      <button type="button" class="header__action-btn" id="show-cart">
+      <button type="button" class="header__action-btn {% if request.path == "/orders/create/" %}_no-event{% endif %}" id="show-cart">
         {% if carts %}
         <div class="no-empty"></div>
         {% endif %}

@@ -625,7 +625,7 @@ class ProductCharForm(forms.ModelForm):
         }
         widgets = {
             'char_name': forms.Select(attrs={
-                'class': 'input',
+                'class': 'form__controls',
                 'placeholder': 'Название характеристики',
                 'id': 'id_char_name',
                

@@ -2,12 +2,12 @@
   display: flex;
   // height: 100vh;
   overflow: hidden;
+  background-color: #f4f6fa;
 
   // .content__inner
   &__inner {
     display: flex;
     flex-direction: column;
-    padding: 30px;
     width: 100%;
   }
 }

@@ -173,7 +173,7 @@ html.lock body::before {
 }
 
 .pagging__item._active {
-  background-color: #e76642;
+  background-color: #e97e8f;
   color: #ffffff;
 }
 
@@ -1344,6 +1344,14 @@ section:nth-child(odd) {
   height: 10px;
   background: #e97e8f;
   border-radius: 10px;
+}
+
+._no-event {
+  pointer-events: none;
+}
+
+._hidden {
+  display: none !important;
 }
 
 .price-filter__numbers {
@@ -2689,19 +2697,90 @@ section:nth-child(odd) {
 }
 
 .order-create__col {
-  flex: 1 1 50%;
   display: flex;
   flex-direction: column;
   gap: 25px;
-  background-color: white;
+  background-color: #fafafa;
   padding: 25px;
   border-radius: 26px;
+  width: 100%;
+}
+
+.order-create__col:last-child {
+  border: 1px solid rgba(63, 60, 56, 0.7);
+  min-width: 100%;
 }
 
 .order-create__title {
   font-size: 45px;
   text-align: center;
   line-height: 150%;
+}
+
+.order-create__item {
+  display: flex;
+  gap: 20px;
+  border-bottom: 2px dashed rgba(63, 60, 56, 0.1);
+  padding: 15px 0px;
+}
+
+.order-create__thumb {
+  width: 50px;
+  height: 50px;
+}
+
+.order-create__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-create__info {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+}
+
+.order-create__name {
+  flex: 1 1 auto;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.order-create__price {
+  font-size: 18px;
+}
+
+.order-create__price span {
+  font-weight: 600;
+}
+
+.order-create__promocod {
+  width: 100%;
+}
+
+.order-create__promocod input {
+  width: 100% !important;
+}
+
+.order-create__total {
+  font-size: 20px;
+}
+
+.order-create__total span {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.order-create__info-order {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order-create__info-order span {
+  font-size: 30px;
 }
 
 #contact-human {
@@ -2714,6 +2793,63 @@ section:nth-child(odd) {
 
 #address-delivery.hidden {
   display: none;
+}
+
+.order-succes__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-succes__image {
+  background-color: green;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-succes__image i {
+  font-size: 35px;
+  color: white;
+}
+
+.order-succes__title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 30px;
+  color: #e97e8f;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.order-succes__subtitle {
+  font-size: 35px;
+  line-height: 150%;
+  margin-bottom: 40px;
+}
+
+.order-succes__questions {
+  text-align: center;
+  line-height: 150%;
+}
+
+.order-succes__questions-text {
+  font-size: 18px;
+}
+
+.order-succes__questions-phone {
+  font-size: 20px;
+  font-weight: 600;
+  display: block;
+  margin-top: 30px;
+}
+
+.error-order {
+  background-color: red;
 }
 
 .category-details {
@@ -3323,6 +3459,19 @@ section:nth-child(odd) {
   }
 }
 
+@media screen and (min-width: 1025px) {
+  .order-create__col {
+    flex: 1 1 65%;
+  }
+
+  .order-create__col:last-child {
+    position: sticky;
+    top: 20px;
+    flex: 0 0 35%;
+    min-width: 390px;
+  }
+}
+
 @media screen and (min-width: 1100px) {
   .header__logo {
     position: absolute;
@@ -3390,6 +3539,10 @@ section:nth-child(odd) {
 
   .index-category__grid {
     grid-template-columns: 1fr;
+  }
+
+  .order-create__row {
+    flex-direction: column-reverse;
   }
 }
 
@@ -3534,6 +3687,18 @@ section:nth-child(odd) {
     font-size: 30px;
     letter-spacing: 1px;
   }
+
+  .order-create {
+    padding: 60px 15px;
+  }
+
+  .order-create__title {
+    font-size: 30px;
+  }
+
+  .order-create__info-order span {
+    font-size: 23px;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -3618,6 +3783,28 @@ section:nth-child(odd) {
   }
 
   .callback__subtitle {
+    font-size: 16px;
+  }
+
+  .order-succes__image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .order-succes__image i {
+    font-size: 25px;
+  }
+
+  .order-succes__title {
+    font-size: 20px;
+  }
+
+  .order-succes__subtitle {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .order-succes__questions-text {
     font-size: 16px;
   }
 }

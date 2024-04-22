@@ -286,10 +286,10 @@ if (whoGetRadio) {
 const pickupCheckbox = document.getElementById('pickup');
 if (pickupCheckbox) {
   pickupCheckbox.addEventListener('change', function (e) {
-    if (!pickupCheckbox.checked) {
-      document.getElementById('address-delivery').classList.add('_hidden');
+    if (pickupCheckbox.checked) {
+      document.getElementById('id_delivery_address').classList.add('_hidden');
     } else {
-      document.getElementById('address-delivery').classList.remove('_hidden');
+      document.getElementById('id_delivery_address').classList.remove('_hidden');
     }
   })
 }
@@ -471,9 +471,9 @@ $(document).on("click", ".add-to-cart", function (e) {
       cartCount++;
       goodsInCartCount.text(cartCount);
       if (cartCount > 0) {
-        $('#mini-cart__inner').html('<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + cartCount + ' </strong><span>)<span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div>')
-
-        $('#mini-cart').append('<div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>')
+        console.log(cartCount);
+        console.log('plus');
+        $('#mini-cart_noempty').html('<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + cartCount + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>')
       }
       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
       var cartItemsContainer = $("#cart-item");
@@ -514,11 +514,12 @@ $(document).on("click", ".remove-from-cart", function (e) {
       goodsInCartCount.text(cartCount);
 
       if (cartCount == 0) {
-        $('#show-cart .no-empty').remove();
-        $('#mini-cart__inner').html('<div class="mini-cart__empty" id="mini-cart__empty"><p class="mini-cart__empty-text">Корзина пуста</p><a href="{% url "category" %}"class="mini-cart__empty-link">Перейти в каталог</a></div>')
-        $('#mini-cart .mini-cart__links').remove()
+        // $('#show-cart .no-empty').remove();
+        $('#mini-cart_noempty').html('<div class="mini-cart__empty"><p class="mini-cart__empty-text">Пусто</p><a href="{% url "category" %}"class="mini-cart__empty-link">Перейти в каталог</a></div>')
+        // $('#mini-cart .mini-cart__links').remove()
       }
       console.log(cartCount);
+      console.log('minus');
       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
       var cartItemsContainer = $("#cart-item");
       cartItemsContainer.html(data.cart_items_html);

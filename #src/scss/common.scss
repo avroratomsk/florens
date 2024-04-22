@@ -91,6 +91,14 @@ section {
   }
 }
 
+._no-event {
+  pointer-events: none;
+}
+
+._hidden {
+  display: none !important;
+}
+
 .price-filter__numbers {
   display: flex;
   align-items: center;

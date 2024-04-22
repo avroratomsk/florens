@@ -22,7 +22,7 @@ def callback(request):
       
       email_callback(messages, title)
       
-      return redirect('home')
+      return redirect('callback_success')
   else:
     form = CallbackForm()
   
@@ -31,6 +31,9 @@ def callback(request):
   }
   
   return render(request, 'pages/index.html', context)
+
+def callback_success(request):
+  return render(request, "pages/orders/callback-succes.html")
 
 def index(request):
   page = request.GET.get('page', 1)

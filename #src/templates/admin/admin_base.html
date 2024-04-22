@@ -15,7 +15,7 @@
     <div class="content">
       {% include 'components/admin-sidebar.html' %}
 
-      <div class="content__inner">{% include 'components/admin_header.html' %} {% block body %} {% endblock %}</div>
+      <div class="content__inner">{% comment %} {% include 'components/admin_header.html' %} {% endcomment %} {% block body %} {% endblock %}</div>
     </div>
     <script>
       {% comment %} CKEDITOR.replace("id_description"); {% endcomment %}
