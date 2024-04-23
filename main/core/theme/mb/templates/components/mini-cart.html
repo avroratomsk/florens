@@ -1,12 +1,9 @@
 {% load static %}{% load carts_tag %}{% user_carts request as carts %}
 <div class="mini-cart" id="mini-cart">
-  <button type="button" class="mini-cart__close" id="close-cart"
-    aria-label="Закрыть мини корзину"><span></span></button>
+  <button type="button" class="mini-cart__close" id="close-cart" aria-label="Закрыть мини корзину"><span></span></button>
   <div class="mini-cart_noempty" id="mini-cart_noempty">
     {% if carts %}
-    <h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">
-        {{ carts.total_quantity }}</strong><span>)</span>
-    </h4>
+    <h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count"> {{ carts.total_quantity }}</strong><span>)</span></h4>
     <div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div>
 
     <div class="mini-cart__links">
@@ -19,6 +16,4 @@
     </div>
     {% endif %}
   </div>
-
-
 </div>

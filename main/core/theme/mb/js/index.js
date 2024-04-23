@@ -472,7 +472,6 @@ $(document).on("click", ".add-to-cart", function (e) {
       goodsInCartCount.text(cartCount);
       if (cartCount > 0) {
         console.log(cartCount);
-        console.log('plus');
         $('#mini-cart_noempty').html('<h4 class="mini-cart__title">Корзина<span>(</span><strong id="mini-cart-count">' + cartCount + '</strong><span>)</span></h4><div class="mini-cart__inner" id="cart-item">{% include "components/cart-item.html" %}</div><div class="mini-cart__links"><a href="/orders/create/" class="mini-cart__link">Оформить заказ</a></div>')
       }
       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
@@ -518,8 +517,6 @@ $(document).on("click", ".remove-from-cart", function (e) {
         $('#mini-cart_noempty').html('<div class="mini-cart__empty"><p class="mini-cart__empty-text">Пусто</p><a href="{% url "category" %}"class="mini-cart__empty-link">Перейти в каталог</a></div>')
         // $('#mini-cart .mini-cart__links').remove()
       }
-      console.log(cartCount);
-      console.log('minus');
       // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
       var cartItemsContainer = $("#cart-item");
       cartItemsContainer.html(data.cart_items_html);

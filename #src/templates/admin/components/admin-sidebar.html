@@ -2,7 +2,7 @@
 
 <div class="sidebar">
   <div class="sidebar__logo">
-    <img src="{% if site_settings.logo %} {{ site_settings.logo.url }}{% endif %}" alt="" title="" />
+    <img src="{{ site_settings.logo.url }}" alt="" title="" />
   </div>
   <div class="sidebar__item dropdownButton _active {% if request.session.sidebar == 'False' %}_active{% endif %}">
     <a href="{% url 'admin' %}" class="sidebar__title">
@@ -451,7 +451,7 @@
     </p>
 
     <div class="sidebar__subitem dropdownContent hidden">
-      <a href="{% url 'admin_service_page' %}" class="sidebar__link">
+      <a href="" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -588,7 +588,7 @@
     </a>
   </div>
 
-  <div class="sidebar__item dropdownButton _active">
+  <div class="sidebar__item dropdownButton">
     <p class="sidebar__title {% if request.session.sidebar == 'False' %}sidebar__title--max {% else %}sidebar__title--min{% endif %}">
       <svg xmlns="http://www.w3.org/2000/svg" width="18.486" height="18.636" viewBox="0 0 18.486 18.636">
         <g id="cubes" transform="translate(0)">
@@ -855,7 +855,7 @@
 
         <span>Опции</span>
       </a>
-      <a href="{% url 'admin_char' %}" class="sidebar__link">
+      <a href="" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
