@@ -160,3 +160,35 @@ document.addEventListener('click', function (event) {
     </div>`
   }
 });
+
+/**
+ * Открывает настройки товара на странице товаров
+ */
+
+const tableSettingsBtn = document.querySelectorAll('.body-table__settings');
+if (tableSettingsBtn) {
+  tableSettingsBtn.forEach(btn => {
+    btn.addEventListener('click', openSettingsProduct);
+  })
+}
+
+function openSettingsProduct() {
+  let elem = this.previousElementSibling;
+  elem.classList.toggle('_active');
+}
+
+/**
+ * Добавлет дополнительное изображение
+ */
+document.querySelector('.product-block__plus').addEventListener('click', function (event) {
+  var image = '<div class="product-block__inner"><p><label for="id_src">Выбрать изображение:</label><input type="file" multiple="multiple" name="src" accept="image/*" required="" id="id_src"></p><div class="product-block__minus"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path> </svg></div></div>';
+  document.querySelector('.product-field').insertAdjacentHTML('beforeend', image);
+})
+
+document.addEventListener('click', function (event) {
+  console.log(event.target);
+  if (event.target.classList.contains('product-block__plus')) {
+    console.log('Тут ');
+
+  }
+});

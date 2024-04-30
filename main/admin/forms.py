@@ -4,6 +4,8 @@ from service.models import Service, ServicePage
 from reviews.models import Reviews
 from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from tinymce.widgets import TinyMCE
+
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
@@ -68,8 +70,8 @@ class GlobalSettingsForm(forms.ModelForm):
     
 class ProductForm(forms.ModelForm):
     """ Form, отвечает за создание товара и редактирование товара"""
-    description = forms.CharField(label='Описание производителя', required=False, widget=CKEditorUploadingWidget)
-    
+    # description = forms.CharField(label='Описание производителя', required=False, widget=CKEditorUploadingWidget)
+    description = forms.CharField(widget=TinyMCE())
     class Meta:
         model = Product
         fields = [
@@ -80,6 +82,7 @@ class ProductForm(forms.ModelForm):
             'meta_title',
             'meta_description',
             'meta_keywords',
+            # 'html_content',
             'image',
             'price',
             'diameter',
@@ -180,10 +183,10 @@ class ProductForm(forms.ModelForm):
             'discount': forms.TextInput(attrs={
                 'class': 'form__controls',
             }),
-            'image': forms.FileInput(attrs={
-                'class': 'submit-file',
-                'accept': 'image/*'
-            }),
+            # 'image': forms.FileInput(attrs={
+            #     'class': 'submit-file',
+            #     'accept': 'image/*'
+            # }),
         }
 
 # Товар и опции товара

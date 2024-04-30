@@ -32,6 +32,7 @@
   // .table-4__head
   &__head {
     grid-template-columns: 10% 1fr 20% 30%;
+    background-color: rgba($color: $white, $alpha: 1.0);
   }
 
   // .table-4__body 
@@ -63,34 +64,51 @@
   display: grid;
   justify-items: center;
   margin-bottom: 20px;
-  border-bottom: 1px solid rgba($color: $mainColor, $alpha: .1);
-  padding-bottom: 15px;
+  padding: 15px 20px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 4px rgba($color: $mainColor, $alpha: .1);
 
   // .head-table__image
 
   &__image {
     justify-self: start;
+    color: rgba($color: $grey, $alpha: 1.0);
   }
 
   // .head-table__name
 
-  &__name {}
+  &__name {
+    color: rgba($color: $grey, $alpha: 1.0);
+  }
 
   // .head-table__price
 
-  &__price {}
+  &__price {
+    color: rgba($color: $grey, $alpha: 1.0);
+  }
 
   // .head-table__action
 
   &__action {
+    color: rgba($color: $grey, $alpha: 1.0);
     justify-self: end;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 
 .body-table {
   overflow-y: auto;
-  height: 410px;
-  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-radius: 6px;
+  padding: 15px 15px;
+  box-shadow: 0px 0px 4px rgba($color: $mainColor, $alpha: .1);
+  background-color: rgba($color: $white, $alpha: 1.0);
 
   &::-webkit-scrollbar {
     width: 3px;
@@ -111,13 +129,13 @@
     display: grid;
     align-items: center;
     justify-items: center;
-    border: 1px solid rgba($color: $mainColor, $alpha: .1);
     padding: 5px;
+    border: 1px solid rgba($color: $mainColor, $alpha: .05);
     border-radius: 6px;
-    padding-right: 10px;
+    transition: $animation_speed;
 
-    &:not(:last-child) {
-      margin-bottom: 15px;
+    &:hover {
+      background-color: rgba($color: $grey, $alpha: .03);
     }
   }
 
@@ -159,7 +177,7 @@
     justify-self: end;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 
     a {
       display: flex;
@@ -182,6 +200,32 @@
       svg {
         width: 18px;
       }
+    }
+  }
+
+  // .body-table__settings
+
+  &__settings {
+    padding: 5px;
+    cursor: pointer;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // .body-table__action-hidden
+
+  &__action-hidden {
+    display: flex;
+    gap: 10px;
+    width: 0px;
+    overflow: hidden;
+    transition: $animation_speed;
+
+    &._active {
+      width: 70px;
     }
   }
 }

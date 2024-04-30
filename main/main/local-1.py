@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "cart",
     "order",
     "payment",
+    'tinymce',
     # "blog",
     # "news",
 ]

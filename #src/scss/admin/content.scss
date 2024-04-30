@@ -1,7 +1,5 @@
 .content {
   display: flex;
-  // height: 100vh;
-  overflow: hidden;
   background-color: #f4f6fa;
 
   // .content__inner
@@ -9,5 +7,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 30px;
   }
 }
