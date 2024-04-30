@@ -1,20 +1,23 @@
-{% extends 'admin_base.html' %} {% block body %}
+{% extends 'admin_base.html' %}{% load static %} {% block body %}
 <div class="page">
   <div class="page__inner">
-
     <div class="page-edit">
       <form action="." method="POST" class="form" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="page__head">
-          <h1 class="page__title">Категория - <span>{{ categorys.name }}</span></h1>
-          <button type="submit" class="form__btn">Сохранить</button>
+          <div class="page__head-save">
+            <h1 class="page__title">Категория - <span>{{ categorys.name }}</span></h1>
+            <button type="submit" class="form__btn">
+              <img src="{% static 'theme/mb/images/admin/save.svg' %}" alt="" />
+              Сохранить
+            </button>
+          </div>
         </div>
         <div class="page-content _show" id="basic">
           <div class="page-content__row">
             <div class="page-content__col">
               <div class="form__group">
-                <label for="{{ form.name.id_for_label }}" class="form__controls-label"><span>*</span>Название категории
-                  <span>:</span></label>
+                <label for="{{ form.name.id_for_label }}" class="form__controls-label"><span>*</span>Название категории <span>:</span></label>
                 {{ form.name }} {{ form.name.errors }}
               </div>
               <div class="form__group">
@@ -25,8 +28,7 @@
                 {{ form.slug }} {{ form.slug.errors }}
               </div>
               <div class="form__group">
-                <label for="{{ form.meta_h1.id_for_label }}" class="form__controls-label"> Заголовок h1
-                  <span>:</span></label>
+                <label for="{{ form.meta_h1.id_for_label }}" class="form__controls-label"> Заголовок h1 <span>:</span></label>
                 {{ form.meta_h1 }} {{ form.meta_h1.errors }}
               </div>
               <div class="form__group">
@@ -45,8 +47,7 @@
                 {{ form.meta_description }} {{ form.meta_description.errors }}
               </div>
               <div class="form__group">
-                <label for="{{ form.meta_description.id_for_label }}" class="form__controls-label"> Мета keywords
-                  <span>:</span></label>
+                <label for="{{ form.meta_description.id_for_label }}" class="form__controls-label"> Мета keywords <span>:</span></label>
                 {{ form.meta_keywords }} {{ form.meta_keywords.errors }}
               </div>
             </div>
@@ -60,8 +61,7 @@
                 {{ form.menu_add.errors }}
               </div>
               <div class="form__group form__group-image">
-                <label for="{{ form.image.id_for_label }}" class="form__controls-label">Изображение категории
-                  <span>:</span></label>
+                <label for="{{ form.image.id_for_label }}" class="form__controls-label">Изображение категории <span>:</span></label>
                 {{ form.image }} {{ form.image.errors }}
               </div>
             </div>

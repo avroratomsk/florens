@@ -41,14 +41,10 @@
               <label for="{{ image_form.src.id_for_label }}" class="form__controls-label"> Дополнительные изображения :
               </label>
               {{ image_form.src }} {{ image_form.src.errors }}
-              <div class="product-block__plus" style="width: 20px; height: 20px">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                  <path
-                    d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
-                  </path>
-                </svg>
-              </div>
-              <div class="product-field"></div>
+            </div>
+            <div class="product-field"></div>
+            <div class="product-block__plus form__btn">
+              Добавить изрбражение
             </div>
             <div class="form__grid">
               <div class="form__group">
@@ -120,7 +116,7 @@
             </div>
             <div class="form__group form__group-image">
               <label for="{{ form.image.id_for_label }}" class="form__controls-label">Выбор изображения товара :</label>
-              {{ form.image.src }} {{ form.image }} {{ form.image.errors }}
+              {{ form.image }} {{ form.image.errors }}{{ image_path }}
             </div>
             <div class="form__group-checkbox">
               {{ form.latest }} {{ form.latest.errors }}
@@ -142,7 +138,7 @@
       <div class="page-content" id="seo">
         <!-- SEO страницы -->
         <div class="page-content__row">
-          <div class="page-content__seo">
+          <div class="page-content__onecol">
             <div class="form__group">
               <label for="{{ form.meta_h1.id_for_label }}" class="form__controls-label"> Заголовок h1 :
               </label>
@@ -168,33 +164,35 @@
         </div>
       </div>
       <div class="page-content" id="char">
-        <button type="button" id="add-char" class="form__plus">Добавить характеристику</button>
         <!-- Характеристики товара страницы -->
         <div class="page-content__row">
-          <div class="page-content__seo" id="paste-char">
-            {% for char in chars %}
-            <div class="form__group-char">
-              <input type="text" name="old_char_id" value="{{ char.id }}" hidden />
-              <label for="{{ form.category.id_for_label }}" class="form__controls-label">Название характеристики
-                :</label>
-              <select name="old_text_name" class="form__controls" placeholder="Название характеристики" id="id_name">
-                <option value="{{ char.char_name.id }}">{{ char.char_name.text_name }}</option>
-                {% for ch in all_chars %}
-                <option value="{{ ch.id }}">{{ ch.text_name }}</option>
-                {% endfor %}
-              </select>
-              <label for="id_char_value" class="form__controls-label">Значение :</label>
-              <input type="text" name="old_char_value" class="form__controls" placeholder="Значение" required=""
-                id="id_char_value" value="{{ char.char_value }}" />
-              <a href="" class="form__remove"> Удалить </a>
+          <div class="page-content__onecol">
+            <div class="page-content__char" id="paste-char">
+              {% for char in chars %}
+              <div class="form__group-char">
+                <input type="text" name="old_char_id" value="{{ char.id }}" hidden />
+                <label for="{{ form.category.id_for_label }}" class="form__controls-label">Название характеристики
+                  :</label>
+                <select name="old_text_name" class="form__controls" placeholder="Название характеристики" id="id_name">
+                  <option value="{{ char.char_name.id }}">{{ char.char_name.text_name }}</option>
+                  {% for ch in all_chars %}
+                  <option value="{{ ch.id }}">{{ ch.text_name }}</option>
+                  {% endfor %}
+                </select>
+                <label for="id_char_value" class="form__controls-label">Значение :</label>
+                <input type="text" name="old_char_value" class="form__controls" placeholder="Значение" required=""
+                  id="id_char_value" value="{{ char.char_value }}" />
+                <a href="" class="form__remove"> Удалить </a>
+              </div>
+              {% endfor %}
             </div>
-            {% endfor %}
           </div>
         </div>
+        <button type="button" id="add-char" class="form__plus">Добавить характеристику</button>
       </div>
     </form>
-    <div class="select-hide" id="select-hide" style="opacity: 0; position: absolute">{{ option_form.type }} {{
-      product_char_form.char_name }}</div>
+    <div class="select-hide" id="select-hide" style="opacity: 0; position: absolute">
+      {{ option_form.type }} {{ product_char_form.char_name }}</div>
   </div>
 </div>
 

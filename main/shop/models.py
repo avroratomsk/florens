@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+
+
 # Дни недели с краткими ключами и полнымим наименованиями.
 DAY_NAMES = (
     ('mon', 'Понедельник'),
@@ -11,6 +13,10 @@ DAY_NAMES = (
     ('sat', 'Суббота'),
     ('sun', 'Воскресенье')
 )
+
+class ShopSettings(models.Model):
+  pass
+  
 
 # Категория
 class Category(models.Model):

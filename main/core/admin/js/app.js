@@ -145,19 +145,11 @@ document.addEventListener('click', function (event) {
     const blockPasteChar = document.getElementById('paste-char');
     let char_name_id = document.getElementById('id_char_name').innerHTML;
     console.log(char_name_id);
-    blockPasteChar.innerHTML += `
-    <div class="form__group-char">
-      <label for="{{ product_char_form.char_name.id_for_label }}" class="form__controls-label">
-        Название характеристики <span>:</span>
-      </label>
-      <select name="text_name" class="form__controls" placeholder="Название характеристики" id="id_name">${char_name_id}</select>
-    
-    <label for="id_char_value">Значение:</label>
-    <input type="text" name="char_value" class="form__controls" placeholder="Значение" required="" id="id_char_value">
-    <div class="form__remove">
-      Удалить
-    </div>
-    </div>`
+
+    const newCharElement = document.createElement('div');
+    newCharElement.classList.add('form__group-char');
+    newCharElement.innerHTML = '<label for="{{ product_char_form.char_name.id_for_label }}" class="form__controls-label">Название характеристики <span>:</span></label><select name="text_name" class="form__controls" placeholder="Название характеристики" id="id_name">' + char_name_id + '</select><label for="id_char_value">Значение:</label><input type="text" name="char_value" class="form__controls" placeholder="Значение" required="" id="id_char_value"><div class="form__remove"></div>';
+    blockPasteChar.appendChild(newCharElement);
   }
 });
 
@@ -181,14 +173,46 @@ function openSettingsProduct() {
  * Добавлет дополнительное изображение
  */
 document.querySelector('.product-block__plus').addEventListener('click', function (event) {
-  var image = '<div class="product-block__inner"><p><label for="id_src">Выбрать изображение:</label><input type="file" multiple="multiple" name="src" accept="image/*" required="" id="id_src"></p><div class="product-block__minus"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path> </svg></div></div>';
+  var image = '<div class="form__group  form__group-image"><input type="file" multiple="multiple" name="src" accept="image/*" required="" id="id_src"><div class="product-block__minus form__remove">Удалить</div></div>';
   document.querySelector('.product-field').insertAdjacentHTML('beforeend', image);
 })
 
-document.addEventListener('click', function (event) {
-  console.log(event.target);
-  if (event.target.classList.contains('product-block__plus')) {
-    console.log('Тут ');
+/**
+ * Переключение между вкладками настроек на странице
+ */
 
+const tabSettingsBtn = document.querySelectorAll('.page__head-btn');
+if (tabSettingsBtn) {
+  tabSettingsBtn.forEach(btn => {
+    btn.addEventListener('click', showTab);
+  })
+}
+
+function showTab(e) {
+
+  checkScrollbar();
+  document.querySelectorAll('.page-content').forEach(item => item.classList.remove('_show'));
+  tabSettingsBtn.forEach(item => item.classList.remove('active'))
+
+  document.getElementById(this.dataset.name).classList.add('_show');
+  this.classList.add('_active');
+}
+
+function checkScrollbar() {
+  if (window.innerHeight < document.body.scrollHeight) {
+    // Страница имеет скролл
+    console.log('Скролл есть');
+    document.body.style.paddingRight = '0px';
+  } else {
+    // Страница не имеет вертикального скролла
+    console.log('Скролла нет');
+
+    let scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    console.log('Ширина стандартного скролла: ' + scrollBarWidth);
+
+    // Добавляем отступ равный ширине скролла
+    document.body.style.paddingRight = '17px';
   }
-});
+}
+
+

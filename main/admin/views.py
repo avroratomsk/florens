@@ -58,6 +58,9 @@ def admin_settings(request):
 
   return render(request, "settings/general_settings.html", context)
 
+def admin_shop(request):
+  return render(request, "shop/settings.html")
+
 def admin_product(request):
   """
   View, которая возвращаяет и отрисовывает все товары на странице
@@ -126,7 +129,7 @@ def product_edit(request, pk):
           img.save()
       return redirect('admin_product')
     else:
-      return render(request, 'shop/product/product_edit.html', {'form': form_new, 'image_form': image_form,})
+      return render(request, 'shop/product/product_edit.html', {'form': form_new})
   context = {
     "form":form,
     'image_form': image_form,
