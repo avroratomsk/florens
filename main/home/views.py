@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 import itertools
-from home.models import BaseSettings, HomeTemplate, Questions, Stock
+from home.models import AboutTemplate, BaseSettings, HomeTemplate, Questions, Stock
 from cart.models import Cart
 from home.forms import CallbackForm
 from home.callback_send import email_callback
@@ -178,12 +178,19 @@ def news(request):
 
 def about(request):
     form = CallbackForm()
+    
+    try:
+      about_page = AboutTemplate.objects.get()
+    except:
+      about_page = AboutTemplate.objects.all()
     context = {
       "form": form,
+      "about_page": about_page,
     }
     return render(request, "pages/about.html", context)
 
 def contact(request):
+  
     return render(request, "pages/contact.html")
 
 def stock(request):

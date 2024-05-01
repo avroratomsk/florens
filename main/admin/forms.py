@@ -1,8 +1,8 @@
 from django import forms
-from home.models import BaseSettings, HomeTemplate, Stock, QuestionPage, Questions
+from home.models import AboutTemplate, BaseSettings, HomeTemplate, Stock, QuestionPage, Questions
 from service.models import Service, ServicePage
 from reviews.models import Reviews
-from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage
+from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage, ShopSettings
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from tinymce.widgets import TinyMCE
 
@@ -25,6 +25,7 @@ class GlobalSettingsForm(forms.ModelForm):
         'phone_whatsapp',
         'email',
         'address',
+        'map_code',
         'meta_h1',
         'meta_title',
         'meta_description',
@@ -36,6 +37,7 @@ class GlobalSettingsForm(forms.ModelForm):
         'time_work': 'Режим работы',
         'email': 'Email',
         'address': 'Адрес',
+        'map_code': 'Код яндекс карты',
         'meta_h1':'Заголвок первого уровня',
         'meta_title':'Meta title',
         'meta_description':'Мета description',
@@ -54,6 +56,9 @@ class GlobalSettingsForm(forms.ModelForm):
         'address': forms.TextInput(attrs={
             'class': 'form__controls'
         }),
+        'map_code': forms.Textarea(attrs={
+            'class': 'form__controls'
+        }),
         'meta_h1': forms.TextInput(attrs={
             'class': 'form__controls'
         }),
@@ -65,7 +70,22 @@ class GlobalSettingsForm(forms.ModelForm):
         }),
         'meta_keywords': forms.TextInput(attrs={
             'class': 'form__controls'
-        })
+        }),
+        'instagram': forms.TextInput(attrs={
+          'class': 'form__controls'
+        }),
+        'telegram': forms.TextInput(attrs={
+          'class': 'form__controls'
+        }),
+        'vk': forms.TextInput(attrs={
+          'class': 'form__controls'  
+        }),
+        'viber': forms.TextInput(attrs={
+          'class': 'form__controls' 
+        }),
+        'phone_whatsapp': forms.TextInput(attrs={
+          'class': 'form__controls'
+        }),
     }
     
 class ProductForm(forms.ModelForm):
@@ -187,6 +207,40 @@ class ProductForm(forms.ModelForm):
             #     'class': 'submit-file',
             #     'accept': 'image/*'
             # }),
+        }
+        
+class ShopSettingsForm(forms.ModelForm):
+    """ Form, отвечает за создание товара и редактирование товара"""
+    # description = forms.CharField(label='Описание производителя', required=False, widget=CKEditorUploadingWidget)
+    description = forms.CharField(widget=TinyMCE())
+    class Meta:
+        model = ShopSettings
+        fields = [
+            'meta_h1',
+            'meta_title',
+            'meta_description',
+            'meta_keywords',
+        ]
+        labels = {
+            'meta_h1':'Заголвок первого уровня',
+            'meta_title':'Meta title',
+            'meta_description':'Мета description',
+            'meta_keywords':'Meta keywords',
+        }
+        widgets = {
+            'meta_h1': forms.TextInput(attrs={
+                'class': 'form__controls',
+            }),
+            'meta_title': forms.TextInput(attrs={
+                'class': 'form__controls',
+            }),
+            'meta_description': forms.Textarea(attrs={
+                'class': 'form__controls',
+                "id": "meta_description"
+            }),
+            'meta_keywords': forms.TextInput(attrs={
+                'class': 'form__controls',
+            }),
         }
 
 # Товар и опции товара
@@ -384,6 +438,47 @@ class HomeTemplateForm(forms.ModelForm):
           # 'about_text': forms.TextInput(attrs={
           #     'class': 'form__controls',
           # }),
+      }
+class AboutTemplateForm(forms.ModelForm):
+  """ Form, редактирование главной страницы"""
+  # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
+  about_text = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
+  
+  class Meta:
+      model = AboutTemplate
+      fields = [
+          'banner',
+          'meta_h1',
+          'meta_title',
+          'meta_description',
+          'meta_keywords',
+          'about_text',
+      ]
+      labels = {
+          'banner': 'Изображение банера',
+          'meta_h1':'Заголвок первого уровня',
+          'meta_title':'Meta title',
+          'meta_description':'Мета description',
+          'meta_keywords':'Meta keywords',
+          'about_text':'Текст о нас',
+      }
+      widgets = {
+          'meta_h1': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+          'meta_title': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+          'meta_description': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+          'meta_keywords': forms.TextInput(attrs={
+              'class': 'form__controls',
+          }),
+          'about_text': forms.Textarea(attrs={
+              'class': 'form__controls',
+              'rows': 5
+          }),
       }
            
 class ReviewsForm(forms.ModelForm):

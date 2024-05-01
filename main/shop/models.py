@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from admin.singleton_model import SingletonModel
+
 
 
 # Дни недели с краткими ключами и полнымим наименованиями.
@@ -14,8 +16,11 @@ DAY_NAMES = (
     ('sun', 'Воскресенье')
 )
 
-class ShopSettings(models.Model):
-  pass
+class ShopSettings(SingletonModel):
+  meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
+  meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="META заголовок")
+  meta_description = models.TextField(null=True, blank=True, verbose_name="META описание")
+  meta_keywords = models.TextField(null=True, blank=True, verbose_name="META keywords")
   
 
 # Категория

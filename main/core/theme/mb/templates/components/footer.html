@@ -36,9 +36,9 @@
       <p class="footer__title">Контакты</p>
       <ul class="footer__list">
         {% if site_settings.phone %}
-        <li><a href="+79027673734 ">+7 902 767-37-34 </a></li>
+        <li><a href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a></li>
         {% endif %} {% if site_settings.email %}
-        <li><a href="#">musik665@mail.ru</a></li>
+        <li><a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></li>
         {% endif %}
       </ul>
       <div class="footer__social">

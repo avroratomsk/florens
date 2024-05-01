@@ -17,24 +17,22 @@
 				<div class="contact__row-bottom">
 					<div class="contact__row-col">
 						<span class="contact__row-label">Пишите</span>
-						<a href="mailto:florens@mail.ru" class="contact__row-info">florens@mail.ru</a>
+						<a href="mailto:{{ site_settings.email }}" class="contact__row-info">{{ site_settings.email }}</a>
 					</div>
 					<div class="contact__row-col">
 						<span class="contact__row-label">Звоните</span>
-						<a href="tel:+79999999999" class="contact__row-info">8 (999) 999-99-99</a>
+						<a href="tel:{{ site_settings.phone }}" class="contact__row-info">{{ site_settings.phone }}</a>
 					</div>
 					<div class="contact__row-col">
 						<span class="contact__row-label">Приходите и приезжайте</span>
-						<p class="contact__row-info">Россия, г.Город ул.Улица 23</p>
+						<p class="contact__row-info">{{ site_settings.address }}</p>
 					</div>
 				</div>
 				<div class="advantages__border borderDotted"></div>
 			</div>
 		</div>
 		<div class="contact__map">
-			<iframe
-				src="https://yandex.ru/map-widget/v1/?um=constructor%3Ac1cf0d6cb1a0a77d749e2c1f0f9e9897a548d46e6449e8291a14966d1c6c5cfd&amp;source=constructor"
-				width="100%" height="500" frameborder="0"></iframe>
+			{{ site_settings.map_code|safe }}
 		</div>
 	</section>
 </main>

@@ -4,12 +4,12 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import CategoryForm, CharGroupForm, CharNameForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, QuestionPageForm, QuestionsForm, ReviewsForm, ServiceForm, ServicePageForm, StockForm, UploadFileForm
-from home.models import BaseSettings, HomeTemplate, QuestionPage, Questions, Stock
+from admin.forms import AboutTemplateForm, CategoryForm, CharGroupForm, CharNameForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, QuestionPageForm, QuestionsForm, ReviewsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, UploadFileForm
+from home.models import AboutTemplate, BaseSettings, HomeTemplate, QuestionPage, Questions, Stock
 from main.settings import BASE_DIR
 from service.models import Service, ServicePage
 from reviews.models import Reviews
-from shop.models import CharGroup, CharName, Product,Category, ProductChar, ProductImage
+from shop.models import CharGroup, CharName, Product,Category, ProductChar, ProductImage, ShopSettings
 from django.core.paginator import Paginator
 from django.core.files.images import ImageFile
 from django.shortcuts import render, get_object_or_404, get_list_or_404
@@ -59,7 +59,27 @@ def admin_settings(request):
   return render(request, "settings/general_settings.html", context)
 
 def admin_shop(request):
-  return render(request, "shop/settings.html")
+  try:
+    shop_setup = ShopSettings.objects.get()
+    form = ShopSettingsForm(instance=shop_setup)
+  except:
+    form = ShopSettingsForm()
+    
+  if request.method == "POST":
+    shop_setup = ShopSettings.objects.get()
+    form_new = ShopSettingsForm(request.POST, request.FILES, instance=shop_setup)
+    
+    if form_new.is_valid:
+      form_new.save()
+      
+      return redirect('admin_shop')
+    else:
+      return render(request, "shop/settings.html", {"form": form})
+  
+  context = {
+    "form": form,
+  }  
+  return render(request, "shop/settings.html", context)
 
 def admin_product(request):
   """
@@ -584,6 +604,31 @@ def admin_home(request):
   }  
   
   return render(request, "static/home_page.html", context)
+
+def about_home(request):
+  try:
+    about_page = AboutTemplate.objects.get()
+  except:
+    about_page = AboutTemplate()
+    about_page.save()
+    
+  if request.method == "POST":
+    form_new = AboutTemplateForm(request.POST, request.FILES, instance=about_page)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect("admin")
+    else:
+      return render(request, "static/about_page.html", {"form": form_new})
+    
+  about_page = AboutTemplate.objects.get()
+  
+  form = AboutTemplateForm(instance=about_page)
+  context = {
+    "form": form,
+    "about_page": about_page,
+  }  
+  
+  return render(request, "static/about_page.html", context)
     
 def admin_question(request):
   try:
