@@ -35,7 +35,6 @@ def callback(request):
 def quick_order(request):
   if request.method == "POST":
     form = QuickOrderForm(request.POST)
-    print(form)
     if form.is_valid():
       name  = form.cleaned_data['name']
       phone = form.cleaned_data['phone']
@@ -48,10 +47,10 @@ def quick_order(request):
       return redirect('callback_success')
   else:
     form = QuickOrderForm()
+    
   context = {
     'form': form
   }
-  
   
   return render(request, 'pages/index.html', context)
 
