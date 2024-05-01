@@ -1,4 +1,5 @@
 from home.models import BaseSettings
+from home.forms import QuickOrderForm
 from shop.models import Category 
  
 def load_settings(request):
@@ -9,3 +10,7 @@ def header_menu(request):
 
 def category_list(request):
     return {'category_list': Category.objects.all()}
+
+def QuickOrder(request):
+    form_quick = QuickOrderForm()
+    return {"form_quick": form_quick}

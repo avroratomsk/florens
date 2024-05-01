@@ -24,3 +24,26 @@ class CallbackForm(forms.Form):
       'rows': 7
       }
   ))
+  
+class QuickOrderForm(forms.Form):
+  name = forms.CharField(min_length=2, widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваше имя',
+      'class': 'form__controls'
+      }
+  ))
+
+  phone = forms.CharField(min_length=2, widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Ваш номер телефона',
+      'class': 'form__controls'
+      }
+  ))
+  
+  goods = forms.CharField(widget=forms.TextInput(
+    attrs={
+      'placeholder': 'Продукт',
+      'class': 'form__controls',
+      'type': 'hidden',
+      }
+  ))

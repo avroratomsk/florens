@@ -11,3 +11,14 @@ def email_callback(messages, title):
     email_clients.split(','),
     fail_silently=False,
   )
+  
+def email_quick_order(messages, title):
+  send_mail(
+    title,
+    messages,
+    EMAIL_FROM,
+    email_clients.split(','),
+    fail_silently=False,
+  )
+  
+  

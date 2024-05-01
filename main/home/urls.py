@@ -13,6 +13,7 @@ urlpatterns = [
     path('best-offer/', views.best_offer, name="best_offer"),
     path('questions/', views.questions, name="questions"),
     path('callback/', views.callback, name="callback"),
+    path('quick-order/', views.quick_order, name="quick_order"),
     path('callback-success/', views.callback_success, name="callback_success"),
     
     path('', views.index, name="home"),

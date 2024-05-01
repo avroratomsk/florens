@@ -355,6 +355,8 @@ function buyOneСlick(e) {
   // document.querySelector('.popup__product-img').src = img;
   document.querySelector('.popup__product-name').innerText = name;
   document.querySelector('.product__price-text').innerText = price;
+  console.log(document.getElementById('id_product'))
+  document.getElementById('id_goods').value = name;
   popup.classList.add('_open');
   bodyLock();
 

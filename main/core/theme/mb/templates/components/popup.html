@@ -13,10 +13,8 @@
           <p class="popup__product-total"><span>Сумма: </span><span class="product__price-text">1990₽</span></p>
         </div>
       </div>
-      <form action="{% url 'callback' %}" method="POST" class="popup__product-form form">
-        {% csrf_token %}
-        <input type="text" placeholder="Имя" class="form__controls" />
-        <input type="text" placeholder="Номер телефона" class="form__controls" />
+      <form action="{% url 'quick_order' %}" method="POST" class="popup__product-form form">
+        {% csrf_token %} {{ form_quick.name }}{{ form_quick.phone }}{{ form_quick.goods }}
         <button type="submit" class="form__submit">Отправить</button>
       </form>
     </div>

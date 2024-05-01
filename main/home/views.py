@@ -3,8 +3,8 @@ from django.shortcuts import redirect, render
 import itertools
 from home.models import AboutTemplate, BaseSettings, HomeTemplate, Questions, Slider, Stock
 from cart.models import Cart
-from home.forms import CallbackForm
-from home.callback_send import email_callback
+from home.forms import CallbackForm, QuickOrderForm
+from home.callback_send import email_callback, email_quick_order
 from shop.models import Category, CharGroup, CharName, Product, ProductChar
 from reviews.models import Reviews
 from django.http import HttpResponseRedirect
@@ -29,6 +29,29 @@ def callback(request):
   context = {
     'form': form
   }
+  
+  return render(request, 'pages/index.html', context)
+
+def quick_order(request):
+  if request.method == "POST":
+    form = QuickOrderForm(request.POST)
+    print(form)
+    if form.is_valid():
+      name  = form.cleaned_data['name']
+      phone = form.cleaned_data['phone']
+      product = form.cleaned_data['goods']
+      title = 'Быстрый заказ'
+      messages = "Быстрый заказ товара:" + "\n" + "*ИМЯ*: " +str(name) + "\n" + "*ТЕЛЕФОН*: " + str(phone) + "\n" + "*Название товара*: " +str(product)
+      
+      email_quick_order(messages, title)
+      
+      return redirect('callback_success')
+  else:
+    form = QuickOrderForm()
+  context = {
+    'form': form
+  }
+  
   
   return render(request, 'pages/index.html', context)
 

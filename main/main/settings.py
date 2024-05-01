@@ -59,6 +59,7 @@ TEMPLATES = [
                 "home.context_processors.load_settings",
                 "home.context_processors.header_menu",
                 "home.context_processors.category_list",
+                "home.context_processors.QuickOrder",
                 # "cart.context_processors.user_carts",
             ],
         },
