@@ -4,8 +4,8 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import AboutTemplateForm, CategoryForm, CharGroupForm, CharNameForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, QuestionPageForm, QuestionsForm, ReviewsForm, ServiceForm, ServicePageForm, ShopSettingsForm, StockForm, UploadFileForm
-from home.models import AboutTemplate, BaseSettings, HomeTemplate, QuestionPage, Questions, Stock
+from admin.forms import AboutTemplateForm, CategoryForm, CharGroupForm, CharNameForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, QuestionPageForm, QuestionsForm, ReviewsForm, ServiceForm, ServicePageForm, ShopSettingsForm, SliderForm, StockForm, UploadFileForm
+from home.models import AboutTemplate, BaseSettings, HomeTemplate, QuestionPage, Questions, Slider, Stock
 from main.settings import BASE_DIR
 from service.models import Service, ServicePage
 from reviews.models import Reviews
@@ -440,6 +440,54 @@ def parse_exсel(path):
         except Exception as e: 
           print(e)
 # parse_exсel(path)
+
+
+def slider_home(request):
+  slide = Slider.objects.all()
+  
+  context = {
+    "slides": slide
+  }
+  return render(request, "static/slider.html", context)
+  
+def slider_home_add(request):
+  form = SliderForm()
+  if request.method == "POST":
+    form_new = SliderForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect("slider_home")
+    else:
+      return render(request, "static/slider_add.html", {"form": form_new})
+    
+  context = {
+    "form": form
+  }
+  return render(request, "static/slider_add.html", context)
+
+def slider_home_edit(request, pk):
+  slide = Slider.objects.get(id=pk)
+  form = SliderForm(request.POST, request.FILES, instance=slide)
+  
+  if request.method == "POST":
+    
+    if form.is_valid():
+      form.save()
+      return redirect("slider_home")
+    else:
+      return render(request, "static/slider_edit.html", {"form": form})
+  
+  context = {
+    "form": SliderForm(instance=slide),
+    "slide": slide
+  }
+
+  return render(request, "static/slider_edit.html", context)
+
+def slider_home_delete(request, pk):
+  slide = Slider.objects.get(id=pk)
+  slide.delete()
+  return redirect("slider_home")
 
 def admin_category(request):
   categorys = Category.objects.all()

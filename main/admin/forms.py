@@ -1,5 +1,5 @@
 from django import forms
-from home.models import AboutTemplate, BaseSettings, HomeTemplate, Stock, QuestionPage, Questions
+from home.models import AboutTemplate, BaseSettings, HomeTemplate, Slider, Stock, QuestionPage, Questions
 from service.models import Service, ServicePage
 from reviews.models import Reviews
 from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage, ShopSettings
@@ -556,10 +556,10 @@ class StockForm(forms.ModelForm):
         'title',
         'slug',
         'description',
-        'validity',
         'home_slider',
         'status',
         'slider_status',
+        'link',
         'image',
         'meta_title',
         'meta_description',
@@ -568,8 +568,8 @@ class StockForm(forms.ModelForm):
     labels = {
         'title':'Название акции',
         'slug': 'URL',
-        'validity':'Срок действия акции',
         'home_slider':'Вывести в слайдер на главную',
+        'link':'Ссылка',
         'description':'Текст коментария',
         'status':'Статус публикации',
         'slider_status':'Вывод на главный слайдер',
@@ -588,7 +588,7 @@ class StockForm(forms.ModelForm):
         'class':'form__controls',
         "id": "slug"
       }),
-      'validity': forms.DateInput(attrs={
+      'link': forms.TextInput(attrs={
         'class':'form__controls',
       }),
       'description': forms.Textarea(attrs={
@@ -845,4 +845,18 @@ class QuestionsForm(forms.ModelForm):
         'description': forms.Textarea(attrs={
             'class': 'form__controls',
         })
+    }
+    
+class SliderForm(forms.ModelForm):
+  class Meta:
+    model = Slider
+    fields = [
+        'image',
+        'status',
+        
+    ]
+    widgets = {
+        'status': forms.CheckboxInput(attrs={
+            'class': 'form__controls-checkbox',
+        }),
     }

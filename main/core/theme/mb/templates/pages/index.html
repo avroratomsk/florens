@@ -9,7 +9,9 @@
             <div class="index-slider__content">
               <h1 class="index-slider__title">{{ slide.title }}</h1>
               <p class="index-slider__subtitle">{{ slide.description }}</p>
-              <a href="{{ slide.get_absolute_url }}" class="index-slider__link _btn">Подробнее об акции</a>
+              {% if slide.link %}
+              <a href="{{ slide.link }}" class="index-slider__link _btn">Подробнее об акции</a>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -263,22 +265,12 @@
   <section class="index-about">
     <div class="advantages__border borderDotted"></div>
     <div class="index-catalog__head">
-      <h2 class="index-catalog__title _title-h2">
-        О нашем магазине
-        <!-- <svg fill="none" viewBox="0 0 16 14" id="css--arrow" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M.759 6.638c0-.451.366-.817.817-.817h12.4a.817.817 0 110 1.634h-12.4a.817.817 0 01-.817-.817zm7.675 6.305a.825.825 0 010-1.173l3.749-3.71a2 2 0 000-2.844l-3.75-3.71A.825.825 0 019.595.333l4.935 4.883a2 2 0 010 2.843l-4.935 4.884a.825.825 0 01-1.16 0z"
-                fill="#3F3C38" />
-            </svg> -->
-      </h2>
+      <h2 class="index-catalog__title _title-h2">О нашем магазине</h2>
       <div class="index-catalog__links">
         <a href="{% url 'about' %}" class="index-catalog__link">Подробнее</a>
       </div>
     </div>
     <div class="advantages__border borderDotted"></div>
-    {% comment %}
-    <div class="index-about__text">{{ home_page.about_text }}</div>
-    {% endcomment %}
     <div class="index-about__text">
       <p>
         Наш интернет магазин осуществляет доставку цветов и подарков. Мы помогаем людям со всего мира быть ближе с их родными и близкими, проживающими в Иркутске и Иркутской
@@ -292,80 +284,24 @@
     </div>
     <div class="index-about__slider swiper">
       <div class="swiper-wrapper">
+        {% if slide_about %} {% for slide in slide_about %}
         <div class="index-about__slide swiper-slide">
-          <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="" />
+          {% thumbnail slide.image "1783x1188" format="WEBP" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width}}" height="im.height" alt="Слайд {{ forloop.counter}}" title="Слайд {{ forloop.counter}}" />
+          {% endthumbnail%}
         </div>
-        <div class="index-about__slide swiper-slide">
-          <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="" />
-        </div>
-        <div class="index-about__slide swiper-slide">
-          <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="" />
-        </div>
+        {% endfor %} {% endif %}
       </div>
       <div class="swiper-pagination"></div>
     </div>
   </section>
-
-  <!-- <section class="index-reviews">
-    <img src="{% static 'theme/mb/images/footer-img.png' %}" alt="" class="index-reviews__image" />
-    <img src="{% static 'theme/mb/images/footer-img.png' %}" alt="" class="index-reviews__image" />
-    <div class="advantages__border borderDotted"></div>
-    <div class="index-catalog__head">
-      <h2 class="index-catalog__title _title-h2">
-        Отзывы о нашей работе
-      </h2>
-      <div class="index-catalog__links">
-        <a href="#" class="index-catalog__link">Все отзывы</a>
-      </div>
-    </div>
-    <div class="advantages__border borderDotted"></div>
-    <div class="index-reviews__slider swiper">
-      <div class="swiper-wrapper">
-        <div class="index-reviews__slide swiper-slide">
-          <div class="reviews">
-            <div class="reviews__head">
-              <div class="reviews__head-left">
-                <h5 class="reviews__name">Ольга</h5>
-                <div class="reviews__stars">
-                  <div class="reviews__star">
-                    <img src="{% static 'theme/mb/images/i-star.svg' %}" alt="Отзыв оставила Ольга" />
-                  </div>
-                  <div class="reviews__star">
-                    <img src="{% static 'theme/mb/images/i-star.svg' %}" alt="Отзыв оставила Ольга" />
-                  </div>
-                  <div class="reviews__star">
-                    <img src="{% static 'theme/mb/images/i-star.svg' %}" alt="Отзыв оставила Ольга" />
-                  </div>
-                  <div class="reviews__star">
-                    <img src="{% static 'theme/mb/images/i-star.svg' %}" alt="Отзыв оставила Ольга" />
-                  </div>
-                  <div class="reviews__star">
-                    <img src="{% static 'theme/mb/images/i-star.svg' %}" alt="Отзыв оставила Ольга" />
-                  </div>
-                </div>
-              </div>
-              <div class="reviews__head-right">
-                <span class="reviews__date">12.04.2024</span>
-                <span class="reviews__time">13:22</span>
-              </div>
-            </div>
-            <div class="reviews__content">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam ex deleniti reprehenderit dolor quos!
-              Cupiditate doloremque facere officiis iusto? Soluta!
-            </div>
-            <a href="#" class="reviews__link">Читать отзыв</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
 
   <section class="faq">
     <div class="advantages__border borderDotted"></div>
     <div class="index-catalog__head">
       <h2 class="index-catalog__title _title-h2">Вопросы и ответы</h2>
       <div class="index-catalog__links">
-        <a href="#" class="index-catalog__link">Все отзывы</a>
+        <a href="{% url 'questions' %}" class="index-catalog__link">Все ответы</a>
       </div>
     </div>
     <div class="advantages__border borderDotted"></div>

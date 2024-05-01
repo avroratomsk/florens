@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 import itertools
-from home.models import AboutTemplate, BaseSettings, HomeTemplate, Questions, Stock
+from home.models import AboutTemplate, BaseSettings, HomeTemplate, Questions, Slider, Stock
 from cart.models import Cart
 from home.forms import CallbackForm
 from home.callback_send import email_callback
@@ -57,6 +57,7 @@ def index(request):
   reviews = Reviews.objects.filter(status=True)
   slider_image = Stock.objects.filter(status=True)
   questions = Questions.objects.filter(status=True)[:3]
+  slide_about = Slider.objects.filter(status=True)
   
   context = {
     "categorys": category,
@@ -68,6 +69,7 @@ def index(request):
     "reviews": reviews,
     "questions": questions,
     "slider_image": slider_image,
+    "slide_about": slide_about,
     "form": form
   }
   return render(request, 'pages/index.html', context)
@@ -133,7 +135,6 @@ def stock_product(request):
   }
   
   return render(request, "pages/stock-product.html", context)
-
 
 def news(request):
   products = Product.objects.filter(latest=True)

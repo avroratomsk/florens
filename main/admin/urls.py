@@ -6,6 +6,13 @@ from . import views
 urlpatterns = [
     path('', views.admin, name="admin"),
     
+    # Сладер на главной странице
+    # path('slider-general', views.general_slider, name="general_slider"),
+    path('slider-home/', views.slider_home, name="slider_home"),
+    path('slider-home/add/', views.slider_home_add, name="slider_home_add"),
+    path('slider-home/edit/<int:pk>/', views.slider_home_edit, name="slider_home_edit"),
+    path('slider-home/delete/<int:pk>/', views.slider_home_delete, name="slider_home_delete"),
+    
     #URl - отвечающие за загрузку данных
     path('upload-goods/', views.upload_goods, name="upload_goods"),
     path('upload-succes/', views.upload_succes, name="upload-succes"),

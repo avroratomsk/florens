@@ -43,9 +43,9 @@ class Stock(models.Model):
   """Model"""
   title = models.CharField(max_length=250, blank=True, null=True, verbose_name="Название акции")
   description = models.TextField(blank=True, null=True, verbose_name="Описание акции")
-  validity = models.DateTimeField(blank=True, null=True, help_text="После окончания акции, она перейдет в состояние не активна", verbose_name="Срок дейстия акции")
+  link = models.CharField(max_length=250, blank=True, null=True, verbose_name="Ссылка на страницу")
   status = models.BooleanField(default=True, verbose_name="Статус публикации")
-  image = models.ImageField(upload_to="stock", null=True, blank=True, verbose_name="ФОтография акции")
+  image = models.ImageField(upload_to="stock", null=True, blank=True, verbose_name="Фотография акции")
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
   home_slider = models.BooleanField(default=False, verbose_name="Вывести в слайдер на главной странице")
   meta_h1 = models.CharField(max_length=250, blank=True, null=True, verbose_name="Заголовок первого уровня")
@@ -68,4 +68,9 @@ class Questions(models.Model):
   title = models.CharField(max_length=250, null=True, blank=True, verbose_name="Вопрос")
   description = models.TextField(null=True, blank=True, verbose_name="Ответ")
   status = models.BooleanField(default=True, verbose_name="Статус публикации")
+  
+class Slider(models.Model):
+  image = models.ImageField(upload_to="slider", null=True, blank=True, verbose_name="Фотографии слайдера на главнойё")
+  status = models.BooleanField(default="True", blank=True, null=True, verbose_name="Отображать ?")
+  
   
