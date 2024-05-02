@@ -13,6 +13,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     "home",
     "shop",
+    "coupons",
     "users",
     "reviews",
     "service",

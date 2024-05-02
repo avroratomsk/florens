@@ -6,8 +6,8 @@ from order.models import Order
 from shop.models import Product
 
 
-login = "r-florens38-api"
-password = "r-florens38*?1"
+login = "r-florens38"
+password = "380894559223"
 # token = AlfaBank.objects.get().token
 
 

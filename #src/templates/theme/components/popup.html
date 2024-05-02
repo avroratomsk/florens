@@ -13,9 +13,8 @@
           <p class="popup__product-total"><span>Сумма: </span><span class="product__price-text">1990₽</span></p>
         </div>
       </div>
-      <form action="" method="POST" class="popup__product-form form">
-        <input type="text" placeholder="Имя" class="form__controls" />
-        <input type="text" placeholder="Номер телефона" class="form__controls" />
+      <form action="{% url 'quick_order' %}" method="POST" class="popup__product-form form">
+        {% csrf_token %} {{ form_quick.name }}{{ form_quick.phone }}{{ form_quick.goods }}
         <button type="submit" class="form__submit">Отправить</button>
       </form>
     </div>
@@ -30,10 +29,8 @@
       <div class="popup__answer">
         <span>Ответ:</span>
         <p class="popup__description">
-          Обратите внимание, что букеты на картинках — это лишь примеры наших работ. Мы не повторяем букеты, каждый их
-          них уникален, так как цветок — это живой организм, и найти
-          два идентичных практически невозможно. Помимо этого мы оставляем себе свободу для творчества и возможности
-          совершенствоваться и удивлять своих клиентов.
+          Обратите внимание, что букеты на картинках — это лишь примеры наших работ. Мы не повторяем букеты, каждый их них уникален, так как цветок — это живой организм, и найти
+          два идентичных практически невозможно. Помимо этого мы оставляем себе свободу для творчества и возможности совершенствоваться и удивлять своих клиентов.
         </p>
       </div>
     </div>
@@ -45,10 +42,7 @@
     <h3 class="popup__title">Перезвоните мне</h3>
     <button type="button" class="popup__close close-btn"></button>
     <form action="{% url 'callback' %}" class="popup__form form" method="POST">
-      {% csrf_token %}
-      {{ form.name }}
-      {{ form.phone }}
-      {{ form.message }}
+      {% csrf_token %} {{ form.name }} {{ form.phone }} {{ form.message }}
       <button type="submit" class="form__submit">Отправить</button>
     </form>
   </div>

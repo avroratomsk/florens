@@ -1,14 +1,27 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% load thumbnail %} {% block content %}
 
 <main class="page">
   <div class="about">
     <div class="about__top">
-      {% include "../components/breadcrumbs/breadcrumbs.html" %}
-      <h1 class="about__title _title">О нашем магазине</h1>
+      <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+        <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
+          Главная
+          <meta itemprop="position" content="1" />
+        </a>
+        <span itemprop="name" class="breadcrumbs__item">
+          О нас
+          <meta itemprop="position" content="2" />
+        </span>
+      </div>
+      <h1 class="about__title _title">{{ about_page.meta_h1 }}</h1>
     </div>
     <div class="about__content content-about">
       <div class="content-about__image">
-        <img src="{% static 'theme/mb/images/slide-2.jpg' %}" alt="" />
+        {% if about_page.banner %} {% thumbnail about_page.banner "1320x550" format="WEBP" crop="center" as im %}
+        <img src="{{ im.url }}" alt="about_page.meta_h1" width="{{ im.width }}" height="{{ im.height }}" title="about_page.meta_h1" />
+        {% endthumbnail %} {% else %}
+        <img src="{% static 'theme/mb/images/no-image.png' %}" alt="about_page.meta_h1" title="about_page.meta_h1" />
+        {% endif %}
       </div>
       <div class="content-about__text text">
         <h2>Магазин Florens</h2>

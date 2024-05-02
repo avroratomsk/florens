@@ -4,7 +4,10 @@
     <div class="index-slider__slider swiper-container">
       <div class="swiper-wrapper">
         {% if slider_image %} {% for slide in slider_image %}
-        <div class="index-slider__slide swiper-slide" style="background-image: url({% if slide.image %}{{ slide.image.url }}{% endif %})">
+        <div class="index-slider__slide swiper-slide">
+          {% thumbnail slide.image "1683x450" format="WEBP" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="index-slider__image" />
+          {% endthumbnail %}
           <div class="index-slider__slide-inner">
             <div class="index-slider__content">
               <h1 class="index-slider__title">{{ slide.title }}</h1>
@@ -20,22 +23,16 @@
       <div class="swiper-pagination"></div>
       <button type="button" aria-label="Предыдущий слайд" class="index-slider__prev swiper-button-prev">
         <svg fill="none" viewBox="0 0 88 176" id="css--union-nav" xmlns="http://www.w3.org/2000/svg">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+          <path fill-rule="evenodd" clip-rule="evenodd"
             d="M37 169a7 7 0 1014 0v-27.785c0-5.845 4.309-10.677 9.684-12.972 15.57-6.649 26.48-22.1 26.48-40.1 0-17.998-10.91-33.45-26.48-40.098C55.31 45.75 51 40.918 51 35.073V7a7 7 0 10-14 0v27.736c0 5.934-4.434 10.811-9.924 13.06C11.19 54.302 0 69.916 0 88.144c0 18.228 11.19 33.842 27.076 40.348 5.49 2.248 9.924 7.126 9.924 13.059V169z"
-            fill="#FDFDFD"
-          />
+            fill="#FDFDFD" />
         </svg>
       </button>
       <button type="button" aria-label="Следующий слайд" class="index-slider__next swiper-button-next">
         <svg fill="none" viewBox="0 0 88 176" id="css--union-nav" xmlns="http://www.w3.org/2000/svg">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+          <path fill-rule="evenodd" clip-rule="evenodd"
             d="M37 169a7 7 0 1014 0v-27.785c0-5.845 4.309-10.677 9.684-12.972 15.57-6.649 26.48-22.1 26.48-40.1 0-17.998-10.91-33.45-26.48-40.098C55.31 45.75 51 40.918 51 35.073V7a7 7 0 10-14 0v27.736c0 5.934-4.434 10.811-9.924 13.06C11.19 54.302 0 69.916 0 88.144c0 18.228 11.19 33.842 27.076 40.348 5.49 2.248 9.924 7.126 9.924 13.059V169z"
-            fill="#FDFDFD"
-          />
+            fill="#FDFDFD" />
         </svg>
       </button>
     </div>
@@ -83,7 +80,8 @@
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
-            {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %} {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
+            {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %}
+            {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
             {% endthumbnail %} {% endif %} {% endfor %} {% else %}
             <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" class="product-click-image" />
@@ -94,11 +92,9 @@
             <a href="{{ product.get_absolute_url }}" class="card__title-h3">{{ product.name }}</a>
             <div class="card__content-bottom">
               {% if product.sale_price %}
-              <span class="card__price"
-                ><s>{{ product.price }}</s>
+              <span class="card__price"><s>{{ product.price }}</s>
                 <span class="card__price-number">{{ product.sale_price }}</span>
-                <span class="currency">₽</span></span
-              >
+                <span class="currency">₽</span></span>
               {% else %}
               <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
               {% endif %}
@@ -135,7 +131,8 @@
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-            {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %} {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
+            {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %}
+            {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
             {% endthumbnail %} {% endif %} {% endfor %} {% else %}
             <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
@@ -146,11 +143,9 @@
             <a href="{{ product.get_absolute_url }}" class="card__title-h3">{{ product.name }}</a>
             <div class="card__content-bottom">
               {% if product.sale_price %}
-              <span class="card__price"
-                ><s>{{ product.price }}</s>
+              <span class="card__price"><s>{{ product.price }}</s>
                 <span class="card__price-number">{{ product.sale_price }}</span>
-                <span class="currency">₽</span></span
-              >
+                <span class="currency">₽</span></span>
               {% else %}
               <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
               {% endif %}
@@ -190,7 +185,8 @@
           <div class="card__image">
             {% if product.image %} {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-            {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %} {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
+            {% endthumbnail %} {% for image in product.images.all %} {% if forloop.counter == 2 %}
+            {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
             {% endthumbnail %} {% endif %} {% endfor %} {% else %}
             <img src="{% static 'theme/mb/images/no-image.png' %}" alt="" />
@@ -201,11 +197,9 @@
             <a href="{{ product.get_absolute_url }}" class="card__title-h3">{{ product.name }}</a>
             <div class="card__content-bottom">
               {% if product.sale_price %}
-              <span class="card__price"
-                ><s>{{ product.price }}</s>
+              <span class="card__price"><s>{{ product.price }}</s>
                 <span class="card__price-number">{{ product.sale_price }}</span>
-                <span class="currency">₽</span></span
-              >
+                <span class="currency">₽</span></span>
               {% else %}
               <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
               {% endif %}
@@ -244,7 +238,8 @@
       <div class="advantages__border borderDotted"></div>
       <div class="index-category__grid">
         {% if categorys %} {% for category in categorys %}
-        <a href="{{ category.get_absolute_url }}" class="index-category__item" style="background-image: url({% if category.image %}{{ category.image }}{% endif %})">
+        <a href="{{ category.get_absolute_url }}" class="index-category__item"
+          style="background-image: url({% if category.image %}{{ category.image }}{% endif %})">
           <div class="index-category__item-col">
             <div class="index-category__item-top">
               <span>{{ category.product_count }}</span>
@@ -273,12 +268,15 @@
     <div class="advantages__border borderDotted"></div>
     <div class="index-about__text">
       <p>
-        Наш интернет магазин осуществляет доставку цветов и подарков. Мы помогаем людям со всего мира быть ближе с их родными и близкими, проживающими в Иркутске и Иркутской
-        области. У нас работают лучшие флористы, которые внимательно относятся к каждому цветку. Соберут для вас букеты любой сложности, на любой вкус и случай. Команда вежливых
+        Наш интернет магазин осуществляет доставку цветов и подарков. Мы помогаем людям со всего мира быть ближе с их
+        родными и близкими, проживающими в Иркутске и Иркутской
+        области. У нас работают лучшие флористы, которые внимательно относятся к каждому цветку. Соберут для вас букеты
+        любой сложности, на любой вкус и случай. Команда вежливых
         курьеров, понимающих важность своевременной доставки.
       </p>
       <p>
-        У нас имеется программа лояльности и накопительная система скидок. Мы готовы прислать фото готового букета, а также фото с получателем. Гарантируем конфиденциальность.
+        У нас имеется программа лояльности и накопительная система скидок. Мы готовы прислать фото готового букета, а
+        также фото с получателем. Гарантируем конфиденциальность.
         Получатель узнает только то, что написано в открытке.
       </p>
     </div>
@@ -287,7 +285,8 @@
         {% if slide_about %} {% for slide in slide_about %}
         <div class="index-about__slide swiper-slide">
           {% thumbnail slide.image "1783x1188" format="WEBP" crop="center" as im %}
-          <img src="{{ im.url }}" width="{{ im.width}}" height="im.height" alt="Слайд {{ forloop.counter}}" title="Слайд {{ forloop.counter}}" />
+          <img src="{{ im.url }}" width="{{ im.width}}" height="im.height" alt="Слайд {{ forloop.counter}}"
+            title="Слайд {{ forloop.counter}}" />
           {% endthumbnail%}
         </div>
         {% endfor %} {% endif %}
@@ -313,8 +312,7 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2"
-            />
+              fill="#F3F3F2" />
           </svg>
         </button>
         <div class="faq__item-description">{{ question.description }}</div>
@@ -326,8 +324,7 @@
           <svg fill="none" viewBox="0 0 12 12" id="icons--card-arrow" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M.95.95a.831.831 0 000 1.175l8.922 8.922a.831.831 0 101.175-1.175L2.125.95A.831.831 0 00.95.95zm10.058.985a.84.84 0 00-.844.844l.029 5.403a2 2 0 01-2.01 2.01l-5.404-.028a.84.84 0 10-.008 1.68l7.1.037a2 2 0 002.01-2.01l-.037-7.1a.84.84 0 00-.836-.836z"
-              fill="#F3F3F2"
-            />
+              fill="#F3F3F2" />
           </svg>
         </span>
       </a>
@@ -345,7 +342,8 @@
           Оставьте номер телефона. <br />
           Флорист свяжется с вами и подберет букет по вашему пожеланию.
         </p>
-        <button type="button" class="callback__btn" data-popup="callback" aria-label="Заказать обратный звонок">Связаться со мной</button>
+        <button type="button" class="callback__btn" data-popup="callback"
+          aria-label="Заказать обратный звонок">Связаться со мной</button>
       </div>
     </div>
   </section>
