@@ -1,6 +1,7 @@
 from django import forms
 from home.models import HomeTemplate
 from shop.models import Category,Product
+# from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
 class CallbackForm(forms.Form):
   name = forms.CharField(min_length=2, widget=forms.TextInput(
@@ -24,8 +25,10 @@ class CallbackForm(forms.Form):
       'rows': 7
       }
   ))
+  # captcha = ReCaptchaField()
   
 class QuickOrderForm(forms.Form):
+  
   name = forms.CharField(min_length=2, widget=forms.TextInput(
     attrs={
       'placeholder': 'Ваше имя',

@@ -108,14 +108,17 @@
             </div>
           </div>
           {% endfor %}
-          <div class="order-create__promocod">
-            <form action="#" method="POST" id="promocod-form" class="order-create__form form">
-              <input type="search" name="promocod" id="promocod" class="form__controls" placeholder="Введите промокод" />
-            </form>
-          </div>
-          <div class="order-create__total"><span>Итого:</span> {{ cart.total_price }} руб.</div>
+          <div class="order-create__promocod"></div>
+          <div class="order-create__total"><span>Сумма:</span> {{ cart.total_price }} руб.</div>
+          <div class="order-create__total"><span>Скидка:</span> -630 руб.</div>
+          <div class="order-create__total"><span>Итого:</span> 5670 руб.</div>
         </div>
       </div>
+    </form>
+    <form action="{% url 'apply' %}" method="POST" id="promocod-form" class="order-create__form form">
+      {% csrf_token %}
+      <input type="text" name="code" id="id_code" class="form__controls" placeholder="Введите промокод" />
+      <button type="button" id="btn-apply">Применить</button>
     </form>
   </section>
 </main>

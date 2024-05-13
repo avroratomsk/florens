@@ -7,6 +7,7 @@ from shop.models import Product
 
 
 login = "r-florens38-api"
+# password = "HrV8Xh9h"
 password = "x856m22K1%"
 # token = AlfaBank.objects.get().token
 
@@ -50,10 +51,8 @@ def create_payment(order, cart, request):
         "failUrl": failUrl,
         "cartItems": items,
     }
-    try:
-        r = requests.post("https://alfa.rbsuat.com/payment/rest/register.do", post_data)
-    except Exception as e:
-        print(e)
+    
+    r = requests.post("https://payment.alfabank.ru/payment/rest/register.do", post_data)
 
     try:
         confirmation_url = r.json()["formUrl"]

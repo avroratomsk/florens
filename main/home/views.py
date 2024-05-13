@@ -10,6 +10,7 @@ from reviews.models import Reviews
 from django.http import HttpResponseRedirect
 
 
+
 def callback(request):
   if request.method == "POST":
     form = CallbackForm(request.POST)

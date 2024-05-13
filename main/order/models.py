@@ -1,4 +1,5 @@
 from django.db import models
+from coupons.models import Coupon
 from shop.models import Product
 
 from users.models import User
@@ -32,6 +33,7 @@ class Order(models.Model):
   phone_number_human = models.CharField(max_length=50, null=True, blank=True, verbose_name="Номер получателя")
   pickup = models.BooleanField(default=False, verbose_name="Самовывоз")
   who_get_bouqets = models.BooleanField(default=False, verbose_name="Кто получатель ?")
+  coupon = models.ForeignKey(Coupon, related_name='orders', null=True, blank=True, on_delete=models.CASCADE)
   
   ORDER_STATUS = (
     ('Новый', 'Новый'),

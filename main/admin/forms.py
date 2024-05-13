@@ -1,5 +1,6 @@
 from django import forms
 from home.models import AboutTemplate, BaseSettings, HomeTemplate, Slider, Stock, QuestionPage, Questions
+from coupons.models import Coupon
 from service.models import Service, ServicePage
 from reviews.models import Reviews
 from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage, ShopSettings
@@ -860,3 +861,39 @@ class SliderForm(forms.ModelForm):
             'class': 'form__controls-checkbox',
         }),
     }
+    
+class CouponForm(forms.ModelForm):
+    class Meta:
+        model = Coupon
+        fields = "__all__"
+        labels = {
+            'code': 'Код купона',
+            'valid_from': 'Дата начала акции',
+            'valid_to': 'Дата окончания акции',
+            'discount': 'Скидка',
+            'active': 'Активность',
+        }
+        widgets = {
+            'code': forms.TextInput(attrs={
+                'class': 'form__controls',
+                'placeholder': 'Код купона',
+            }),
+            'valid_from': forms.DateInput(attrs={
+                'class': 'form__controls',
+                'type': 'date',
+                
+            }),
+            'valid_to': forms.DateInput(attrs={
+                'class': 'form__controls',
+                'type': 'date',
+                
+            }),
+
+            
+            'discount': forms.NumberInput(attrs={
+                'class': 'form__controls',
+                'placeholder': 'Скидка',
+            }),
+           
+            
+        }

@@ -530,4 +530,37 @@ $(document).on("click", ".remove-from-cart", function (e) {
   });
 });
 
+/**
+ * Купоны
+ */
 
+const btnApplyCoupon = document.getElementById('btn-apply');
+if (btnApplyCoupon) {
+  btnApplyCoupon.addEventListener('click', applyCoupon)
+}
+
+function applyCoupon(e) {
+
+  let coupon = document.getElementById('id_code').value;
+  const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  if (coupon) {
+    fetch('/coupons/apply/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken
+      },
+      body: JSON.stringify({ coupon: coupon })
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Coupon applied successfully');
+        } else {
+          console.error('Error applying coupon');
+        }
+      })
+      .catch(error => {
+        console.error('Request failed', error);
+      });
+  }
+}

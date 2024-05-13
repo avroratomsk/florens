@@ -15,6 +15,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('orders/', include('order.urls')),
     path('admin/', include('admin.urls')),
+    path('coupons/', include(('coupons.urls'))),
     path('', include('home.urls')),
 ]
 

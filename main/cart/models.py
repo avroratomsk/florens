@@ -28,6 +28,7 @@ class Cart(models.Model):
   session_key = models.CharField(max_length=32, null=True, blank=True, verbose_name="ключ сессии если пользователь не авторизован")
   created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата обновления")
   
+  
   class Meta:
     db_table = "cart"
     verbose_name = "Корзина"

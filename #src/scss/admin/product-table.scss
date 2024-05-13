@@ -44,6 +44,23 @@
 
 }
 
+.table-5 {
+
+  // .table-5__head
+  &__head {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    background-color: rgba($color: $white, $alpha: 1.0);
+  }
+
+  // .table-5__body 
+  &__body {
+    .body-table__row {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
+
+}
+
 .table-2 {
 
   // .table-2__head

@@ -111,7 +111,6 @@ def order_create(request):
 
               order.payment_id = payment_id
               order.payment_dop_info = confirmation_url
-              print(confirmation_url)
               order.save()
               return redirect(confirmation_url)
           else:
@@ -162,7 +161,21 @@ def order_success(request):
         return redirect("/?order=True")
 
     else:
-        return redirect("order_error")
+        order = data["order"]
+
+        email_send(order)
+
+        text = f"Ваш заказ принят. Ему присвоен № {order.id}."
+
+        session_key = request.session.session_key
+        cart_items = Cart.objects.filter(session_key=session_key)
+        cart_items.delete()
+        request.session["delivery"] = 1
+        order.paid = True
+
+        order.save()
+        return redirect("order_success")
+        # return redirect("order_error")
 
 # def order_create(request):
 #   if request.method == 'POST':
