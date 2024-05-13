@@ -33,8 +33,8 @@ urlpatterns = [
     
     
     #URl - Промокоды
-    path('admin-promo/', views.admin_promo, name='admin_promo'),
-    path('promo-add/add/', views.promo_add, name='promo_add'),
+    # path('admin-promo/', views.admin_promo, name='admin_promo'),
+    # path('promo-add/add/', views.promo_add, name='promo_add'),
     # path('days/edit/<int:pk>/', views.day_edit, name='days_edit'),
     # path('days/delete/<int:pk>/', views.day_delete, name='days_delete'),
     
