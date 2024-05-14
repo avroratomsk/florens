@@ -18,14 +18,15 @@ import pandas as pd
 # from django.contrib.auth.decorators import user_passes_test
 
 # @user_passes_test(lambda u: u.is_superuser)
-# def sidebar_show(request): 
+def sidebar_show(request): 
    
-#     request.session['sidebar'] = 'True' 
+    request.session['sidebar'] = 'True' 
     
-#     return redirect('admin')
+    return redirect('admin')
 
 # @user_passes_test(lambda u: u.is_superuser)
 
+# @user_passes_test(lambda u: u.is_superuser)
 def admin(request):
   """Данная предстовление отобразает главную страницу админ панели"""
   return render(request, "page/index.html")
