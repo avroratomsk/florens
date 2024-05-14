@@ -21,7 +21,6 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'allauth',
     'allauth.account',
-    # 'allauth.socialaccount',
     "debug_toolbar",
     "corsheaders",
     'sorl.thumbnail',
