@@ -180,7 +180,7 @@
         </svg>
         <span>Слайдер</span>
       </a>
-      <a href="" class="sidebar__link">
+      {% comment %} <a href="" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -220,7 +220,7 @@
         </svg>
 
         <span>Галерея</span>
-      </a>
+      </a> {% endcomment %}
       <a href="{% url 'admin_reviews' %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
@@ -354,7 +354,7 @@
             </g>
           </g>
         </svg>
-        <span>Шаблон главной страницы</span>
+        <span>Главной страницы</span>
       </a>
       <a href="{% url "about_home" %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
@@ -451,7 +451,7 @@
     </p>
 
     <div class="sidebar__subitem dropdownContent hidden">
-      <a href="" class="sidebar__link">
+      {% comment %} <a href="" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -491,7 +491,7 @@
         </svg>
 
         <span>Настройки страницы</span>
-      </a>
+      </a> {% endcomment %}
       <a href="{% url 'admin_service' %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
@@ -536,7 +536,7 @@
     </div>
   </div>
 
-  <div class="sidebar__item dropdownButton">
+  {% comment %} <div class="sidebar__item dropdownButton">
     <a href="#" class="sidebar__title">
       <svg id="dashboard" xmlns="http://www.w3.org/2000/svg" width="16.025" height="16.025" viewBox="0 0 16.025 16.025">
         <g id="Group_2301" data-name="Group 2301" transform="translate(8.638)">
@@ -586,7 +586,7 @@
 
       <span>Аналитика</span>
     </a>
-  </div>
+  </div> {% endcomment %}
 
   <div class="sidebar__item dropdownButton">
     <p class="sidebar__title {% if request.session.sidebar == 'False' %}sidebar__title--max {% else %}sidebar__title--min{% endif %}">
@@ -691,7 +691,7 @@
         <span>Категории</span>
       </a>
 
-      <a href="{% url 'admin_day' %}" class="sidebar__link">
+      {% comment %} <a href="{% url 'admin_day' %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -731,7 +731,7 @@
         </svg>
 
         <span>День</span>
-      </a>
+      </a> {% endcomment %}
 
       <a href="{% url 'admin_product' %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
@@ -773,7 +773,8 @@
         </svg>
         <span>Товары</span>
       </a>
-      <a href="{% url 'admin_fillial' %}" class="sidebar__link">
+      
+      {% comment %} <a href="{% url 'admin_fillial' %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -813,8 +814,8 @@
         </svg>
 
         <span>Филлиалы</span>
-      </a>
-      <a href="" class="sidebar__link">
+      </a> {% endcomment %}
+      {% comment %} <a href="" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -854,8 +855,8 @@
         </svg>
 
         <span>Опции</span>
-      </a>
-      <a href="" class="sidebar__link">
+      </a> {% endcomment %}
+      <a href="{% url 'admin_char' %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -896,7 +897,7 @@
 
         <span>Характеристики</span>
       </a>
-      <a href="" class="sidebar__link">
+      {% comment %} <a href="" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -936,48 +937,8 @@
         </svg>
 
         <span>Производители</span>
-      </a>
-      <a href="" class="sidebar__link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
-          <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
-            <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
-              <g id="Group_2308" data-name="Group 2308" transform="translate(0 0)">
-                <path
-                  id="Path_915"
-                  data-name="Path 915"
-                  d="M15.516,37.374,8.2,34.234a.624.624,0,0,0-.492,0L.386,37.374a.624.624,0,0,0,0,1.147L7.706,41.64a.624.624,0,0,0,.489,0l7.319-3.119a.624.624,0,0,0,0-1.147ZM7.951,40.388,2.218,37.945l5.732-2.459,5.732,2.459Z"
-                  transform="translate(-0.008 -34.184)"
-                  fill="#40547b"
-                />
-              </g>
-            </g>
-            <g id="Group_2311" data-name="Group 2311" transform="translate(0 43.561)">
-              <g id="Group_2310" data-name="Group 2310" transform="translate(0)">
-                <path
-                  id="Path_916"
-                  data-name="Path 916"
-                  d="M15.835,336.782a.624.624,0,0,0-.819-.327l-7.073,3.034L.869,336.455A.624.624,0,1,0,.378,337.6l7.319,3.14a.624.624,0,0,0,.492,0l7.319-3.14A.624.624,0,0,0,15.835,336.782Z"
-                  transform="translate(0 -336.404)"
-                  fill="#40547b"
-                />
-              </g>
-            </g>
-            <g id="Group_2313" data-name="Group 2313" transform="translate(0 40.442)">
-              <g id="Group_2312" data-name="Group 2312" transform="translate(0 0)">
-                <path
-                  id="Path_917"
-                  data-name="Path 917"
-                  d="M15.842,236.268a.624.624,0,0,0-.818-.329l-7.075,3.015L.875,235.939a.624.624,0,0,0-.489,1.148L7.7,240.205a.624.624,0,0,0,.489,0l7.319-3.119A.624.624,0,0,0,15.842,236.268Z"
-                  transform="translate(-0.007 -235.889)"
-                  fill="#40547b"
-                />
-              </g>
-            </g>
-          </g>
-        </svg>
+      </a> {% endcomment %}
 
-        {% comment %} <span>Настройка наценки</span> {% endcomment %}
-      </a>
       <a href="{% url 'upload_goods' %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
@@ -1022,7 +983,7 @@
     </div>
   </div>
 
-  <div class="sidebar__item dropdownButton">
+  {% comment %} <div class="sidebar__item dropdownButton">
     <p class="sidebar__title {% if request.session.sidebar == 'False' %}sidebar__title--max {% else %}sidebar__title--min{% endif %}">
       <svg xmlns="http://www.w3.org/2000/svg" width="14.505" height="14.505" viewBox="0 0 14.505 14.505">
         <g id="Group_2345" data-name="Group 2345" transform="translate(-218.848 -247.717)">
@@ -1139,9 +1100,9 @@
         <span>Заказы</span>
       </a>
     </div>
-  </div>
+  </div> {% endcomment %}
 
-  <div class="sidebar__item dropdownButton">
+  {% comment %} <div class="sidebar__item dropdownButton">
     <p class="sidebar__title {% if request.session.sidebar == 'False' %}sidebar__title--max {% else %}sidebar__title--min{% endif %}">
       <svg xmlns="http://www.w3.org/2000/svg" width="14.504" height="13.598" viewBox="0 0 14.504 13.598">
         <g id="note" transform="translate(0 -16)">
@@ -1295,9 +1256,9 @@
         <span>Статьи блога</span>
       </a>
     </div>
-  </div>
+  </div> {% endcomment %}
 
-  <div class="sidebar__item dropdownButton">
+  {% comment %} <div class="sidebar__item dropdownButton">
     <p class="sidebar__title {% if request.session.sidebar == 'False' %}sidebar__title--max {% else %}sidebar__title--min{% endif %}">
       <svg xmlns="http://www.w3.org/2000/svg" width="17.228" height="14.538" viewBox="0 0 17.228 14.538">
         <g id="switch" transform="translate(0 -1)">
@@ -1459,7 +1420,7 @@
         <span>Рассылки</span>
       </a>
     </div>
-  </div>
+  </div> {% endcomment %}
 
   <div class="sidebar__item dropdownButton">
     <p class="sidebar__title {% if request.session.sidebar == 'False' %}sidebar__title--max {% else %}sidebar__title--min{% endif %}">
@@ -1559,7 +1520,7 @@
 
         <span>Общие настройки</span>
       </a>
-      <a href="" class="sidebar__link">
+      {% comment %} <a href="" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -1599,8 +1560,8 @@
         </svg>
 
         <span>Платежи</span>
-      </a>
-      <a href="" class="sidebar__link">
+      </a> {% endcomment %}
+      {% comment %} <a href="" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -1640,11 +1601,11 @@
         </svg>
 
         <span>Коды счетчиков</span>
-      </a>
+      </a> {% endcomment %}
     </div>
   </div>
 
-  <div class="sidebar__item dropdownButton">
+  {% comment %} <div class="sidebar__item dropdownButton">
     <p class="sidebar__title {% if request.session.sidebar == 'False' %}sidebar__title--max {% else %}sidebar__title--min{% endif %}">
       <svg xmlns="http://www.w3.org/2000/svg" width="20.437" height="13.496" viewBox="0 0 20.437 13.496">
         <g id="motion_1_" data-name="motion (1)" transform="translate(0 -89)">
@@ -1746,5 +1707,5 @@
         <span>Цвета</span>
       </a>
     </div>
-  </div>
+  </div> {% endcomment %}
 </div>

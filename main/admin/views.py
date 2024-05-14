@@ -15,22 +15,23 @@ from django.core.files.images import ImageFile
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 import openpyxl
 import pandas as pd
-# from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test
 
-# @user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def sidebar_show(request): 
    
     request.session['sidebar'] = 'True' 
     
     return redirect('admin')
 
-# @user_passes_test(lambda u: u.is_superuser)
 
-# @user_passes_test(lambda u: u.is_superuser)
+
+@user_passes_test(lambda u: u.is_superuser)
 def admin(request):
   """Данная предстовление отобразает главную страницу админ панели"""
   return render(request, "page/index.html")
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_settings(request):
   try:
     settings = BaseSettings.objects.get()
@@ -58,6 +59,7 @@ def admin_settings(request):
 
   return render(request, "settings/general_settings.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_shop(request):
   try:
     shop_setup = ShopSettings.objects.get()
@@ -81,6 +83,7 @@ def admin_shop(request):
   }  
   return render(request, "shop/settings.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_product(request):
   """
   View, которая возвращаяет и отрисовывает все товары на странице
@@ -97,6 +100,7 @@ def admin_product(request):
   }
   return render(request, "shop/product/product.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def product_edit(request, pk):
   """
     View, которая получает данные из формы редактирования товара
@@ -159,6 +163,7 @@ def product_edit(request, pk):
   }
   return render(request, "shop/product/product_edit.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def product_add(request):
   form = ProductForm()
   product_char_form = ProductCharForm()
@@ -197,12 +202,14 @@ def product_add(request):
   
   return render(request, 'shop/product/product_add.html', context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def product_delete(request,pk):
   product = Product.objects.get(id=pk)
   product.delete()
   
   return redirect('admin_product')
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_char(request):
   chars = CharName.objects.filter(group=None)
   groups = CharGroup.objects.all()
@@ -213,6 +220,7 @@ def admin_char(request):
     }
   return render(request, "shop/char/char.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def char_add(request):
   if request.method == 'POST':
         form_new = CharNameForm(request.POST)
@@ -228,6 +236,7 @@ def char_add(request):
   }
   return render(request, 'shop/char/char_add.html', context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def char_edit(request, pk):
   char = CharName.objects.get(id=pk)
   
@@ -245,11 +254,13 @@ def char_edit(request, pk):
   }
   return render(request, 'shop/char/char_edit.html', context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def char_delete(request, pk):
   char = CharName.objects.get(id=pk)
   char.delete()
   return redirect('admin_char')
 
+@user_passes_test(lambda u: u.is_superuser)
 def char_group_add(request):
   if request.method == 'POST':
       form_new = CharGroupForm(request.POST)
@@ -265,6 +276,7 @@ def char_group_add(request):
   }
   return render(request, 'shop/char/char_group_add.html', context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def char_group_edit(request, pk):
   char_group = CharGroup.objects.get(id=pk)
   if request.method == "POST":
@@ -282,7 +294,7 @@ def char_group_edit(request, pk):
   
   return render(request, "shop/char/char_group_edit.html", context)
 
-
+@user_passes_test(lambda u: u.is_superuser)
 def char_group_delete(request, pk):
   char_group = CharGroup.objects.get(id=pk)
   char_group.delete()
@@ -292,6 +304,7 @@ folder = 'upload/'
 
 from PIL import Image
 
+@user_passes_test(lambda u: u.is_superuser)
 def upload_goods(request):
     form = UploadFileForm()
     if request.method == 'POST':
@@ -325,6 +338,7 @@ def upload_goods(request):
         form = UploadFileForm()
     return render(request, 'upload/upload.html', {'form': form})
 
+@user_passes_test(lambda u: u.is_superuser)
 def upload_succes(request):
   return render(request, "upload/upload-succes.html")
 
@@ -335,6 +349,7 @@ from pytils.translit import slugify
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 
+@user_passes_test(lambda u: u.is_superuser)
 def parse_exсel(path):
   workbook = openpyxl.load_workbook(path)
   sheet = workbook.active
@@ -432,7 +447,7 @@ def parse_exсel(path):
           print(e)
 # parse_exсel(path)
 
-
+@user_passes_test(lambda u: u.is_superuser)
 def slider_home(request):
   slide = Slider.objects.all()
   
@@ -440,7 +455,9 @@ def slider_home(request):
     "slides": slide
   }
   return render(request, "static/slider.html", context)
-  
+
+
+@user_passes_test(lambda u: u.is_superuser)
 def slider_home_add(request):
   form = SliderForm()
   if request.method == "POST":
@@ -456,6 +473,8 @@ def slider_home_add(request):
   }
   return render(request, "static/slider_add.html", context)
 
+
+@user_passes_test(lambda u: u.is_superuser)
 def slider_home_edit(request, pk):
   slide = Slider.objects.get(id=pk)
   form = SliderForm(request.POST, request.FILES, instance=slide)
@@ -475,11 +494,13 @@ def slider_home_edit(request, pk):
 
   return render(request, "static/slider_edit.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def slider_home_delete(request, pk):
   slide = Slider.objects.get(id=pk)
   slide.delete()
   return redirect("slider_home")
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_category(request):
   categorys = Category.objects.all()
   
@@ -488,6 +509,7 @@ def admin_category(request):
   }
   return render(request, "shop/category/category.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def category_add(request):
   form = CategoryForm()
   if request.method == "POST":
@@ -503,6 +525,7 @@ def category_add(request):
   }
   return render(request, "shop/category/category_add.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def category_edit(request, pk):
   categorys = Category.objects.get(id=pk)
   form = CategoryForm(request.POST, request.FILES, instance=categorys)
@@ -522,12 +545,14 @@ def category_edit(request, pk):
 
   return render(request, "shop/category/category_edit.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def category_delete(request, pk):
   category = Category.objects.get(id=pk)
   category.delete()
   
   return redirect('admin_category')
 
+@user_passes_test(lambda u: u.is_superuser)
 def day_product(request):
   pass
   # days = Day.objects.all().exclude(slug="ezhednevno")
@@ -538,6 +563,7 @@ def day_product(request):
   
   # return render(request, "days/days.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def day_edit(request, pk):
   pass
   # day = Day.objects.get(id=pk)
@@ -557,6 +583,7 @@ def day_edit(request, pk):
   
   # return render(request, "days/days_edit.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def day_add(request):
   pass
   # form = DayForm()
@@ -573,6 +600,7 @@ def day_add(request):
   
   # return render(request, "days/days_add.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_fillial(request):
   pass
   # fillials = Subsidiary.objects.all()
@@ -583,6 +611,7 @@ def admin_fillial(request):
   
   # return render(request, "fillials/fillial.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def fillial_edit(request, pk):
   pass
   # fillial = Subsidiary.objects.get(id=pk)
@@ -602,6 +631,7 @@ def fillial_edit(request, pk):
   
   # return render(request, "fillials/fillial_edit.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def fillial_add(request):
   pass
   # form = FillialForm()
@@ -619,6 +649,7 @@ def fillial_add(request):
   
   # return render(request, "fillials/fillial_add.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_home(request):
   try:
     home_page = HomeTemplate.objects.get()
@@ -644,6 +675,7 @@ def admin_home(request):
   
   return render(request, "static/home_page.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def about_home(request):
   try:
     about_page = AboutTemplate.objects.get()
@@ -668,7 +700,8 @@ def about_home(request):
   }  
   
   return render(request, "static/about_page.html", context)
-    
+
+@user_passes_test(lambda u: u.is_superuser)
 def admin_question(request):
   try:
     question_page = QuestionPage.objects.get()
@@ -694,6 +727,7 @@ def admin_question(request):
   
   return render(request, "static/question_page.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def questions(request):
   questions = Questions.objects.all()
   
@@ -703,6 +737,7 @@ def questions(request):
   
   return render(request, "questions/questions.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def question_add(request):
   form = QuestionsForm()
   
@@ -720,6 +755,7 @@ def question_add(request):
   
   return render(request, "questions/question_add.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def question_edit(request, pk):
   question = Questions.objects.get(id=pk)
   form = QuestionsForm(instance=question)
@@ -737,11 +773,13 @@ def question_edit(request, pk):
   
   return render(request, "questions/question_edit.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def question_delete(request,pk):
   question = Questions.objects.get()
   question.delete()
   return redirect("question")
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_service_page(request):
   try:
     service_page = ServicePage.objects.get()
@@ -767,6 +805,7 @@ def admin_service_page(request):
   
   return render(request, "static/home_page.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_reviews(request):
   reviews = Reviews.objects.all()
   
@@ -776,6 +815,7 @@ def admin_reviews(request):
   
   return render(request, "reviews/reviews.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_reviews_edit(request, pk):
   review = Reviews.objects.get(id=pk)
   form = ReviewsForm(instance=review)
@@ -795,6 +835,7 @@ def admin_reviews_edit(request, pk):
   
   return render(request, "reviews/reviews_edit.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_reviews_add(request):
   form = ReviewsForm()
   if request.method == "POST":
@@ -811,6 +852,7 @@ def admin_reviews_add(request):
   
   return render(request, "reviews/reviews_add.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_stock(request):
   stocks = Stock.objects.all()
   
@@ -820,6 +862,7 @@ def admin_stock(request):
   
   return render(request, "stock/stock.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def stock_add(request):
   form = StockForm()
   
@@ -837,6 +880,7 @@ def stock_add(request):
   
   return render(request, "stock/stock_add.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def stock_edit(request, pk):
   stock = Stock.objects.get(id=pk)
   form = StockForm(instance=stock)
@@ -854,11 +898,13 @@ def stock_edit(request, pk):
   
   return render(request, "stock/stock_edit.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def stock_delete(request, pk):
   stock = Stock.objects.get(id=pk)
   stock.delete()
   return redirect("admin_stock")
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_service(request):
   services = Service.objects.all()
   
@@ -868,6 +914,7 @@ def admin_service(request):
   
   return render(request, "serv/admin_serv.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def service_add(request):
   form = ServiceForm()
   
@@ -885,6 +932,7 @@ def service_add(request):
   
   return render(request, "serv/serv_add.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def service_edit(request, pk):
   services = Service.objects.get(id=pk)
   form = ServiceForm(instance=services)
@@ -902,6 +950,7 @@ def service_edit(request, pk):
   
   return render(request, "serv/serv_edit.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def service_delete(request, pk):
   service = Service.objects.get(id=pk)
   service.delete()

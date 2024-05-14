@@ -69,6 +69,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "main.wsgi.application"
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -172,4 +178,4 @@ EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 
 # Переопределяем путь для @login_required - если пользовательно не авторизован, то перенаправить на страницу login  а не 404
-LOGIN_URL = 'user/login/'
+# LOGIN_URL = 'user/login/'

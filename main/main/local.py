@@ -19,6 +19,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'ckeditor',
     'ckeditor_uploader',
+    'allauth',
+    'allauth.account',
+    # 'allauth.socialaccount',
     "debug_toolbar",
     "corsheaders",
     'sorl.thumbnail',
@@ -47,4 +50,5 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
 ]
