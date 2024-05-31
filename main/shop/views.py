@@ -16,27 +16,24 @@ def category(request):
   except:
     shop_settings = ShopSettings()
   products = Product.objects.filter(status=True)
-  max_price_product = Product.objects.filter(status=True).aggregate(Max('price'))['price__max']
-  min_price_product = Product.objects.filter(status=True).aggregate(Min('price'))['price__min']
+  # max_price_product = Product.objects.filter(status=True).aggregate(Max('price'))['price__max']
+  # min_price_product = Product.objects.filter(status=True).aggregate(Min('price'))['price__min']
   
   
   if request.method == "GET":
     get_filtres = request.GET
-    min_price = request.GET.get('min')
-    max_price = request.GET.get('max')
     
-    
-    if min_price != None and min_price != '':
-      min_price = float(min_price)
+    # if min_price != None and min_price != '':
+    #   min_price = float(min_price)
       
-    else:
-      min_price = min_price_product
+    # else:
+    #   min_price = min_price_product
       
-    if max_price != None and max_price != '':
-      max_price = float(max_price)
+    # if max_price != None and max_price != '':
+    #   max_price = float(max_price)
       
-    else:
-      max_price = max_price_product
+    # else:
+    #   max_price = max_price_product
       
     
     char_filtres_list = list(get_filtres.keys())
@@ -50,7 +47,7 @@ def category(request):
     id_filter = [pr.parent.id for pr in product]
     
     if id_filter:
-        products = products.filter(id__in=id_filter, price__gte=min_price, price__lte=max_price)
+        products = products.filter(id__in=id_filter)
     
   products_all = Product.objects.filter(status=True)
   paginator = Paginator(products, 15)
@@ -70,8 +67,8 @@ def category(request):
     "products": current_page,
     "chars": chars,
     "char_name": char_name,
-    "min_price_product": min_price_product,
-    "max_price_product": max_price_product,
+    # "min_price_product": min_price_product,
+    # "max_price_product": max_price_product,
   }
 
   return render(request, "pages/catalog/category.html", context)
@@ -82,31 +79,29 @@ def category_detail(request, slug):
   # chars = CharName.objects.filter(group=None)
   groups = CharGroup.objects.all()
   products = Product.objects.filter(category=category)
-  max_price_product = Product.objects.filter(category=category).aggregate(Max('price'))['price__max']
-  min_price_product = Product.objects.filter(category=category).aggregate(Min('price'))['price__min']
+  # max_price_product = Product.objects.filter(category=category).aggregate(Max('price'))['price__max']
+  # min_price_product = Product.objects.filter(category=category).aggregate(Min('price'))['price__min']
   
   
   if request.method == "GET":
     get_filtres = request.GET
-    min_price = request.GET.get('min')
-    max_price = request.GET.get('max')
     
     
-    if min_price != None and min_price != '':
-      min_price = float(min_price)
+    # if min_price != None and min_price != '':
+    #   min_price = float(min_price)
       
-    else:
-      min_price = min_price_product
-      print(min_price)
-      print('-------------')
+    # else:
+    #   min_price = min_price_product
+    #   print(min_price)
+    #   print('-------------')
       
-    if max_price != None and max_price != '':
-      max_price = float(max_price)
+    # if max_price != None and max_price != '':
+    #   max_price = float(max_price)
       
-    else:
-      max_price = max_price_product
-      print(max_price)
-      print('-------------')
+    # else:
+    #   max_price = max_price_product
+    #   print(max_price)
+    #   print('-------------')
       
     
     char_filtres_list = list(get_filtres.keys())
@@ -120,7 +115,7 @@ def category_detail(request, slug):
     id_filter = [pr.parent.id for pr in product]
     
     if id_filter:
-        products = products.filter(id__in=id_filter, price__gte=min_price, price__lte=max_price)
+        products = products.filter(id__in=id_filter)
     
   products_all = Product.objects.filter(status=True, category_id=category)
   chars_all = ProductChar.objects.filter(parent__in=products_all).distinct()
@@ -145,8 +140,8 @@ def category_detail(request, slug):
     "products": products,
     "chars": chars,
     "char_name": char_name,
-    "min_price_product": min_price_product,
-    "max_price_product": max_price_product,
+    # "min_price_product": min_price_product,
+    # "max_price_product": max_price_product,
   }
   
   return render(request, "pages/catalog/category-details.html", context)
