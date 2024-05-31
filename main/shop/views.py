@@ -147,17 +147,10 @@ def category_detail(request, slug):
   return render(request, "pages/catalog/category-details.html", context)
 
 def product(request, slug):
- # Получение конкретного продукта по slug с подгрузкой связанной категории
-  product = Product.objects.select_related('category').get(slug=slug)
-
-  # Получение первых 3 изображений, связанных с продуктом
+  product = Product.objects.get(slug=slug)
   images = ProductImage.objects.filter(parent_id=product.id)[:3]
-
-  # Получение первых 4 продуктов в той же категории, исключая текущий продукт, с подгрузкой связанных категорий
-  products = Product.objects.filter(category_id=product.category.id).exclude(slug=slug).select_related('category')[:4]
-
-  # Получение первых 4 продуктов, у которых есть скидка (sale_price больше 0), с подгрузкой связанных категорий
-  saleProducts = Product.objects.filter(sale_price__gt=0).select_related('category')[:4]
+  products = Product.objects.filter(category_id=product.category.id).exclude(slug=slug)[:4]
+  saleProducts = Product.objects.filter(sale_price__gt=0)[:4]
   
   context = {
     "title": "Название продукта",
