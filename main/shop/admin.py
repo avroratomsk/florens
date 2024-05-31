@@ -19,7 +19,10 @@ def admin_shop(request):
     form = ShopSettingsForm()
     
   if request.method == "POST":
-    shop_setup = ShopSettings.objects.get()
+    try:
+      shop_setup = ShopSettings.objects.get()
+    except:
+      shop_setup = ShopSettings()
     form_new = ShopSettingsForm(request.POST, request.FILES, instance=shop_setup)
     
     if form_new.is_valid:

@@ -71,8 +71,6 @@ def index(request):
     settings = BaseSettings.objects.all()
 
   category = Category.objects.all()[:4]
-  for cat in category:
-    cat.product_count = cat.product_set.count() # Получаем количество товаров в каждой категории
     
   product = Product.objects.filter(quantity_purchase__gte=10)
   saleProduct = Product.objects.filter(sale_price__gt=0)[:8]
