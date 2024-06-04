@@ -2,7 +2,9 @@
 
 <div class="sidebar">
   <div class="sidebar__logo">
-    <img src="{{ site_settings.logo.url }}" alt="" title="" />
+    {% if site_settings.logo %}
+    <img src="{{ site_settings.logo.url }}" alt="Логотип" title="Логотип" />
+    {% endif %}
   </div>
   <div class="sidebar__item dropdownButton _active {% if request.session.sidebar == 'False' %}_active{% endif %}">
     <a href="{% url 'admin' %}" class="sidebar__title">
