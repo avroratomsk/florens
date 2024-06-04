@@ -352,7 +352,7 @@ from pytils.translit import slugify
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 
-@user_passes_test(lambda u: u.is_superuser)
+
 def parse_exсel(path):
   workbook = openpyxl.load_workbook(path)
   sheet = workbook.active
@@ -448,7 +448,8 @@ def parse_exсel(path):
           )
         except Exception as e: 
           print(e)
-# parse_exсel(path)
+          
+parse_exсel(path)
 
 @user_passes_test(lambda u: u.is_superuser)
 def slider_home(request):
