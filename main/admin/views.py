@@ -393,17 +393,14 @@ def parse_exсel(path):
 
     try:
       category = Category.objects.get(slug=category_slug)
-      print(f"Первый try - {category}")
     except ObjectDoesNotExist:
       if not Category.objects.filter(name=category_name).exists():
         category = Category.objects.create(
           name=category_name,
           slug=category_slug
         )
-        print(f"Второй except - {category}")
       else:
         category = Category.objects.filter(name=category_name).first()
-        print(f"Второй else - {category}")
     
     composition = row[9]
     diameter = row[10]
