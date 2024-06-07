@@ -362,7 +362,7 @@ def parse_exсel(path):
   start_row = 2
     
   Product.objects.all().delete()
-  Category.objects.all().delete()
+  # Category.objects.all().delete()
   
   for row in sheet.iter_rows(min_row=start_row, values_only=True):
     name = row[1]

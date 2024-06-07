@@ -290,24 +290,24 @@ class CategoryForm(forms.ModelForm):
       #     'class': 'submit-file',
       #     'accept': 'image/*'
       # }),
-      # "meta_h1": forms.TextInput(attrs={
-      #   "class":"form__controls",
-      #   # "placeholder": "Заголовок H1"
-      # }),
-      # "meta_title": forms.TextInput(attrs={
-      #   "class":"form__controls meta_field",
-      #   "id": "meta_title"
-      #   # "placeholder": "Meta заголовок"
-      # }),
-      # "meta_description": forms.Textarea(attrs={
-      #   "class":"form__controls meta_field",
-      #   # "placeholder": "Meta Описание",
-      #   "rows": "5"
-      # }),
-      # "meta_keywords": forms.TextInput(attrs={
-      #   "class":"form__controls",
-      #   # "placeholder": "Meta keywords"
-      # }),  
+      "meta_h1": forms.TextInput(attrs={
+        "class":"form__controls",
+        # "placeholder": "Заголовок H1"
+      }),
+      "meta_title": forms.TextInput(attrs={
+        "class":"form__controls meta_field",
+        "id": "meta_title"
+        # "placeholder": "Meta заголовок"
+      }),
+      "meta_description": forms.Textarea(attrs={
+        "class":"form__controls meta_field",
+        # "placeholder": "Meta Описание",
+        "rows": "5"
+      }),
+      "meta_keywords": forms.TextInput(attrs={
+        "class":"form__controls",
+        # "placeholder": "Meta keywords"
+      }),  
     }
     
 # class DayForm(forms.ModelForm):
