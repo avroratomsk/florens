@@ -1,8 +1,16 @@
-{% extends "base.html" %} {% load shop_tags %} {% load thumbnail %}{% load static %}
+{% extends "base.html" %}
+{% load shop_tags %}
+{% load thumbnail %}
+{% load static %}
+{% block title %}{{ site_settings.meta_title }}{% endblock %}
+{% block description %}{{ site_settings.meta_description }}{% endblock %}
+{% block keywords %}{{ site_settings.meta_keywords }}{% endblock %}
 {% block content %}
 <main class="page">
   <section class="category-details">
-    <h1 class="category-details__title _title">{{ category_name }}</h1>
+    <h1 class="category-details__title _title">{% if category.meta_h1 %}{{ category.meta_h1 }}{% else %}
+      {{ category_name }}{% endif %}
+    </h1>
     <div class="category-details__row">
       <div class="category-details__col" id="filter-category">
         <button type="button" class="close" id="close-filter">X</button>

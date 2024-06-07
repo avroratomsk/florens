@@ -15,8 +15,8 @@ class BaseSettings(SingletonModel):
   email = models.EmailField(max_length=250, blank=True, null=True, db_index=True, verbose_name="Email")
   address = models.CharField(max_length=250, blank=True, null=True, verbose_name="Адрес первого филлиала")
   map_code = models.TextField(null=True, blank=True, verbose_name="Код яндекс карты")
-  meta_h1 = models.CharField(max_length=350, null=True, blank=True, verbose_name="Заголовок первого уровня")
-  meta_title = models.CharField(max_length=350, null=True, blank=True, verbose_name="Мета заголовок")
+  meta_h1 = models.CharField(max_length=250, null=True, blank=True, verbose_name="Заголовок первого уровня")
+  meta_title = models.CharField(max_length=250, null=True, blank=True, verbose_name="Мета заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
   
