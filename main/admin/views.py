@@ -453,7 +453,7 @@ def parse_exсel(path):
         except Exception as e: 
           print(e)
           
-# parse_exсel(path)
+parse_exсel(path)
 
 @user_passes_test(lambda u: u.is_superuser)
 def slider_home(request):
