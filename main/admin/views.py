@@ -42,19 +42,13 @@ def admin_settings(request):
   if request.method == "POST":
     form_new = GlobalSettingsForm(request.POST, request.FILES, instance=settings)
     if form_new.is_valid():
-      print(form_new)
       form_new.save()
-      
-      # subprocess.call(["touch", RESET_FILE])
-      # return redirect(request.META.get('HTTP_REFERER'))
       return redirect ('admin_settings')
     else:
-      print(form_new)
       return render(request, "settings/general_settings.html", {"form": form_new})
     
   settings = BaseSettings.objects.get()
   form = GlobalSettingsForm(instance=settings)
-  print(form)
   context = {
     "form": form,
     "settings": settings
