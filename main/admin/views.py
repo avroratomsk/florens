@@ -362,15 +362,13 @@ def parse_exсel(path):
   start_row = 2
     
   Product.objects.all().delete()
-
+  Category.objects.all().delete()
+  
   for row in sheet.iter_rows(min_row=start_row, values_only=True):
     name = row[1]
     slug = slugify(name)
     description = row[3]
-    meta_h1 = ''
-    meta_title = ''
-    meta_description = ''
-    meta_keywords = ''
+    
     try:
       image = f"goods/{row[4].split(';')[0]}"
       image_list = row[4].split(';')
@@ -385,22 +383,27 @@ def parse_exсel(path):
       discount = int(row[6])
       sale_price = round(price - price * discount / 100, 1)
     quantity = row[8]
+    
     if row[7]:
       category_name = row[7]
     else:
       pass
+    
     category_slug = slugify(category_name)
 
     try:
       category = Category.objects.get(slug=category_slug)
+      print(f"Первый try - {category}")
     except ObjectDoesNotExist:
       if not Category.objects.filter(name=category_name).exists():
         category = Category.objects.create(
           name=category_name,
           slug=category_slug
         )
+        print(f"Второй except - {category}")
       else:
         category = Category.objects.filter(name=category_name).first()
+        print(f"Второй else - {category}")
     
     composition = row[9]
     diameter = row[10]
@@ -418,16 +421,12 @@ def parse_exсel(path):
             name=name,
             slug=slug,
             description=description,
-            meta_h1=meta_h1,
-            meta_title=meta_title,
-            meta_description=meta_description,
-            meta_keywords=meta_keywords,
             image=image,
             price=price,
             sale_price=sale_price,
             discount=discount,
             quantity=quantity,
-            category=category,
+            # category=category,
             composition=composition,
             diameter=diameter,
             height=height,
@@ -439,7 +438,9 @@ def parse_exсel(path):
           pass
       else:
         new_product = Product.objects.filter(name=name).first() 
-        
+      
+      new_product.category.add(category)
+      
       for image in image_list:
         
         try:

@@ -268,28 +268,7 @@ class CategoryForm(forms.ModelForm):
   """ Form, отвечает за создание категорий и редактирование категорий"""
   class Meta:
     model = Category
-    fields = [
-      "name",
-      "slug",
-      "description",
-      "image",
-      "menu_add",
-      "meta_h1",
-      "meta_title",
-      "meta_description",
-      "meta_keywords"
-    ]
-    labels = {
-      "name": "Назване категории",
-      "slug": "URL",
-      "description": "Описание категории",
-      "image": "Изображение",
-      "menu_add": "Добавить в меню ?",
-      "meta_h1": "Заголовок H1",
-      "meta_title": "Meta заголовок",
-      "meta_description": "Meta описание",
-      "meta_keyword": "Meta keywords",
-    }
+    fields = "__all__"
     widgets = {
       "name": forms.TextInput(attrs={
           "class": "form__controls",
@@ -311,24 +290,24 @@ class CategoryForm(forms.ModelForm):
       #     'class': 'submit-file',
       #     'accept': 'image/*'
       # }),
-      "meta_h1": forms.TextInput(attrs={
-        "class":"form__controls",
-        # "placeholder": "Заголовок H1"
-      }),
-      "meta_title": forms.TextInput(attrs={
-        "class":"form__controls meta_field",
-        "id": "meta_title"
-        # "placeholder": "Meta заголовок"
-      }),
-      "meta_description": forms.Textarea(attrs={
-        "class":"form__controls meta_field",
-        # "placeholder": "Meta Описание",
-        "rows": "5"
-      }),
-      "meta_keywords": forms.TextInput(attrs={
-        "class":"form__controls",
-        # "placeholder": "Meta keywords"
-      }),  
+      # "meta_h1": forms.TextInput(attrs={
+      #   "class":"form__controls",
+      #   # "placeholder": "Заголовок H1"
+      # }),
+      # "meta_title": forms.TextInput(attrs={
+      #   "class":"form__controls meta_field",
+      #   "id": "meta_title"
+      #   # "placeholder": "Meta заголовок"
+      # }),
+      # "meta_description": forms.Textarea(attrs={
+      #   "class":"form__controls meta_field",
+      #   # "placeholder": "Meta Описание",
+      #   "rows": "5"
+      # }),
+      # "meta_keywords": forms.TextInput(attrs={
+      #   "class":"form__controls",
+      #   # "placeholder": "Meta keywords"
+      # }),  
     }
     
 # class DayForm(forms.ModelForm):

@@ -135,7 +135,7 @@ def category_detail(request, slug):
   # print(chars)
   
   context = {
-    "category_name": category.name,
+    "category": category,
     "title": "Название товара",
     "products": products,
     "chars": chars,
@@ -149,14 +149,14 @@ def category_detail(request, slug):
 def product(request, slug):
   product = Product.objects.get(slug=slug)
   images = ProductImage.objects.filter(parent_id=product.id)[:3]
-  products = Product.objects.filter(category_id=product.category.id).exclude(slug=slug)[:4]
+  # products = Product.objects.filter(category_id=product.category.id).exclude(slug=slug)[:4]
   saleProducts = Product.objects.filter(sale_price__gt=0)[:4]
   
   context = {
     "title": "Название продукта",
     "product": product,
     "images": images,
-    "products": products,
+    # "products": products,
     "saleProducts": saleProducts
   }
   return render(request, "pages/catalog/product.html", context)
