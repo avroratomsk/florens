@@ -193,7 +193,7 @@ class ProductForm(forms.ModelForm):
                 'class': 'form__controls',
                 "id": "slug"
             }),
-            'category': forms.Select(attrs={
+            'category': forms.CheckboxSelectMultiple(attrs={
                 'class': 'form__controls', 
             }),
             'free_shipping': forms.CheckboxInput(attrs={
