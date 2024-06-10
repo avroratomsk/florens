@@ -95,4 +95,18 @@ urlpatterns = [
     
     #URl - Шаблон общих настроек сайта
     path('settings/', views.admin_settings, name='admin_settings'),
+    
+    #URl - отвечающие за отображение категорий, редактирование и удаление категории
+    path('category-blog/', views.category_blog, name='category_blog'),
+    path('category-blog/add/', views.category_blog_add, name='category_blog_add'),
+    path('category-blog/edit/<int:pk>/', views.category_blog_edit, name='category_blog_edit'),
+    path('category-blog/delete/<int:pk>/', views.category_blog_delete, name='category_blog_delete'),
+    
+    
+    #URl - отвечающие за отображение товаров, редактирование и удаление товара
+    # path('post/', admin_shop, name='admin_shop'),
+    path('post/', views.admin_post, name='admin_post'),
+    path('post/add/', views.admin_post_add, name='admin_post_add'),
+    path('post/edit/<int:pk>/', views.admin_post_edit, name='admin_post_edit'),
+    path('post/delete/<int:pk>/', views.admin_post_delete, name='admin_post_delete'),
 ]

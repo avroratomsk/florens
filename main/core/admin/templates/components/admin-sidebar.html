@@ -1104,7 +1104,7 @@
     </div>
   </div> {% endcomment %}
 
-  {% comment %} <div class="sidebar__item dropdownButton">
+  <div class="sidebar__item dropdownButton">
     <p class="sidebar__title {% if request.session.sidebar == 'False' %}sidebar__title--max {% else %}sidebar__title--min{% endif %}">
       <svg xmlns="http://www.w3.org/2000/svg" width="14.504" height="13.598" viewBox="0 0 14.504 13.598">
         <g id="note" transform="translate(0 -16)">
@@ -1175,7 +1175,7 @@
 
         <span>Настройки блога</span>
       </a>
-      <a href="" class="sidebar__link">
+      <a href="{% url 'category_blog' %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -1216,7 +1216,7 @@
 
         <span>Категории блога</span>
       </a>
-      <a href="" class="sidebar__link">
+      <a href="{% url 'admin_post' %}" class="sidebar__link">
         <svg xmlns="http://www.w3.org/2000/svg" width="15.886" height="13.765" viewBox="0 0 15.886 13.765">
           <g id="layers_1_" data-name="layers (1)" transform="translate(0 -34.184)">
             <g id="Group_2309" data-name="Group 2309" transform="translate(0 34.184)">
@@ -1258,7 +1258,7 @@
         <span>Статьи блога</span>
       </a>
     </div>
-  </div> {% endcomment %}
+  </div>
 
   {% comment %} <div class="sidebar__item dropdownButton">
     <p class="sidebar__title {% if request.session.sidebar == 'False' %}sidebar__title--max {% else %}sidebar__title--min{% endif %}">

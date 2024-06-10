@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load shop_tags %}
+{% load thumbnail %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block content %}
+<main class="page">
+  <section class="blog index-catalog">
+    <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+      <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+        class="breadcrumbs__item">
+        Главная
+        <meta itemprop="position" content="1" />
+      </a>
+      <span itemprop="name" class="breadcrumbs__item">
+        Стаьи
+        <meta itemprop="position" content="2" />
+      </span>
+    </div>
+    <div class="blog__inner ">
+      <h1 class="blog__title _title-h2">Интересная информация</h1>
+      <div class="blog__tags">
+        <a href="#" class="blog__tag _active">Все</a>
+        <a href="#" class="blog__tag">Топ</a>
+        <a href="#" class="blog__tag">Уход</a>
+        <a href="#" class="blog__tag">Авторская подборка</a>
+        <a href="#" class="blog__tag">Выбор букета</a>
+      </div>
+      {% if articles %}
+      <div class="blog__grid">
+        <div class="blog__item item-blog item-blog--big">
+          <img src="{% static 'theme/mb/images/product-1.jpeg' %}" class="item-blog__image" alt="">
+          <div class="item-blog__content">
+            <p class="item-blog__date">
+              29.06.2024
+            </p>
+            <a href="#" class="item-blog__title">Первая статья на данном сайте</a>
+          </div>
+          <div class="item-blog__tags">
+            <p href="#" class="item-blog__tag">Уход</p>
+            <p href="#" class="item-blog__tag">Авторская подборка</p>
+            <p href="#" class="item-blog__tag">Выбор букета</p>
+          </div>
+        </div>
+        <div class="blog__item item-blog">
+          <img src="{% static 'theme/mb/images/product-1.jpeg' %}" class="item-blog__image" alt="">
+          <div class="item-blog__content">
+            <p class="item-blog__date">
+              29.06.2024
+            </p>
+            <a href="#" class="item-blog__title">Первая статья на данном сайте</a>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi omnis nesciunt error fuga esse.
+            </p>
+          </div>
+          <div class="item-blog__tags">
+            <p href="#" class="item-blog__tag">Уход</p>
+            <p href="#" class="item-blog__tag">Авторская подборка</p>
+            <p href="#" class="item-blog__tag">Выбор букета</p>
+          </div>
+        </div>
+        <div class="blog__item item-blog">
+          <img src="{% static 'theme/mb/images/product-1.jpeg' %}" class="item-blog__image" alt="">
+          <div class="item-blog__content">
+            <p class="item-blog__date">
+              29.06.2024
+            </p>
+            <a href="#" class="item-blog__title">Первая статья на данном сайте</a>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi omnis nesciunt error fuga esse.
+            </p>
+          </div>
+          <div class="item-blog__tags">
+            <p href="#" class="item-blog__tag">Уход</p>
+            <p href="#" class="item-blog__tag">Авторская подборка</p>
+            <p href="#" class="item-blog__tag">Выбор букета</p>
+          </div>
+        </div>
+        <div class="blog__item item-blog">
+          <img src="{% static 'theme/mb/images/product-1.jpeg' %}" class="item-blog__image" alt="">
+          <div class="item-blog__content">
+            <p class="item-blog__date">
+              29.06.2024
+            </p>
+            <a href="#" class="item-blog__title">Первая статья на данном сайте</a>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi omnis nesciunt error fuga esse.
+            </p>
+          </div>
+          <div class="item-blog__tags">
+            <p href="#" class="item-blog__tag">Уход</p>
+            <p href="#" class="item-blog__tag">Авторская подборка</p>
+            <p href="#" class="item-blog__tag">Выбор букета</p>
+          </div>
+        </div>
+        <div class="blog__item item-blog">
+          <img src="{% static 'theme/mb/images/product-1.jpeg' %}" class="item-blog__image" alt="">
+          <div class="item-blog__content">
+            <p class="item-blog__date">
+              29.06.2024
+            </p>
+            <a href="#" class="item-blog__title">Первая статья на данном сайте</a>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi omnis nesciunt error fuga esse.
+            </p>
+          </div>
+          <div class="item-blog__tags">
+            <p href="#" class="item-blog__tag">Уход</p>
+            <p href="#" class="item-blog__tag">Авторская подборка</p>
+            <p href="#" class="item-blog__tag">Выбор букета</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+</main>
+{% endblock content %}

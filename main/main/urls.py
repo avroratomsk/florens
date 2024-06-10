@@ -18,6 +18,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
     path('coupons/', include(('coupons.urls'))),
+    path('blog/', include(('blog.urls'))),
     path('', include('home.urls')),
 ]
 

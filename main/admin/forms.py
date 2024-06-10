@@ -1,6 +1,7 @@
 from django import forms
 from home.models import AboutTemplate, BaseSettings, HomeTemplate, Slider, Stock, QuestionPage, Questions
 from coupons.models import Coupon
+from blog.models import BlogCategory, Post
 from service.models import Service, ServicePage
 from reviews.models import Reviews
 from shop.models import Category, CharGroup, CharName, Product, ProductChar, ProductImage, ShopSettings
@@ -876,3 +877,96 @@ class CouponForm(forms.ModelForm):
            
             
         }
+        
+        
+class BlogCategoryForm(forms.ModelForm):
+  """ Form, отвечает за создание категорий и редактирование категорий"""
+  class Meta:
+    model = BlogCategory
+    fields = "__all__"
+    widgets = {
+      "name": forms.TextInput(attrs={
+          "class": "form__controls",
+          "id":"name"
+          # "placeholder": "Название  категории"
+      }),
+      "slug": forms.TextInput(attrs={
+        "class":"form__controls",
+        "id": "slug"
+        # "placeholder": "Название категори"
+      }),
+      "description": forms.Textarea(attrs={
+        "class":"form__controls",
+      }),
+      'menu_add': forms.CheckboxInput(attrs={
+        'class': 'form__controls-checkbox',
+      }),
+      # 'image': forms.FileInput(attrs={
+      #     'class': 'submit-file',
+      #     'accept': 'image/*'
+      # }),
+      "meta_h1": forms.TextInput(attrs={
+        "class":"form__controls",
+        # "placeholder": "Заголовок H1"
+      }),
+      "meta_title": forms.TextInput(attrs={
+        "class":"form__controls meta_field",
+        "id": "meta_title"
+        # "placeholder": "Meta заголовок"
+      }),
+      "meta_description": forms.Textarea(attrs={
+        "class":"form__controls meta_field",
+        # "placeholder": "Meta Описание",
+        "rows": "5"
+      }),
+      "meta_keywords": forms.TextInput(attrs={
+        "class":"form__controls",
+        # "placeholder": "Meta keywords"
+      }),  
+    }
+    
+class BlogPostForm(forms.ModelForm):
+  """ Form, отвечает за создание категорий и редактирование категорий"""
+  class Meta:
+    model = Post
+    fields = "__all__"
+    widgets = {
+      "name": forms.TextInput(attrs={
+          "class": "form__controls",
+          "id":"name"
+          # "placeholder": "Название  категории"
+      }),
+      "slug": forms.TextInput(attrs={
+        "class":"form__controls",
+        "id": "slug"
+        # "placeholder": "Название категори"
+      }),
+      "description": forms.Textarea(attrs={
+        "class":"form__controls",
+      }),
+      'menu_add': forms.CheckboxInput(attrs={
+        'class': 'form__controls-checkbox',
+      }),
+      # 'image': forms.FileInput(attrs={
+      #     'class': 'submit-file',
+      #     'accept': 'image/*'
+      # }),
+      "meta_h1": forms.TextInput(attrs={
+        "class":"form__controls",
+        # "placeholder": "Заголовок H1"
+      }),
+      "meta_title": forms.TextInput(attrs={
+        "class":"form__controls meta_field",
+        "id": "meta_title"
+        # "placeholder": "Meta заголовок"
+      }),
+      "meta_description": forms.Textarea(attrs={
+        "class":"form__controls meta_field",
+        # "placeholder": "Meta Описание",
+        "rows": "5"
+      }),
+      "meta_keywords": forms.TextInput(attrs={
+        "class":"form__controls",
+        # "placeholder": "Meta keywords"
+      }),  
+    }

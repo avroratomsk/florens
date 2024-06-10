@@ -23,7 +23,7 @@ class Post(models.Model):
   name = models.CharField(max_length=250, null=True, blank=True, db_index=True, verbose_name="Название статьи")
   slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
   text = models.TextField(null=True, blank=True, verbose_name="Содержимое статьи")
-  category = models.ForeignKey("BlogCategory", on_delete=models.CASCADE, null=True, blank=True, default=None, verbose_name='Категория')
+  category = models.ManyToManyField(BlogCategory, null=True, blank=True, verbose_name='Категории')
   date_creation = models.DateField(auto_now_add=True)
   date_update = models.DateField(auto_now=True)
   image = models.ImageField(upload_to="blog", blank=True, null=True, verbose_name="Изображение статьи")

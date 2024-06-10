@@ -4,8 +4,9 @@ import zipfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from admin.forms import AboutTemplateForm, CategoryForm, CharGroupForm, CharNameForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, QuestionPageForm, QuestionsForm, ReviewsForm, ServiceForm, ServicePageForm, ShopSettingsForm, SliderForm, StockForm, UploadFileForm
+from admin.forms import AboutTemplateForm, BlogCategoryForm, BlogPostForm, CategoryForm, CharGroupForm, CharNameForm, GlobalSettingsForm, HomeTemplateForm, ProductCharForm, ProductForm, ProductImageForm, QuestionPageForm, QuestionsForm, ReviewsForm, ServiceForm, ServicePageForm, ShopSettingsForm, SliderForm, StockForm, UploadFileForm
 from home.models import AboutTemplate, BaseSettings, HomeTemplate, QuestionPage, Questions, Slider, Stock
+from blog.models import BlogCategory, Post
 from main.settings import BASE_DIR
 from service.models import Service, ServicePage
 from reviews.models import Reviews
@@ -954,3 +955,107 @@ def service_delete(request, pk):
   service = Service.objects.get(id=pk)
   service.delete()
   return redirect("admin_service")
+
+@user_passes_test(lambda u: u.is_superuser)
+def category_blog(request):
+  categorys_blog = BlogCategory.objects.all()
+  
+  context ={
+    "categorys": categorys_blog,
+  }
+  return render(request, "blog/blog_category/blog_category.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def category_blog_add(request):
+  form = BlogCategoryForm()
+  if request.method == "POST":
+    form_new = BlogCategoryForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect("category_blog")
+    else:
+      return render(request, "blog/blog_category/blog_category_add.html", {"form": form_new})
+    
+  context = {
+    "form": form
+  }
+  return render(request, "blog/blog_category/blog_category_add.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def category_blog_edit(request, pk):
+  categorys = BlogCategory.objects.get(id=pk)
+  form = BlogCategoryForm(request.POST, request.FILES, instance=categorys)
+  
+  if request.method == "POST":
+    
+    if form.is_valid():
+      form.save()
+      return redirect("category_blog")
+    else:
+      return render(request, "blog/blog_category/blog_category_edit.html")
+  
+  context = {
+    "form": BlogCategoryForm(instance=categorys),
+    "categorys": categorys
+  }
+
+  return render(request, "blog/blog_category/blog_category_edit.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def category_blog_delete(request, pk):
+  category = BlogCategory.objects.get(id=pk)
+  category.delete()
+  
+  return redirect('category_blog')
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_post(request):
+  posts = Post.objects.all()
+  
+  context ={
+    "posts": posts,
+  }
+  return render(request, "blog/blog_post/blog_post.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_post_add(request):
+  form = BlogPostForm()
+  if request.method == "POST":
+    form_new = BlogPostForm(request.POST, request.FILES)
+    if form_new.is_valid():
+      form_new.save()
+      return redirect("admin_post")
+    else:
+      return render(request, "blog/blog_post/post_add.html", {"form": form_new})
+    
+  context = {
+    "form": form
+  }
+  return render(request, "blog/blog_post/post_add.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_post_edit(request, pk):
+  posts = Post.objects.get(id=pk)
+  form = BlogPostForm(request.POST, request.FILES, instance=posts)
+  
+  if request.method == "POST":
+    
+    if form.is_valid():
+      form.save()
+      return redirect("admin_post")
+    else:
+      return render(request, "blog/blog_post/post_edit.html")
+  
+  context = {
+    "form": BlogPostForm(instance=posts),
+    "posts": posts
+  }
+
+  return render(request, "blog/blog_post/post_edit.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_post_delete(request, pk):
+  post = Post.objects.get(id=pk)
+  post.delete()
+  
+  return redirect('admin_post')
