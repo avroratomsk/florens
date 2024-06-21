@@ -13,17 +13,18 @@
 <main class="page">
   <div class="products category-top">
     <div class="products__top title-page">
-      <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-        <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-          class="breadcrumbs__item">
-          Главная
+      <ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
+          <a itemprop="item" href="/" title="Главная">
+            <span itemprop="name">Главная</span></a>
           <meta itemprop="position" content="1" />
-        </a>
-        <span itemprop="name" class="breadcrumbs__item">
-          Каталог
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
+          <a itemprop="item" href="{% url 'category' %}">
+            <span itemprop="name">Категории</span></a>
           <meta itemprop="position" content="2" />
-        </span>
-      </div>
+        </li>
+      </ol>
     </div>
   </div>
   <div class="category-details__row">
