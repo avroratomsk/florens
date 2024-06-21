@@ -24,8 +24,8 @@
           <meta itemprop="position" content="1" />
         </li>
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
-          <a itemprop="item" href="{{ product.category.get_absolute_url }}">
-            <span itemprop="name">{{ product.category.name }}</span></a>
+          <a itemprop="item" href="{% url 'category' %}">
+            <span itemprop="name">Категории</span></a>
           <meta itemprop="position" content="2" />
         </li>
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
@@ -74,7 +74,7 @@
             <div class="info-product__sizes-grid">
               {% if product.height %}
               <div class="info-product__sizes-width">
-                <img src="{% static 'theme/mb/images/height.png' %}" alt="" />
+                <img src="{% static 'theme/mb/images/height.png' %}" alt="Иконка высоты" title="Иконка высоты" />
                 <div class="">
                   <span>{{ product.height }} см</span>
                   <!-- <span>Высота</span> -->
@@ -82,7 +82,7 @@
               </div>
               {% endif %} {% if product.width %}
               <div class="info-product__sizes-width">
-                <img src="{% static 'theme/mb/images/width.png' %}" alt="" />
+                <img src="{% static 'theme/mb/images/width.png' %}" alt="Иконка ширины" title="Иконка ширины" />
                 <div class="">
                   <span>{{ product.width }} см</span>
                   <!-- <span>Ширина</span> -->
@@ -90,7 +90,7 @@
               </div>
               {% endif %} {% if product.diameter %}
               <div class="info-product__sizes-width">
-                <img src="{% static 'theme/mb/images/diametr.png' %}" alt="" />
+                <img src="{% static 'theme/mb/images/diametr.png' %}" alt="Иконка диаметра" title="Иконка диаметра" />
                 <div class="">
                   <span>{{ product.diameter }} см</span>
                   <!-- <span>Диаметр</span> -->
@@ -98,7 +98,8 @@
               </div>
               {% endif %} {% if product.quantity_flower %}
               <div class="info-product__sizes-width">
-                <img src="{% static 'theme/mb/images/flowers.png' %}" alt="" />
+                <img src="{% static 'theme/mb/images/flowers.png' %}" alt="Количество цветков"
+                  title="Количество цветков" />
                 <div class="">
                   <span>{{ product.quantity_flower }} шт.</span>
                   <!-- <span>Цветков</span> -->
