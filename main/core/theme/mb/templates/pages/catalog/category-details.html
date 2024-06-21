@@ -17,16 +17,30 @@
       </li>
       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
         <a itemprop="item" href="{% url 'category' %}">
-          <span itemprop="name">Каталог</span></a>
+          <span itemprop="name">Категории</span></a>
         <meta itemprop="position" content="2" />
       </li>
       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
-        <span itemprop="item">
+        <a itemprop="item" href="{{ category.get_absolute_url }}">
           <span itemprop="name">{{ category.name }}</span>
-        </span>
+        </a>
         <meta itemprop="position" content="2" />
       </li>
     </ol>
+    <div itemscope itemtype="https://schema.org/BreadcrumbList">
+      <a href="/" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Главная</span>
+        <meta itemprop="position" content="0" />
+      </a>
+      <a href="/" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
+        Каталог
+        <meta itemprop="position" content="1" />
+      </a>
+      <span itemprop="name" class="breadcrumbs__item" itemtype="https://schema.org/ListItem">
+        {{ category.name }}
+        <meta itemprop="position" content="2" />
+      </span>
+    </div>
     <h1 class="category-details__title _title">{% if category.meta_h1 %}{{ category.meta_h1 }}{% else %}
       {{ category_name }}{% endif %}
     </h1>
