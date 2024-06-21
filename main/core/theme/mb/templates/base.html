@@ -7,11 +7,7 @@
   <meta name="description" content="{% block description %}{% endblock %}" />
   <meta name="keywords" content="{% block keywords %}{% endblock %}" />
   <link rel="canonical" href="{% block canonical %}{% endblock %}" />
-  {% if setup.active == True %}
   <meta name="robots" content="index,follow" />
-  {% else %}
-  <meta name="robots" content="noindex,nofollow" />
-  {% endif %}
   <meta charset="UTF-8" />
   <meta name="format-detection" content="telephone=no" />
   <!-- <style>body{opacity: 0;}</style> -->
@@ -22,10 +18,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  {% comment %}
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet" />
-  {% endcomment %}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&display=swap"
