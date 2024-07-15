@@ -5,11 +5,15 @@
 {% if product.meta_title %}
 {{ product.meta_title }}
 {% else %}
-{{ product.name }}
+{{ product.name }} | Цветочный магазин Florens
 {% endif %}
 
 {% endblock %}
-{% block description %}{{ product.meta_description }}{% endblock %}
+{% block description %}{% if product.meta_description %}{{ product.meta_description }}{% else %}
+Заказать {{ product.name }} с доставкой в Иркутске из цветочного салона Florens. Огромный выбор для любого повода! Заказ
+онлайн и по телефону ☎ 8(3952) 615-500
+{% endif %}
+{% endblock %}
 {% block keywords %}{{ product.meta_keywords }}{% endblock %}
 
 {% block content %}
