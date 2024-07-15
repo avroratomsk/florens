@@ -9,17 +9,24 @@
 <main class="page">
 
   <section class="category-details">
-    <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-      <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-        class="breadcrumbs__item">
-        Главная
+    <ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
+        <a itemprop="item" href="/" title="Главная">
+          <span itemprop="name">Главная</span></a>
         <meta itemprop="position" content="1" />
-      </a>
-      <span itemprop="name" class="breadcrumbs__item">
-        {{ category.name }}
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
+        <a itemprop="item" href="{% url 'category' %}">
+          <span itemprop="name">Категории</span></a>
         <meta itemprop="position" content="2" />
-      </span>
-    </div>
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
+        <a itemprop="item" href="{{ category.get_absolute_url }}">
+          <span itemprop="name">{{ category.name }}</span>
+        </a>
+        <meta itemprop="position" content="3" />
+      </li>
+    </ol>
     <h1 class="category-details__title _title">{% if category.meta_h1 %}{{ category.meta_h1 }}{% else %}
       {{ category_name }}{% endif %}
     </h1>
@@ -69,52 +76,10 @@
           <i class="fa-solid fa-arrow-up-wide-short"></i>
         </button>
         <div class="index-catalog__cards cards-catalog">
-          {% if products %} {% for product in products %}
-          <div class="index-catalog__card card">
-            <div class="card__image">
-              {% if product.image %}
-              {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
-              {% endthumbnail %}
-              {% for image in product.images.all %} {% if forloop.counter == 2 and forloop.counter > 0 %}
-              {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
-              {% endthumbnail %} {% else %}
-              {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="product-click-image" />
-              {% endthumbnail %} {% endif %} {% endfor %} {% else %}
-              <img src="{% static 'theme/mb/images/no-image.png' %}" class="product-click-image" alt="" />
-              {% endif %}
-              <button type="button" class="card__click" id="one-click">Купить в один клик</button>
-            </div>
-            <div class="card__content">
-              <a href="{{ product.get_absolute_url }}" class="card__title-h3">{{ product.name }}</a>
-              <div class="card__content-bottom">
-                {% if product.sale_price %}
-                <span class="card__price"><s>{{ product.price }}</s>
-                  <span class="card__price-number">{{ product.sale_price }}</span>
-                  <span class="currency">₽</span></span>
-                {% else %}
-                <span class="card__price">{{ product.price }} <span class="currency">₽</span></span>
-                {% endif %}
-                <a href="{% url 'cart_add' %}" class="card__cart add-to-cart" data-product-id="{{ product.id }}">
-                  {% csrf_token %}
-                  <img src="{% static 'theme/mb/images/cart.svg' %}" alt="" />
-                </a>
-                {% if product.quantity_purchase > 10 %}
-                <button type="button" class="card__hit">
-                  <img src="{% static 'theme/mb/images/hit.svg' %}" alt="" />
-                </button>
-                {% endif %} {% if product.discount %}
-                <div class="card__stock">-{{ product.discount }}%</div>
-                {% endif %}
-                <button type="button" class="card__favorit">
-                  <img src="{% static 'theme/mb/images/favorit.svg' %}" alt="" />
-                </button>
-              </div>
-            </div>
-          </div>
-          {% endfor %} {% else %}
+          {% if products %}
+          {% for product in products %} {% include "../../includes/product-card.html" with product=product %}
+          {% endfor %}
+          {% else %}
           <div class="empty-info">
             <p>Товара нет</p>
           </div>

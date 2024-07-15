@@ -1,1 +1,29 @@
-Disallow: \
+User-Agent: *
+Disallow: /admin/
+Disallow: /order/
+Disallow: /accounts/
+Disallow: /cart/
+Disallow: /search/?q*
+Disallow: *utm=
+Allow: /static/*.css
+Allow: /static/*.js
+Allow: /static/*.png
+Allow: /static/*.jpg
+Allow: /static/*.gif
+
+User-Agent: Yandex
+Disallow: /admin/
+Disallow: /order/
+Disallow: /accounts/
+Disallow: /cart/
+Disallow: /search/?q*
+Disallow: *utm=
+Allow: /static/*.css
+Allow: /static/*.js
+Allow: /static/*.png
+Allow: /static/*.jpg
+Allow: /static/*.gif
+
+Clean-Param: utm_source&utm_medium&utm_campaign
+Host: https://florens38.ru
+Sitemap: https://florens38.ru/sitemap.xml

@@ -17,22 +17,24 @@
 <main class="page">
   <div class="product">
     <div class="product__container">
-      <div class="breadcrumbs" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-        <a href="/" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-          class="breadcrumbs__item">
-          Главная
+      <ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
+          <a itemprop="item" href="/" title="Главная">
+            <span itemprop="name">Главная</span></a>
           <meta itemprop="position" content="1" />
-        </a>
-        <a href="{{ product.category.get_absolute_url }}" itemprop="itemListElement" itemscope=""
-          itemtype="http://schema.org/ListItem" class="breadcrumbs__item">
-          {{ product.category.name }}
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
+          <a itemprop="item" href="{% url 'category' %}">
+            <span itemprop="name">Категории</span></a>
           <meta itemprop="position" content="2" />
-        </a>
-        <span itemprop="name" class="breadcrumbs__item">
-          {{ product.name }}
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
+          <a itemprop="item" href="{{ category.get_absolute_url }}">
+            <span itemprop="name">{{ product.name }}</span>
+          </a>
           <meta itemprop="position" content="3" />
-        </span>
-      </div>
+        </li>
+      </ol>
       <div class="product__content">
         <div class="product__image">
           {% if images|length > 1 %}
@@ -72,7 +74,7 @@
             <div class="info-product__sizes-grid">
               {% if product.height %}
               <div class="info-product__sizes-width">
-                <img src="{% static 'theme/mb/images/height.png' %}" alt="" />
+                <img src="{% static 'theme/mb/images/height.png' %}" alt="Иконка высоты" title="Иконка высоты" />
                 <div class="">
                   <span>{{ product.height }} см</span>
                   <!-- <span>Высота</span> -->
@@ -80,7 +82,7 @@
               </div>
               {% endif %} {% if product.width %}
               <div class="info-product__sizes-width">
-                <img src="{% static 'theme/mb/images/width.png' %}" alt="" />
+                <img src="{% static 'theme/mb/images/width.png' %}" alt="Иконка ширины" title="Иконка ширины" />
                 <div class="">
                   <span>{{ product.width }} см</span>
                   <!-- <span>Ширина</span> -->
@@ -88,7 +90,7 @@
               </div>
               {% endif %} {% if product.diameter %}
               <div class="info-product__sizes-width">
-                <img src="{% static 'theme/mb/images/diametr.png' %}" alt="" />
+                <img src="{% static 'theme/mb/images/diametr.png' %}" alt="Иконка диаметра" title="Иконка диаметра" />
                 <div class="">
                   <span>{{ product.diameter }} см</span>
                   <!-- <span>Диаметр</span> -->
@@ -96,7 +98,8 @@
               </div>
               {% endif %} {% if product.quantity_flower %}
               <div class="info-product__sizes-width">
-                <img src="{% static 'theme/mb/images/flowers.png' %}" alt="" />
+                <img src="{% static 'theme/mb/images/flowers.png' %}" alt="Количество цветков"
+                  title="Количество цветков" />
                 <div class="">
                   <span>{{ product.quantity_flower }} шт.</span>
                   <!-- <span>Цветков</span> -->
