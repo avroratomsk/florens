@@ -17,8 +17,8 @@ class BaseSettings(SingletonModel):
   map_code = models.TextField(null=True, blank=True, verbose_name="Код яндекс карты")
   meta_h1 = models.CharField(max_length=250, null=True, blank=True, verbose_name="Заголовок первого уровня")
   meta_title = models.CharField(max_length=250, null=True, blank=True, verbose_name="Мета заголовок")
-  meta_description = models.CharField(null=True, blank=True, verbose_name="Meta описание")
-  meta_keywords = models.CharField(null=True, blank=True, verbose_name="Meta keywords")
+  meta_description = models.CharField(max_length=250, null=True, blank=True, verbose_name="Meta описание")
+  meta_keywords = models.CharField(max_length=250, null=True, blank=True, verbose_name="Meta keywords")
   favicon = models.FileField(upload_to='base-settings/', blank=True, null=True, verbose_name="ФавИконка")
   
 
