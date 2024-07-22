@@ -6,15 +6,20 @@
     <img itemprop="image" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
       class="product-click-image" />
     {% endthumbnail %}
+
     {% for image in product.images.all %} {% if forloop.counter == 2 and forloop.counter > 0 %}
     {% thumbnail image.src "368x350" format="WEBP" crop="center" as im %}
     <img itemprop="image" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
       class="product-click-image" />
-    {% endthumbnail %} {% else %}
+    {% endthumbnail %}
+    {% else %}
     {% thumbnail product.image "368x350" format="WEBP" crop="center" as im %}
     <img itemprop="image" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
       class="product-click-image" />
-    {% endthumbnail %} {% endif %} {% endfor %} {% else %}
+    {% endthumbnail %}
+    {% endif %}
+    {% endfor %}
+    {% else %}
     <img itemprop="image" src="{% static 'theme/mb/images/no-image.png' %}" class="product-click-image" alt="" />
     {% endif %}
     <button type="button" class="card__click" id="one-click">Купить в один клик</button>

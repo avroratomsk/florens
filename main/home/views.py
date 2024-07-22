@@ -72,9 +72,9 @@ def index(request):
 
   category = Category.objects.all()[:4]
     
-  product = Product.objects.filter(quantity_purchase__gte=10)
-  saleProduct = Product.objects.filter(sale_price__gt=0)[:8]
-  affordable_products = Product.objects.filter(price__gt=0, price__lt=2500)[:8]
+  product = Product.objects.filter(quantity_purchase__gte=10).prefetch_related('images')
+  saleProduct = Product.objects.filter(sale_price__gt=0).prefetch_related('images')[:8]
+  affordable_products = Product.objects.filter(price__gt=0, price__lt=2500).prefetch_related('images')[:8]
   reviews = Reviews.objects.filter(status=True)
   slider_image = Stock.objects.filter(status=True)
   questions = Questions.objects.filter(status=True)[:3]

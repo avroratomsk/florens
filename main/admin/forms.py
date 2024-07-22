@@ -32,6 +32,7 @@ class GlobalSettingsForm(forms.ModelForm):
         'meta_title',
         'meta_description',
         'meta_keywords',
+        'favicon',
     ]
     labels = {
         'logo': 'Логотип',

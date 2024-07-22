@@ -15,7 +15,7 @@ def category(request):
     shop_settings = ShopSettings.objects.get()
   except:
     shop_settings = ShopSettings()
-  products = Product.objects.filter(status=True)
+  products = Product.objects.filter(status=True).prefetch_related('images')
   # max_price_product = Product.objects.filter(status=True).aggregate(Max('price'))['price__max']
   # min_price_product = Product.objects.filter(status=True).aggregate(Min('price'))['price__min']
   
@@ -76,32 +76,13 @@ def category(request):
 
 def category_detail(request, slug):
   category = Category.objects.get(slug=slug)
-  # chars = CharName.objects.filter(group=None)
-  groups = CharGroup.objects.all()
-  products = Product.objects.filter(category=category)
+  products = Product.objects.filter(category=category).prefetch_related('images')
   # max_price_product = Product.objects.filter(category=category).aggregate(Max('price'))['price__max']
   # min_price_product = Product.objects.filter(category=category).aggregate(Min('price'))['price__min']
   
   
   if request.method == "GET":
     get_filtres = request.GET
-    
-    
-    # if min_price != None and min_price != '':
-    #   min_price = float(min_price)
-      
-    # else:
-    #   min_price = min_price_product
-    #   print(min_price)
-    #   print('-------------')
-      
-    # if max_price != None and max_price != '':
-    #   max_price = float(max_price)
-      
-    # else:
-    #   max_price = max_price_product
-    #   print(max_price)
-    #   print('-------------')
       
     
     char_filtres_list = list(get_filtres.keys())

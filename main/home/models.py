@@ -4,7 +4,7 @@ from django.urls import reverse
 from admin.singleton_model import SingletonModel
 
 class BaseSettings(SingletonModel):
-  logo  = models.ImageField(upload_to="base-settings", blank=True, null=True, verbose_name="Логотип")
+  logo  = models.ImageField(upload_to="base-settings/", blank=True, null=True, verbose_name="Логотип")
   phone = models.CharField(max_length=50, blank=True, null=True, db_index=True, verbose_name="Номер телефона")
   phone_whatsapp = models.CharField(max_length=250, blank=True, null=True, db_index=True, verbose_name="WhatsApp")
   vk = models.CharField(max_length=250, blank=True, null=True, db_index=True, verbose_name="VK")
@@ -19,6 +19,7 @@ class BaseSettings(SingletonModel):
   meta_title = models.CharField(max_length=250, null=True, blank=True, verbose_name="Мета заголовок")
   meta_description = models.TextField(null=True, blank=True, verbose_name="Meta описание")
   meta_keywords = models.TextField(null=True, blank=True, verbose_name="Meta keywords")
+  favicon = models.FileField(upload_to='base-settings/', blank=True, null=True, verbose_name="ФавИконка")
   
 
 class HomeTemplate(SingletonModel):
