@@ -16,24 +16,7 @@ class GlobalSettingsForm(forms.ModelForm):
   # description = forms.CharField(label='Полное описание товара', required=False, widget=CKEditorUploadingWidget())
   class Meta:
     model = BaseSettings
-    fields = [
-        'logo',
-        'phone',
-        'time_work',
-        'instagram',
-        'telegram',
-        'vk',
-        'viber',
-        'phone_whatsapp',
-        'email',
-        'address',
-        'map_code',
-        'meta_h1',
-        'meta_title',
-        'meta_description',
-        'meta_keywords',
-        'favicon',
-    ]
+    fields = "__all__"
     labels = {
         'logo': 'Логотип',
         'phone': 'Номер телефона',
